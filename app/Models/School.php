@@ -24,8 +24,13 @@ class School extends Model
         'email_pattern'
     ];
 
-    public function users()
+    public function users(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        $this->hasMany(User::class);
+        return $this->hasMany(User::class);
+    }
+
+    public function schoolMajors(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(SchoolMajor::class);
     }
 }

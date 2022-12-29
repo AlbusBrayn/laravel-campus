@@ -13,21 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('school_majors', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('school_id')->unsigned();
-            $table->string('name')->nullable();
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->boolean('is_banned')->default(false);
-            $table->boolean('hide_location')->default(true);
-            $table->boolean('is_muted')->default(false);
-            $table->integer('status')->default(1);
-            $table->rememberToken();
+            $table->bigInteger('major_id')->unsigned();
             $table->timestamps();
 
             $table->foreign('school_id')->references('id')->on('schools')->onDelete('cascade');
+            $table->foreign('major_id')->references('id')->on('majors')->onDelete('cascade');
         });
     }
 
@@ -38,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('school_majors');
     }
 };

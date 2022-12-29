@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Profile\AvatarController;
+use App\Http\Controllers\Profile\MajorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,5 +28,7 @@ Route::middleware('auth:api')->group(function () {
         Route::post('/avatar', [AvatarController::class, 'index']);
         Route::post('/avatar/set', [AvatarController::class, 'store']);
         Route::post('/avatar/update', [AvatarController::class, 'update']);
+
+        Route::post('/majors', [MajorController::class, 'index']);
     });
 });
