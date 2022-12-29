@@ -18,6 +18,7 @@ return new class extends Migration
             $table->bigInteger('school_id')->unsigned();
             $table->string('name')->nullable();
             $table->string('email')->unique();
+            $table->integer('otp_code')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->boolean('is_banned')->default(false);
