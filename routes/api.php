@@ -29,5 +29,3 @@ Route::middleware('auth:api')->group(function () {
         Route::post('/avatar/update', [AvatarController::class, 'update']);
     });
 });
-
-//7xarh2w2R8#8HKY
