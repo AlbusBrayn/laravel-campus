@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Major;
 use App\Models\School;
 use App\Models\User;
+use App\Models\UserMajor;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
@@ -125,6 +127,10 @@ class AuthController extends Controller
             'code' => 'Doğrulama kodu'
         ]);
 
+        if ($validator->fails()) {
+            return response(['status' => 'error', 'message' => 'validate error!', 'data' => $validator->errors()], 400);
+        }
+
         $user = $request->user();
 
         if ($user->otp_code) {
@@ -143,5 +149,37 @@ class AuthController extends Controller
         } else {
             return response(['status' => 'error', 'message' => 'Hesaba tanımlı bir doğrulama kodu bulunamadı.'], 400);
         }
+    }
+
+    public function info(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required|string|min:3|max:255',
+            'major_id' => 'required|int'
+        ]);
+
+        $validator->setAttributeNames([
+            'name' => 'İsim',
+            'major_id' => 'Bölüm'
+        ]);
+
+        if ($validator->fails()) {
+            return response(['status' => 'error', 'message' => 'validate error!', 'data' => $validator->errors()], 400);
+        }
+
+        $user = $request->user();
+        $major = Major::findOrFail($request->major_id);
+
+        $user->name = $request->name;
+
+        UserMajor::create([
+            'user_id' => $user->id,
+            'school_id' => $user->school_id,
+            'major_id' => $major->id
+        ]);
+
+        $user->save();
+
+        return response(['status' => 'success', 'message' => 'Kullanıcı bilgileri başarıyla kaydedildi.']);
     }
 }

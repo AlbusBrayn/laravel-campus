@@ -29,6 +29,7 @@ Route::middleware('auth:api')->group(function () {
         Route::post('logout', [AuthController::class, 'logout']);
         Route::post('otp', [AuthController::class, 'otp']);
         Route::post('otp/check', [AuthController::class, 'otpCheck']);
+        Route::post('info', [AuthController::class, 'info']);
     });
 
     Route::prefix('profile')->group(function () {
