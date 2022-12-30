@@ -24,11 +24,9 @@ class ProfileController extends Controller
         unset($user['forget_code']);
         unset($user['forget_expire']);
         $data = $user;
-        dd($data);
         $data['school'] = $user->school;
         $data['avatar'] = $user->avatar;
         $data['major'] = $user->major;
-        dd($user->major, $data);
         $count = UserMajor::where(['school_id' => $user->school_id, 'major_id' => $user->major->major_id])->count();
         $data['major']['major_user_count'] = $count;
 
