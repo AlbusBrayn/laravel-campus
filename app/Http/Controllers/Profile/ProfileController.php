@@ -14,8 +14,7 @@ class ProfileController extends Controller
         $data = [];
         $user = $request->user();
         unset($user['tokens']);
-        dd($user->getAttributes());
-        $data = $user->getAttributes();
+        $data = $user->getMutatedAttributes();
         $data['school'] = $user->school;
         $data['avatar'] = $user->avatar;
         $data['major'] = $user->major;
