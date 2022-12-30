@@ -182,14 +182,14 @@ class AuthController extends Controller
             'major_id' => $major->id
         ]);
 
-        if (!$userMajor) {
+        if ($userMajor) {
+            $user->status = 3;
+            $user->save();
+
+            return response(['status' => 'success', 'message' => 'Kullanıcı bilgileri başarıyla kaydedildi.']);
+        } else {
             return response(['status' => 'error', 'message' => 'Olmaması gereken münasip bir hata!']);
         }
-
-        $user->status = 3;
-        $user->save();
-
-        return response(['status' => 'success', 'message' => 'Kullanıcı bilgileri başarıyla kaydedildi.']);
     }
 
     public function forget(Request $request)
