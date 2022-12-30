@@ -96,6 +96,7 @@ class AuthController extends Controller
 
     public function otp(Request $request)
     {
+        dd('test');
         $user = $request->user();
         $code = rand(1000, 9999);
 
