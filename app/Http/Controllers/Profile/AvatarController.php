@@ -35,6 +35,18 @@ class AvatarController extends Controller
             'beard' => 'nullable|string',
             'beard_color' => 'nullable|string'
         ]);
+        $validator->setAttributeNames([
+            'skin' => 'Ten rengi',
+            'clothes' => 'Kıyafet',
+            'mouth' => 'Ağız',
+            'eyes' => 'Gözler',
+            'eye_brow' => 'Kaşlar',
+            'top' => 'Saç',
+            'hair_color' => 'Saç Rengi',
+            'accessories' => 'Aksesuar',
+            'beard' => 'Sakal',
+            'beard_color' => 'Sakal Rengi'
+        ]);
 
         if ($validator->fails()) {
             return response(['status' => 'error', 'message' => 'validate error!', 'data' => $validator->errors()], 400);
@@ -70,6 +82,18 @@ class AvatarController extends Controller
             'accessories' => 'nullable|string',
             'beard' => 'nullable|string',
             'beard_color' => 'nullable|string'
+        ]);
+        $validator->setAttributeNames([
+            'skin' => 'Ten rengi',
+            'clothes' => 'Kıyafet',
+            'mouth' => 'Ağız',
+            'eyes' => 'Gözler',
+            'eye_brow' => 'Kaşlar',
+            'top' => 'Saç',
+            'hair_color' => 'Saç Rengi',
+            'accessories' => 'Aksesuar',
+            'beard' => 'Sakal',
+            'beard_color' => 'Sakal Rengi'
         ]);
 
         if ($validator->fails()) {

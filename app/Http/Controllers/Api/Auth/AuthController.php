@@ -16,6 +16,10 @@ class AuthController extends Controller
             'email' => 'required|email|unique:users',
             'password' => 'required',
         ]);
+        $validator->setAttributeNames([
+            'email' => 'Email',
+            'password' => 'Şifre'
+        ]);
 
         if ($validator->fails()) {
             return response(['status' => 'error', 'message' => 'validate error!', 'data' => $validator->errors()], 400);
@@ -51,6 +55,10 @@ class AuthController extends Controller
         $validator = \Validator::make($request->all(), [
             'email' => 'required|email',
             'password' => 'required'
+        ]);
+        $validator->setAttributeNames([
+            'email' => 'Email',
+            'password' => 'Şifre'
         ]);
 
         if ($validator->fails()) {
