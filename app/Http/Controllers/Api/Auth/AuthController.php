@@ -18,12 +18,12 @@ class AuthController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response(['status' => 'error', 'message' => 'validate error!', 'data' => $validator->errors()]);
+            return response(['status' => 'error', 'message' => 'validate error!', 'data' => $validator->errors()], 400);
         }
 
         $school = School::first();
         if (!$school) {
-            return response(['status' => 'error', 'message' => 'Sisteme kayıtlı bir okul bulunamadı!']);
+            return response(['status' => 'error', 'message' => 'Sisteme kayıtlı bir okul bulunamadı!'], 400);
         }
 
         $exp = explode('@', $request->email);
@@ -32,7 +32,7 @@ class AuthController extends Controller
                 'email' => [
                     'The email does not match school mail.'
                 ]
-            ]]);
+            ]], 400);
         }
 
         $data = $validator->validated();
@@ -54,12 +54,12 @@ class AuthController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response(['status' => 'error', 'message' => 'validate error!', 'data' => $validator->errors()]);
+            return response(['status' => 'error', 'message' => 'validate error!', 'data' => $validator->errors()], 400);
         }
 
         $data = $validator->validated();
         if (!auth()->attempt($data)) {
-            return response(['status' => 'error', 'message' => 'Email veya şifre hatalı. Lütfen tekrar deneyin.']);
+            return response(['status' => 'error', 'message' => 'Email veya şifre hatalı. Lütfen tekrar deneyin.'], 400);
         }
 
         $user = auth()->user();

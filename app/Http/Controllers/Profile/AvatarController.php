@@ -15,7 +15,7 @@ class AvatarController extends Controller
         $user = $request->user();
 
         if (!$user->avatar) {
-            return response(['status' => 'error', 'message' => 'Kullanıcının avatar datası oluşturulmamış!']);
+            return response(['status' => 'error', 'message' => 'Kullanıcının avatar datası oluşturulmamış!'], 400);
         }
 
         return response(['avatar' => $user->avatar]);
@@ -37,13 +37,13 @@ class AvatarController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response(['status' => 'error', 'message' => 'validate error!', 'data' => $validator->errors()]);
+            return response(['status' => 'error', 'message' => 'validate error!', 'data' => $validator->errors()], 400);
         }
 
         $user = $request->user();
 
         if ($user->avatar) {
-            return response(['status' => 'error', 'message' => 'Kullanıcının avatarı zaten oluşturulmuş!']);
+            return response(['status' => 'error', 'message' => 'Kullanıcının avatarı zaten oluşturulmuş!'], 400);
         }
 
         $data = $validator->validated();
@@ -53,7 +53,7 @@ class AvatarController extends Controller
         if ($create) {
             return response(['status' => 'success', 'message' => 'Başarılı']);
         } else {
-            return response(['status' => 'error', 'message' => 'Hata']);
+            return response(['status' => 'error', 'message' => 'Hata'], 400);
         }
     }
 
@@ -73,13 +73,13 @@ class AvatarController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response(['status' => 'error', 'message' => 'validate error!', 'data' => $validator->errors()]);
+            return response(['status' => 'error', 'message' => 'validate error!', 'data' => $validator->errors()], 400);
         }
 
         $user = $request->user();
 
         if (!$user->avatar) {
-            return response(['status' => 'error', 'message' => 'Kullanıcının avatar datası oluşturulmamış!']);
+            return response(['status' => 'error', 'message' => 'Kullanıcının avatar datası oluşturulmamış!'], 400);
         }
 
         $data = $validator->validated();
@@ -90,7 +90,7 @@ class AvatarController extends Controller
         if ($update) {
             return response(['status' => 'success', 'message' => 'Başarılı']);
         } else {
-            return response(['status' => 'error', 'message' => 'Hata']);
+            return response(['status' => 'error', 'message' => 'Hata'], 400);
         }
     }
 }

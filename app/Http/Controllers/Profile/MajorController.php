@@ -15,7 +15,7 @@ class MajorController extends Controller
         //@TODO: Multiple school control
         $school = School::first();
         if (!$school) {
-            return response(['status' => 'error', 'message' => 'Sisteme kayıtlı bir okul bulunamadı!']);
+            return response(['status' => 'error', 'message' => 'Sisteme kayıtlı bir okul bulunamadı!'], 400);
         }
 
         $data = [];
