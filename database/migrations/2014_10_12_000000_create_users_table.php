@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->integer('otp_code')->nullable();
             $table->integer('otp_reset_time')->nullable();
-            $table->integer('forget_reset_time')->nullable();
+            $table->integer('forget_code')->nullable();
+            $table->integer('forget_expire')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->boolean('is_banned')->default(false);

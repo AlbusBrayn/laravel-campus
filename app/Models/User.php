@@ -29,7 +29,8 @@ class User extends Authenticatable
         'otp_code',
         'is_admin',
         'otp_reset_time',
-        'forget_reset_time'
+        'forget_code',
+        'forget_expire'
     ];
 
     /**
@@ -47,7 +48,8 @@ class User extends Authenticatable
         'otp_code',
         'is_admin',
         'otp_reset_time',
-        'forget_reset_time'
+        'forget_code',
+        'forget_expire'
     ];
 
     /**

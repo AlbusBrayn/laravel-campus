@@ -8,6 +8,7 @@ use App\Models\School;
 use App\Models\User;
 use App\Models\UserMajor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class AuthController extends Controller
 {
@@ -140,6 +141,7 @@ class AuthController extends Controller
 
             if ($request->code == $user->otp_code) {
                 $user->status = 2;
+                $user->email_verified_at = Carbon::now();
                 $user->otp_code = null;
                 $user->otp_reset_time = null;
                 $user->save();
@@ -184,5 +186,76 @@ class AuthController extends Controller
         $user->save();
 
         return response(['status' => 'success', 'message' => 'Kullanıcı bilgileri başarıyla kaydedildi.']);
+    }
+
+    public function forget(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'email' => 'required|email'
+        ]);
+
+        $validator->setAttributeNames([
+            'email' => 'Email'
+        ]);
+
+        if ($validator->fails()) {
+            return response(['status' => 'error', 'message' => 'validate error!', 'data' => $validator->errors()], 400);
+        }
+
+        $user = User::where(['email' => $request->email])->first();
+        if ($user) {
+            $code = rand(1000, 9999);
+            if ($user->forget_expire) {
+                if (time() > $user->forget_expire) {
+                    $user->forget_code = $code;
+                    $user->forget_expire = strtotime('+3 minutes');
+                    $this->sendMail('email.forget', ['token' => $code], $user->email, 'Campus A+ Şifre Sıfırlama');
+                }
+            } else {
+                $user->forget_code = $code;
+                $user->forget_expire = strtotime('+3 minutes');
+                $this->sendMail('email.forget', ['token' => $code], $user->email, 'Campus A+ Şifre Sıfırlama');
+            }
+
+            $user->save();
+        }
+
+        return response(['status' => 'success', 'message' => 'Girdiğiniz mail adresi ile eşleşen bir hesap varsa doğrulama kodu gönderilecek.']);
+    }
+
+    public function forgetCheck(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'email' => 'required|email',
+            'code' => 'required|int',
+            'password' => 'required|string|min:8'
+        ]);
+
+        $validator->setAttributeNames([
+            'email' => 'Email',
+            'code' => 'Doğrulama kodu',
+            'password' => 'Şifre'
+        ]);
+
+        if ($validator->fails()) {
+            return response(['status' => 'error', 'message' => 'validate error!', 'data' => $validator->errors()], 400);
+        }
+
+        $user = User::where(['email' => $request->email])->first();
+        if ($user) {
+            if ($user->forget_code == $request->code) {
+                $user->password = bcrypt($request->password);
+                $user->forget_code = null;
+                $user->forget_expire = null;
+
+                $user->tokens->each(function ($token, $key) {
+                    $token->delete();
+                });
+                $user->save();
+                return response(['status' => 'success', 'message' => 'Şifre başarıyla değiştirildi!']);
+            }
+        }
+
+        return response(['status' => 'error', 'message' => 'Şifre değiştirme işlemi başarısız!'], 400);
     }
 }
