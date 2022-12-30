@@ -176,20 +176,20 @@ class AuthController extends Controller
 
         $user->name = $request->name;
 
-        $userMajor = UserMajor::create([
-            'user_id' => $user->id,
-            'school_id' => $user->school_id,
-            'major_id' => $major->id
-        ]);
+        $userMajor = UserMajor::updateOrCreate(
+            [
+                'user_id' => $user->id,
+                'school_id' => $user->school_id
+            ],
+            [
+                'major_id' => $major->id
+            ]
+        );
 
-        if ($userMajor) {
-            $user->status = 3;
-            $user->save();
+        $user->status = 3;
+        $user->save();
 
-            return response(['status' => 'success', 'message' => 'Kullanıcı bilgileri başarıyla kaydedildi.']);
-        } else {
-            return response(['status' => 'error', 'message' => 'Olmaması gereken münasip bir hata!']);
-        }
+        return response(['status' => 'success', 'message' => 'Kullanıcı bilgileri başarıyla kaydedildi.']);
     }
 
     public function forget(Request $request)
