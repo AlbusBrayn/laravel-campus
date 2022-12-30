@@ -89,4 +89,57 @@ class AuthController extends Controller
 
         return response(['status' => 'success', 'message' => 'Başarıyla çıkış yaptın.']);
     }
+
+    public function otp(Request $request)
+    {
+        $user = $request->user();
+        $code = rand(1000, 9999);
+
+        if ($user->otp_reset_time) {
+            if (time() < $user->otp_reset_time) {
+                $c = $user->otp_reset_time - time();
+                return response(['status' => 'error', 'message' => 'Tekrar doğrulama maili göndermek için '. $c .' saniye beklemen gerek.'], 400);
+            } else {
+                $user->otp_code = $code;
+                $user->otp_reset_time = strtotime('+3 minutes');
+                $this->sendMail('email.otp', ['token' => $code, 'message' => 'Sistem kaydını tamamlamak için kodu uygulamaya girin.'], $user->email, 'Campus A+ Doğrulama Kodu');
+            }
+        } else {
+            $user->otp_code = $code;
+            $user->otp_reset_time = strtotime('+3 minutes');
+            $this->sendMail('email.otp', ['token' => $code, 'message' => 'Sistem kaydını tamamlamak için kodu uygulamaya girin.'], $user->email, 'Campus A+ Doğrulama Kodu');
+        }
+
+        $user->save();
+        return response(['status' => 'success', 'Doğrulama kodu email adresinize gönderildi.']);
+    }
+
+    public function otpCheck(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'code' => 'required|int'
+        ]);
+        $validator->setAttributeNames([
+            'code' => 'Doğrulama kodu'
+        ]);
+
+        $user = $request->user();
+
+        if ($user->otp_code) {
+            if (time() > $user->otp_reset_time) {
+                return response(['status' => 'error', 'message' => 'Doğrulama kodunun geçerlilik süresi doldu. Yeniden göndermeyi deneyin.'], 400);
+            }
+
+            if ($request->code === $user->otp_code) {
+                $user->status = 2;
+                $user->save();
+
+                return response(['status' => 'success', 'message' => 'Email adresi başarıyla doğrulandı.']);
+            } else {
+                return response(['status' => 'error', 'message' => 'Doğrulama kodu yanlış, lütfen tekrar deneyin.'], 400);
+            }
+        } else {
+            return response(['status' => 'error', 'message' => 'Hesaba tanımlı bir doğrulama kodu bulunamadı.'], 400);
+        }
+    }
 }

@@ -27,6 +27,8 @@ Route::post('/unauthenticated', function () {
 Route::middleware('auth:api')->group(function () {
     Route::prefix('auth')->group(function () {
         Route::post('logout', [AuthController::class, 'logout']);
+        Route::post('otp', [AuthController::class, 'otp']);
+        Route::post('otp/check', [AuthController::class, 'otpCheck']);
     });
 
     Route::prefix('profile')->group(function () {

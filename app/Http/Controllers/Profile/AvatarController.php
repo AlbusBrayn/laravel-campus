@@ -63,6 +63,9 @@ class AvatarController extends Controller
 
         $create = Avatar::create($data);
         if ($create) {
+            $user->status = 3;
+            $user->save();
+
             return response(['status' => 'success', 'message' => 'Başarılı']);
         } else {
             return response(['status' => 'error', 'message' => 'Hata'], 400);

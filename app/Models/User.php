@@ -27,7 +27,9 @@ class User extends Authenticatable
         'school_id',
         'is_muted',
         'otp_code',
-        'is_admin'
+        'is_admin',
+        'otp_reset_time',
+        'forget_reset_time'
     ];
 
     /**
@@ -43,7 +45,9 @@ class User extends Authenticatable
         'hide_location',
         'is_muted',
         'otp_code',
-        'is_admin'
+        'is_admin',
+        'otp_reset_time',
+        'forget_reset_time'
     ];
 
     /**

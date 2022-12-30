@@ -10,4 +10,19 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    /**
+     * @param string $view
+     * @param array $data
+     * @param string $email
+     * @param string $subject
+     * @return void
+     */
+    public function sendMail(string $view, array $data, string $email, string $subject): void
+    {
+        \Mail::send($view, $data, function ($message) use ($email, $subject) {
+            $message->to($email);
+            $message->subject($subject);
+        });
+    }
 }
