@@ -106,16 +106,16 @@ class AuthController extends Controller
             } else {
                 $user->otp_code = $code;
                 $user->otp_reset_time = strtotime('+3 minutes');
-                $this->sendMail('email.otp', ['token' => $code, 'message' => 'Sistem kaydını tamamlamak için kodu uygulamaya girin.'], $user->email, 'Campus A+ Doğrulama Kodu');
+                $this->sendMail('email.otp', ['token' => $code], $user->email, 'Campus A+ Doğrulama Kodu');
             }
         } else {
             $user->otp_code = $code;
             $user->otp_reset_time = strtotime('+3 minutes');
-            $this->sendMail('email.otp', ['token' => $code, 'message' => 'Sistem kaydını tamamlamak için kodu uygulamaya girin.'], $user->email, 'Campus A+ Doğrulama Kodu');
+            $this->sendMail('email.otp', ['token' => $code], $user->email, 'Campus A+ Doğrulama Kodu');
         }
 
         $user->save();
-        return response(['status' => 'success', 'Doğrulama kodu email adresinize gönderildi.']);
+        return response(['status' => 'success', 'message' => 'Doğrulama kodu email adresinize gönderildi.']);
     }
 
     public function otpCheck(Request $request)
@@ -138,8 +138,10 @@ class AuthController extends Controller
                 return response(['status' => 'error', 'message' => 'Doğrulama kodunun geçerlilik süresi doldu. Yeniden göndermeyi deneyin.'], 400);
             }
 
-            if ($request->code === $user->otp_code) {
+            if ($request->code == $user->otp_code) {
                 $user->status = 2;
+                $user->otp_code = null;
+                $user->otp_reset_time = null;
                 $user->save();
 
                 return response(['status' => 'success', 'message' => 'Email adresi başarıyla doğrulandı.']);
