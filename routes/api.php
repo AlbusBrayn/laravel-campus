@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Profile\AvatarController;
 use App\Http\Controllers\Profile\MajorController;
+use App\Http\Controllers\Profile\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +25,12 @@ Route::post('/unauthenticated', function () {
 });
 
 Route::middleware('auth:api')->group(function () {
+    Route::prefix('auth')->group(function () {
+        Route::post('logout', [AuthController::class, 'logout']);
+    });
+
     Route::prefix('profile')->group(function () {
+        Route::post('/', [ProfileController::class, 'index']);
         Route::post('/avatar', [AvatarController::class, 'index']);
         Route::post('/avatar/set', [AvatarController::class, 'store']);
         Route::post('/avatar/update', [AvatarController::class, 'update']);

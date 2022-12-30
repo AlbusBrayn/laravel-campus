@@ -26,7 +26,8 @@ class User extends Authenticatable
         'status',
         'school_id',
         'is_muted',
-        'otp_code'
+        'otp_code',
+        'is_admin'
     ];
 
     /**
@@ -41,7 +42,8 @@ class User extends Authenticatable
         'is_banned',
         'hide_location',
         'is_muted',
-        'otp_code'
+        'otp_code',
+        'is_admin'
     ];
 
     /**

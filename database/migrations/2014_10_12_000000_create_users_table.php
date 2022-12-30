@@ -24,6 +24,7 @@ return new class extends Migration
             $table->boolean('is_banned')->default(false);
             $table->boolean('hide_location')->default(true);
             $table->boolean('is_muted')->default(false);
+            $table->boolean('is_admin')->default(false);
             $table->integer('status')->default(1);
             $table->rememberToken();
             $table->timestamps();
