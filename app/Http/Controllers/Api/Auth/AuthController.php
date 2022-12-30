@@ -98,7 +98,6 @@ class AuthController extends Controller
     {
         $user = $request->user();
         $code = rand(1000, 9999);
-        dd('test');
 
         if ($user->otp_reset_time) {
             if (time() < $user->otp_reset_time) {
