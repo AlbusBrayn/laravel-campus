@@ -8,13 +8,23 @@ use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
-
     public function index(Request $request)
     {
         $data = [];
         $user = $request->user();
         unset($user['tokens']);
-        $data = $user->getAttributes();
+        unset($user['password']);
+        unset($user['remember_token']);
+        unset($user['school_id']);
+        unset($user['is_banned']);
+        unset($user['hide_location']);
+        unset($user['is_muted']);
+        unset($user['otp_code']);
+        unset($user['is_admin']);
+        unset($user['otp_reset_time']);
+        unset($user['forget_code']);
+        unset($user['forget_expire']);
+        $data = $user;
         dd($data);
         $data['school'] = $user->school;
         $data['avatar'] = $user->avatar;
