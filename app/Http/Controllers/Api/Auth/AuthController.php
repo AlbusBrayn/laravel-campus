@@ -30,14 +30,16 @@ class AuthController extends Controller
             return response(['status' => 'error', 'message' => 'Sisteme kayıtlı bir okul bulunamadı!'], 400);
         }
 
-        $exp = explode('@', $request->email);
-        if ($school->email_pattern !== $exp[1]) {
-            return response(['status' => 'error', 'message' => 'validate error!', 'data' => [
-                'email' => [
-                    'The email does not match school mail.'
-                ]
-            ]], 400);
-        }
+       /*
+            $exp = explode('@', $request->email);
+            if ($school->email_pattern !== $exp[1]) {
+                return response(['status' => 'error', 'message' => 'validate error!', 'data' => [
+                    'email' => [
+                        'The email does not match school mail.'
+                    ]
+                ]], 400);
+            }
+        */
 
         $data = $validator->validated();
         $data['password'] = bcrypt($request->password);
