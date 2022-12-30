@@ -11,6 +11,7 @@ class ProfileController extends Controller
     public function index(Request $request)
     {
         $user = $request->user();
+        dd($user->school);
         unset($user['password']);
         unset($user['remember_token']);
         unset($user['school_id']);
