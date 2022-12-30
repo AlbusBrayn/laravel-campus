@@ -48,6 +48,7 @@ class AuthController extends Controller
         $data['school_id'] = $school->id; //@todo: multiple school support
         $user = User::create($data);
         $user['school'] = $user->school;
+        $user['status'] = $user->status;
 
         $token = $user->createToken('Personel Access Token')->accessToken;
 
