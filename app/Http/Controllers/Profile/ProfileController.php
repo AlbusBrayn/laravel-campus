@@ -11,16 +11,16 @@ class ProfileController extends Controller
 
     public function index(Request $request)
     {
+        $data = [];
         $user = $request->user();
         unset($user['tokens']);
-        $user['school'] = $user->school;
-        $user['avatar'] = $user->avatar;
-        $user['major'] = $user->major->major;
-        dd($user->school_id, $user->major->major->id);
+        $data = $user;
+        $data['school'] = $user->school;
+        $data['avatar'] = $user->avatar;
+        $data['major'] = $user->major->major;
         $count = UserMajor::where(['school_id' => $user->school_id, 'major_id' => $user->major->major_id])->get();
-        dd($count);
-        $user['major']['major_user_count'] = $count;
+        $data['major']['major_user_count'] = $count;
 
-        return response(['user' => $user]);
+        return response(['user' => $data]);
     }
 }
