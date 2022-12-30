@@ -26,8 +26,7 @@ class ProfileController extends Controller
         $data['school'] = $user->school;
         $data['avatar'] = $user->avatar;
         $data['major'] = $user->major;
-        $data['major']['title'] = $user->major->major->title;
-        $count = UserMajor::where(['school_id' => $user->school_id, 'major_id' => $user->major->major_id])->count();
+        $count = UserMajor::where(['school_id' => $data['major']['school_id'], 'major_id' => $data['major']['major_id']])->count();
         $data['major']['major_user_count'] = $count;
 
         return response(['user' => $data]);
