@@ -14,4 +14,9 @@ class UserMajor extends Model
         'school_id',
         'major_id'
     ];
+
+    public function major(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Major::class);
+    }
 }

@@ -70,4 +70,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Avatar::class);
     }
+
+    public function major(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(UserMajor::class);
+    }
 }

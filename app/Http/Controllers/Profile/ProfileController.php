@@ -14,6 +14,7 @@ class ProfileController extends Controller
         unset($user['tokens']);
         $user['school'] = $user->school;
         $user['avatar'] = $user->avatar;
+        $user['major'] = $user->major->major;
 
         return response(['user' => $user]);
     }
