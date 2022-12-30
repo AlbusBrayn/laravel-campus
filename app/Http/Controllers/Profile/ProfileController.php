@@ -28,6 +28,8 @@ class ProfileController extends Controller
         $data['major'] = $user->major;
         $count = UserMajor::where(['school_id' => $data['major']['school_id'], 'major_id' => $data['major']['major_id']])->count();
         $data['major']['major_user_count'] = $count;
+        $data['major']['title'] = $user->major->major->title;
+        unset($data['major']['major']);
 
         return response(['user' => $data]);
     }
