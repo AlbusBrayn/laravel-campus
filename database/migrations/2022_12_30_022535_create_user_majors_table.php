@@ -20,7 +20,7 @@ return new class extends Migration
             $table->bigInteger('major_id')->unsigned();
             $table->timestamps();
 
-            $table->unique(['user_id', 'school_id']);
+            $table->unique('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('school_id')->references('id')->on('schools')->onDelete('cascade');
             $table->foreign('major_id')->references('id')->on('majors')->onDelete('cascade');

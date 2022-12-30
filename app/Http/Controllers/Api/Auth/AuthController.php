@@ -176,11 +176,15 @@ class AuthController extends Controller
 
         $user->name = $request->name;
 
-        UserMajor::create([
+        $userMajor = UserMajor::create([
             'user_id' => $user->id,
             'school_id' => $user->school_id,
             'major_id' => $major->id
         ]);
+
+        if (!$userMajor) {
+            return response(['status' => 'error', 'message' => 'Olmaması gereken münasip bir hata!']);
+        }
 
         $user->status = 3;
         $user->save();
