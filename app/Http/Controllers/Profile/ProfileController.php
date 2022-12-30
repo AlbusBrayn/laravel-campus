@@ -11,7 +11,7 @@ class ProfileController extends Controller
     public function index(Request $request)
     {
         $user = $request->user();
-        dd($user->school);
+        $school = $user->school;
         unset($user['password']);
         unset($user['remember_token']);
         unset($user['school_id']);
@@ -24,7 +24,7 @@ class ProfileController extends Controller
         unset($user['forget_code']);
         unset($user['forget_expire']);
         $data = $user;
-        $data['school'] = $user->school;
+        $data['school'] = $school;
         $data['avatar'] = $user->avatar;
         $data['major'] = $user->major;
         $count = UserMajor::where(['school_id' => $data['major']['school_id'], 'major_id' => $data['major']['major_id']])->count();
