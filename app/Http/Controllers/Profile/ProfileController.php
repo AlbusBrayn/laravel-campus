@@ -13,7 +13,14 @@ class ProfileController extends Controller
         $user = $request->user();
         $school = $user->school;
 
-        dd($user->major);
+        if ($user->major) {
+            $major = [
+                'title' => $user->major->major->title,
+                'major_user_count' => UserMajor::where(['school_id' => $user->school_id, 'major_id' => $user->major->major_id])->count()
+            ];
+        } else {
+            $major = [];
+        }
 
         $profile = [
             'id' => $user->id,
@@ -25,10 +32,7 @@ class ProfileController extends Controller
             'updated_at' => $user->updated_at,
             'school' => $school,
             'avatar' => $user->avatar,
-            'major' => [
-                'title' => $user->major->major->title,
-                'major_user_count' => UserMajor::where(['school_id' => $user->school_id, 'major_id' => $user->major->major_id])->count()
-            ]
+            'major' => $major
         ];
 
         return response(['user' => $profile]);
