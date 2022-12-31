@@ -12,26 +12,24 @@ class ProfileController extends Controller
     {
         $user = $request->user();
         $school = $user->school;
-        unset($user['password']);
-        unset($user['remember_token']);
-        unset($user['school_id']);
-        unset($user['is_banned']);
-        unset($user['hide_location']);
-        unset($user['is_muted']);
-        unset($user['otp_code']);
-        unset($user['is_admin']);
-        unset($user['otp_reset_time']);
-        unset($user['forget_code']);
-        unset($user['forget_expire']);
-        $data = $user;
-        $data['school'] = $school;
-        $data['avatar'] = $user->avatar;
-        $data['major'] = $user->major;
-        $count = UserMajor::where(['school_id' => $data['major']['school_id'], 'major_id' => $data['major']['major_id']])->count();
-        $data['major']['major_user_count'] = $count;
-        $data['major']['title'] = $user->major->major->title;
-        unset($data['major']['major']);
+        $major = $user->major;
 
-        return response(['user' => $data]);
+        $profile = [
+            'id' => $user->id,
+            'name' => $user->name,
+            'email' => $user->email,
+            'email_verified_at' => $user->email_verified_at,
+            'status' => $user->status,
+            'created_at' => $user->created_at,
+            'updated_at' => $user->updated_at,
+            'school' => $school,
+            'avatar' => $user->avatar,
+            'major' => [
+                'title' => $major->major->title,
+                'major_user_count' => UserMajor::where(['school_id' => $user->school_id, 'major_id' => $major->major_id])->count()
+            ]
+        ];
+
+        return response(['user' => $profile]);
     }
 }
