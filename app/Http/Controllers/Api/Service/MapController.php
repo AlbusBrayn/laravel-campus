@@ -33,8 +33,8 @@ class MapController extends Controller
     public function store(Request $request)
     {
         $validator = \Validator::make($request->all(), [
-            'latitude' => 'required|numeric',
-            'longitude' => 'required|numeric'
+            'latitude' => 'required|string',
+            'longitude' => 'required|string'
         ]);
 
         $validator->setAttributeNames([
