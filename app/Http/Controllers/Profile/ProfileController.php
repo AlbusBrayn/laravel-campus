@@ -13,6 +13,8 @@ class ProfileController extends Controller
         $user = $request->user();
         $school = $user->school;
 
+        dd($user->major->major->title);
+
         $profile = [
             'id' => $user->id,
             'name' => $user->name,
