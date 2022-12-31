@@ -32,7 +32,8 @@ class ProfileController extends Controller
             'updated_at' => $user->updated_at,
             'school' => $school,
             'avatar' => $user->avatar,
-            'major' => $major
+            'major' => $major,
+            'hide_location' => $user->hide_location
         ];
 
         return response(['user' => $profile]);

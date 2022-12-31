@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Profile\AvatarController;
 use App\Http\Controllers\Profile\MajorController;
 use App\Http\Controllers\Profile\ProfileController;
+use App\Http\Controllers\Api\Service\MapController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,5 +43,11 @@ Route::middleware('auth:api')->group(function () {
         Route::post('/avatar/update', [AvatarController::class, 'update']);
 
         Route::post('/majors', [MajorController::class, 'index']);
+    });
+
+    Route::prefix('/location')->group(function () {
+        Route::post('/settings', [MapController::class, 'index']);
+        Route::post('/save', [MapController::class, 'store']);
+        Route::post('/get', [MapController::class, 'getMap']);
     });
 });

@@ -7,10 +7,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
+use Multicaret\Acquaintances\Traits\CanBeFollowed;
+use Multicaret\Acquaintances\Traits\CanFollow;
+use Multicaret\Acquaintances\Traits\Friendable;
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+    use Friendable;
+    use CanFollow, CanBeFollowed;
 
     /**
      * The attributes that are mass assignable.
@@ -30,7 +35,9 @@ class User extends Authenticatable
         'is_admin',
         'otp_reset_time',
         'forget_code',
-        'forget_expire'
+        'forget_expire',
+        'lat',
+        'lng'
     ];
 
     /**

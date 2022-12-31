@@ -13,15 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('friends', function (Blueprint $table) {
+        Schema::create('hide_maps', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('sender_id')->unsigned();
-            $table->bigInteger('receiver_id')->unsigned();
-            $table->enum('status', [0, 1, 2]);
+            $table->bigInteger('from_id')->unsigned();
+            $table->bigInteger('to_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('sender_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('receiver_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('from_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('to_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -32,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('friends');
+        Schema::dropIfExists('hide_maps');
     }
 };
