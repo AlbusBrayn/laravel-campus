@@ -186,7 +186,7 @@ class AuthController extends Controller
             ]
         );
 
-        $user->status = 3;
+        $user->status = 4;
         $user->save();
 
         return response(['status' => 'success', 'message' => 'Kullanıcı bilgileri başarıyla kaydedildi.']);
