@@ -47,8 +47,8 @@ class MapController extends Controller
         }
 
         $user = $request->user();
-        $user->latitude = $request->latitude;
-        $user->longitude = $request->longitude;
+        $user->lat = $request->latitude;
+        $user->lng = $request->longitude;
         $user->save();
 
         return response(['status' => 'success', 'message' => 'Konum güncellendi!']);
