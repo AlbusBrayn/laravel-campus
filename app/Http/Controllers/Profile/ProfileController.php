@@ -12,7 +12,6 @@ class ProfileController extends Controller
     {
         $user = $request->user();
         $school = $user->school;
-        $major = $user->major;
 
         $profile = [
             'id' => $user->id,
@@ -25,8 +24,8 @@ class ProfileController extends Controller
             'school' => $school,
             'avatar' => $user->avatar,
             'major' => [
-                'title' => $major->major->title,
-                'major_user_count' => UserMajor::where(['school_id' => $user->school_id, 'major_id' => $major->major_id])->count()
+                'title' => $user->major->major->title,
+                'major_user_count' => UserMajor::where(['school_id' => $user->school_id, 'major_id' => $user->major->major_id])->count()
             ]
         ];
 
