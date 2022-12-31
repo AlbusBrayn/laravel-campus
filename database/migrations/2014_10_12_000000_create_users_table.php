@@ -29,8 +29,8 @@ return new class extends Migration
             $table->boolean('is_muted')->default(false);
             $table->boolean('is_admin')->default(false);
             $table->integer('status')->default(1);
-            $table->double('lat', 11, 8)->nullable();
-            $table->double('lng', 11, 8)->nullable();
+            $table->string('lat')->nullable();
+            $table->string('lng')->nullable();
             $table->rememberToken();
             $table->timestamps();
 
