@@ -33,7 +33,9 @@ class ProfileController extends Controller
             'school' => $school,
             'avatar' => $user->avatar,
             'major' => $major,
-            'hide_location' => (bool)$user->hide_location
+            'hide_location' => (bool)$user->hide_location,
+            'lat' => $user->lat,
+            'lng' => $user->lng
         ];
 
         return response(['user' => $profile]);
