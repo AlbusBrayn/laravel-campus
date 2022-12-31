@@ -89,8 +89,10 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        $user = \Auth::user()->token();
-        $user->revoke();
+        $user = $request->user();
+        $user->tokens->each(function ($token, $key) {
+            $token->delete();
+        });
 
         return response(['status' => 'success', 'message' => 'Başarıyla çıkış yaptın.']);
     }
@@ -176,7 +178,7 @@ class AuthController extends Controller
 
         $user->name = $request->name;
 
-        $userMajor = UserMajor::updateOrCreate(
+        UserMajor::updateOrCreate(
             [
                 'user_id' => $user->id,
                 'school_id' => $user->school_id
