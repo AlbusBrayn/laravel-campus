@@ -16,7 +16,7 @@ class TestSeeder extends Seeder
     {
         \DB::table('schools')->insert([
             'name' => 'Yeditepe Üniversitesi',
-            'email_pattern' => 'std.yeditepe.k12.tr',
+            'email_pattern' => 'std.yeditepe.edu.tr',
             'latitude' => '40.97185883728523',
             'longitude' => '29.15220554654341',
             'latitude_delta' => '0.015',
