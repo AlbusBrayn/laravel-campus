@@ -262,4 +262,27 @@ class AuthController extends Controller
 
         return response(['status' => 'error', 'message' => 'Şifre değiştirme işlemi başarısız!'], 400);
     }
+
+    public function forgetControl(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'email' => 'required|email',
+            'code' => 'required|int'
+        ]);
+
+        $validator->setAttributeNames([
+            'email' => 'Email',
+            'code' => 'Doğrulama kodu'
+        ]);
+
+        if ($validator->fails()) {
+            return response(['status' => 'error', 'message' => 'validate error!', 'data' => $validator->errors()], 400);
+        }
+
+        if (User::where(['email' => $request->email, 'forget_code' => $request->code])->exists()) {
+            return response(['status' => 'success', 'data' => true]);
+        } else {
+            return response(['status' => 'error', 'data' => false], 400);
+        }
+    }
 }

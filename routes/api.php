@@ -22,6 +22,7 @@ Route::post('/auth/register', [AuthController::class, 'register']);
 Route::post('/auth/login', [AuthController::class, 'login']);
 Route::post('/auth/forget', [AuthController::class, 'forget']);
 Route::post('/auth/forget/check', [AuthController::class, 'forgetCheck']);
+Route::post('/auth/forget/control', [AuthController::class, 'forgetControl']);
 Route::post('/unauthenticated', function () {
     return response()->json(['status' => 'error', 'message' => 'Unauthenticated.'], 403);
 });
