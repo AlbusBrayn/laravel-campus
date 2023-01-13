@@ -35,7 +35,9 @@ class ProfileController extends Controller
             'major' => $major,
             'hide_location' => (bool)$user->hide_location,
             'lat' => $user->lat,
-            'lng' => $user->lng
+            'lng' => $user->lng,
+            'followers' => $user->followersCount(),
+            'posts' => $user->posts->count(),
         ];
 
         return response(['user' => $profile]);

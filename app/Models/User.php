@@ -82,4 +82,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(UserMajor::class);
     }
+
+    public function posts(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Post::class);
+    }
 }
