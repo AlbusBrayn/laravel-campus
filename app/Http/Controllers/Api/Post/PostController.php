@@ -41,11 +41,34 @@ class PostController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+        $validator = \Validator::make($request->all(), [
+            'title' => 'required|string',
+            'content' => 'required|string',
+        ]);
+
+        $validator->setAttributeNames([
+            'title' => 'Başlık',
+            'content' => 'İçerik'
+        ]);
+
+        if ($validator->fails()) {
+            return response(['status' => 'error', 'message' => 'validate error!', 'data' => $validator->errors()], 400);
+        }
+
+        $data = $validator->validated();
+        $post = Post::find($id);
+        $post->title = $data['title'];
+        $post->content = $data['content'];
+        $post->save();
+
+        return response(['status' => 'success', 'message' => 'Post başarıyla güncellendi!', 'data' => new PostResource($post)]);
     }
 
     public function destroy($id)
     {
-        //
+        $post = Post::find($id);
+        $post->delete();
+
+        return response(['status' => 'success', 'message' => 'Post başarıyla silindi!']);
     }
 }
