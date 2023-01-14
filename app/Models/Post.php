@@ -22,4 +22,9 @@ class Post extends Model
         'user_id',
         'published'
     ];
+
+    public function comments(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Comment::class);
+    }
 }
