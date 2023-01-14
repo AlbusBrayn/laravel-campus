@@ -26,6 +26,7 @@ class PostResource extends JsonResource
             'action' => isLiked($request->user()->id, $this->id),
             'is_admin' => $request->user()->id === $this->user_id,
             'profile' => User::find($this->user_id)->avatar,
+            'created_at' => $this->created_at,
         ];
     }
 }
