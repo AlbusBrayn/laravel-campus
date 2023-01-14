@@ -61,5 +61,8 @@ Route::middleware('auth:api')->group(function () {
 
        Route::post('/like/{id}', [PostController::class, 'like']);
        Route::post('/unlike/{id}', [PostController::class, 'unlike']);
+
+       Route::post('/comment/{id}', [PostController::class, 'comment']);
+       Route::post('/comment/delete/{id}', [PostController::class, 'commentDelete']);
     });
 });

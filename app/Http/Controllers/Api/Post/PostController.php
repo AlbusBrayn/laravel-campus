@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Post;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PostResource;
+use App\Models\Comment;
 use App\Models\Like;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -118,6 +119,41 @@ class PostController extends Controller
             $post->dislike = $post->dislike + 1;
             $post->save();
             return response(['status' => 'success', 'message' => 'Post beğenilmedi!']);
+        }
+    }
+
+    public function comment(Request $request, $id)
+    {
+        $validator = \Validator::make($request->all(), [
+            'content' => 'required|string',
+            'parent_id' => 'nullable|integer',
+        ]);
+
+        $validator->setAttributeNames([
+            'content' => 'İçerik',
+            'parent_id' => 'Üst Yorum'
+        ]);
+
+        if ($validator->fails()) {
+            return response(['status' => 'error', 'message' => 'validate error!', 'data' => $validator->errors()], 400);
+        }
+
+        $data = $validator->validated();
+        $data['user_id'] = $request->user()->id;
+        $data['post_id'] = $id;
+        $comment = Comment::create($data);
+
+        return response(['status' => 'success', 'message' => 'Yorum başarıyla oluşturuldu!']);
+    }
+
+    public function commentDelete(Request $request, $id)
+    {
+        $comment = Comment::findOrFail($id);
+        if ($request->user()->id === $comment->user_id) {
+            $comment->delete();
+            return response(['status' => 'success', 'message' => 'Yorum başarıyla silindi!']);
+        } else {
+            return response(['status' => 'error', 'message' => 'Bu yorumu silemezsiniz!'], 403);
         }
     }
 
