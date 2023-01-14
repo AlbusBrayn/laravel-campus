@@ -40,6 +40,12 @@ class PostController extends Controller
         return response(['status' => 'success', 'message' => 'Post başarıyla oluşturuldu!', 'data' => new PostResource($post)]);
     }
 
+    public function show(Request $request, $id)
+    {
+        $post = Post::where(['id' => $id, 'published' => true])->firstOrFail();
+        return response(['status' => 'success', 'data' => new PostResource($post)]);
+    }
+
     public function update(Request $request, $id)
     {
         $validator = \Validator::make($request->all(), [
