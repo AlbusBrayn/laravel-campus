@@ -13,7 +13,7 @@ class PostController extends Controller
     public function index(Request $request)
     {
         $posts = Post::where(['published' => 1])->orderBy('created_at', 'desc')->paginate(10);
-        return new PostResource(PostResource::collection($posts));
+        return new PostResource($posts);
     }
 
     public function store(Request $request)
