@@ -23,9 +23,7 @@ class PostResource extends JsonResource
             'like' => $this->like,
             'dislike' => $this->dislike,
             'writer' => User::find($this->user_id)->name,
-            'is_liked' => function () {
-                return false;
-            },
+            'action' => isLiked($request->user()->id, $this->id)
         ];
     }
 }
