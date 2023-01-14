@@ -7,6 +7,7 @@ use App\Http\Controllers\Profile\AvatarController;
 use App\Http\Controllers\Profile\MajorController;
 use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\Api\Service\MapController;
+use App\Http\Controllers\Api\Post\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,5 +50,12 @@ Route::middleware('auth:api')->group(function () {
         Route::post('/settings', [MapController::class, 'index']);
         Route::post('/save', [MapController::class, 'store']);
         Route::post('/get', [MapController::class, 'getMap']);
+    });
+
+    Route::prefix('post')->group(function () {
+       Route::post('/list', [PostController::class, 'index']);
+       Route::post('/create', [PostController::class, 'store']);
+       Route::post('/update/{id}', [PostController::class, 'update']);
+       Route::post('/delete/{id}', [PostController::class, 'delete']);
     });
 });
