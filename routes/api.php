@@ -57,5 +57,8 @@ Route::middleware('auth:api')->group(function () {
        Route::post('/create', [PostController::class, 'store']);
        Route::post('/update/{id}', [PostController::class, 'update']);
        Route::post('/delete/{id}', [PostController::class, 'destroy']);
+
+       Route::post('/like/{id}', [PostController::class, 'like']);
+       Route::post('/unlike/{id}', [PostController::class, 'unlike']);
     });
 });
