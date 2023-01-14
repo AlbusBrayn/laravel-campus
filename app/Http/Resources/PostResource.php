@@ -25,6 +25,7 @@ class PostResource extends JsonResource
             'writer' => User::find($this->user_id)->name,
             'action' => isLiked($request->user()->id, $this->id),
             'is_admin' => $request->user()->id === $this->user_id,
+            'profile' => User::find($this->user_id)->avatar,
         ];
     }
 }
