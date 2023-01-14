@@ -17,4 +17,9 @@ class Post extends Model
         'dislike',
         'published'
     ];
+
+    protected $hidden = [
+        'user_id',
+        'published'
+    ];
 }
