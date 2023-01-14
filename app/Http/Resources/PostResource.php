@@ -23,7 +23,9 @@ class PostResource extends JsonResource
             'like' => $this->like,
             'dislike' => $this->dislike,
             'writer' => User::find($this->user_id)->name,
-            'is_liked' => Like::where(['user_id' => $request->user()->id, 'post_id' => $this->id])->exists(),
+            'is_liked' => function () {
+                return false;
+            },
         ];
     }
 }
