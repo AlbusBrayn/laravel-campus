@@ -18,7 +18,25 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-        //
+        $validator = \Validator::make($request->all(), [
+            'title' => 'required|string',
+            'content' => 'required|string',
+        ]);
+
+        $validator->setAttributeNames([
+            'title' => 'Başlık',
+            'content' => 'İçerik'
+        ]);
+
+        if ($validator->fails()) {
+            return response(['status' => 'error', 'message' => 'validate error!', 'data' => $validator->errors()], 400);
+        }
+
+        $data = $validator->validated();
+        $data['user_id'] = $request->user()->id;
+        $post = Post::create($data);
+
+        return response(['status' => 'success', 'message' => 'Post başarıyla oluşturuldu!', 'data' => new PostResource($post)]);
     }
 
     public function update(Request $request, $id)
