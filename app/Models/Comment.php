@@ -15,4 +15,14 @@ class Comment extends Model
         'parent_id',
         'body'
     ];
+
+    public function user()
+    {
+        $this->belongsTo(User::class);
+    }
+
+    public function replies(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Comment::class, 'parent_id');
+    }
 }
