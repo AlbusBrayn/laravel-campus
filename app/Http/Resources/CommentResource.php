@@ -19,7 +19,7 @@ class CommentResource extends JsonResource
             'content' => $this->body,
             'avatar' => $this->user->avatar,
             'parent_id' => $this->parent_id,
-            'replies' => is_null($this->replies) ? [] : CommentResource::collection($this->replies),
+            'replies' => $this->replies,
         ];
     }
 }
