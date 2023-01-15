@@ -14,7 +14,7 @@ class PostController extends Controller
 
     public function index(Request $request)
     {
-        $posts = Post::where(['published' => 1])->orderBy('created_at', 'desc')->paginate(10);
+        $posts = Post::where(['published' => 1])->with('comments.replies')->orderBy('created_at', 'desc')->paginate(10);
         return PostResource::collection($posts);
     }
 
@@ -43,7 +43,7 @@ class PostController extends Controller
 
     public function show(Request $request, $id)
     {
-        $post = Post::where(['id' => $id, 'published' => true])->firstOrFail();
+        $post = Post::where(['id' => $id, 'published' => true])->with('comments.replies')->firstOrFail();
         return response(['status' => 'success', 'data' => new PostResource($post)]);
     }
 
