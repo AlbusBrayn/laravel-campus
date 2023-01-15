@@ -89,12 +89,12 @@ class PostController extends Controller
             $like->delete();
             $post->like = $post->like - 1;
             $post->save();
-            return response(['status' => 'success', 'message' => 'Post beğeni kaldırıldı!']);
+            return response(['status' => 'success', 'message' => 'Post beğeni kaldırıldı!', 'like' => $post->like, 'dislike' => $post->dislike]);
         } else {
             Like::create(['user_id' => $request->user()->id, 'post_id' => $post->id]);
             $post->like = $post->like + 1;
             $post->save();
-            return response(['status' => 'success', 'message' => 'Post beğenildi!']);
+            return response(['status' => 'success', 'message' => 'Post beğenildi!', 'like' => $post->like, 'dislike' => $post->dislike]);
         }
     }
 
@@ -114,12 +114,12 @@ class PostController extends Controller
             $unlike->delete();
             $post->dislike = $post->dislike - 1;
             $post->save();
-            return response(['status' => 'success', 'message' => 'Post beğenmeme kaldırıldı!']);
+            return response(['status' => 'success', 'message' => 'Post beğenmeme kaldırıldı!', 'like' => $post->like, 'dislike' => $post->dislike]);
         } else {
             Like::create(['user_id' => $request->user()->id, 'post_id' => $post->id, 'is_liked' => false]);
             $post->dislike = $post->dislike + 1;
             $post->save();
-            return response(['status' => 'success', 'message' => 'Post beğenilmedi!']);
+            return response(['status' => 'success', 'message' => 'Post beğenilmedi!', 'like' => $post->like, 'dislike' => $post->dislike]);
         }
     }
 
