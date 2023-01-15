@@ -21,7 +21,7 @@ class Comment extends Model
         $this->belongsTo(User::class);
     }
 
-    public function replies(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function replies()
     {
         return $this->hasMany(Comment::class, 'parent_id');
     }
