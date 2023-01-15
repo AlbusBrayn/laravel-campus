@@ -27,6 +27,7 @@ class PostResource extends JsonResource
             'is_admin' => $request->user()->id === $this->user_id,
             'profile' => User::find($this->user_id)->avatar,
             'comments' => CommentResource::collection($this->comments),
+            'comments_count' => $this->comments->count(),
             'created_at' => $this->created_at,
         ];
     }
