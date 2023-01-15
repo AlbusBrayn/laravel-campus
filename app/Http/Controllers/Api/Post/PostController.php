@@ -125,12 +125,12 @@ class PostController extends Controller
     public function comment(Request $request, $id)
     {
         $validator = \Validator::make($request->all(), [
-            'content' => 'required|string',
+            'body' => 'required|string',
             'parent_id' => 'nullable|integer',
         ]);
 
         $validator->setAttributeNames([
-            'content' => 'İçerik',
+            'body' => 'İçerik',
             'parent_id' => 'Üst Yorum'
         ]);
 
