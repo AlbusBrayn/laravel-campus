@@ -45,6 +45,8 @@ class PostController extends Controller
     public function show(Request $request, $id)
     {
         $post = Post::where(['id' => $id, 'published' => true])->with('comments.replies')->firstOrFail();
+        $comment = Comment::first();
+        dd($comment->user);
         return response(['status' => 'success', 'data' => new PostResource($post)]);
     }
 
