@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Models\Avatar;
+use App\Models\Comment;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class CommentResource extends JsonResource
@@ -20,7 +21,7 @@ class CommentResource extends JsonResource
             'body' => $this->body,
             'avatar' => Avatar::where(['user_id' => $this->user->id])->first(),
             'parent_id' => $this->parent_id,
-            'replies' => (count($this->replies) > 0) ? CommentResource::collection($this->replies) : [],
+            'replies' => CommentResource::collection($this->replies),
         ];
     }
 }
