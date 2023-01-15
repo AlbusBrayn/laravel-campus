@@ -19,6 +19,7 @@ class CommentResource extends JsonResource
         return [
             'id' => $this->id,
             'body' => $this->body,
+            'name' => $this->user->name,
             'avatar' => Avatar::where(['user_id' => $this->user->id])->first(),
             'parent_id' => $this->parent_id,
             'replies' => CommentResource::collection($this->replies),
