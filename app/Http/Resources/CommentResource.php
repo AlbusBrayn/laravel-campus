@@ -22,6 +22,7 @@ class CommentResource extends JsonResource
             'avatar' => Avatar::where(['user_id' => $this->user->id])->first(),
             'parent_id' => $this->parent_id,
             'replies' => CommentResource::collection($this->replies),
+            'created_at' => $this->created_at,
         ];
     }
 }
