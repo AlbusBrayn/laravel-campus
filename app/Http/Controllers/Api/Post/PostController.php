@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Post;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CommentResource;
 use App\Http\Resources\PostResource;
 use App\Models\Comment;
 use App\Models\Like;
@@ -44,7 +45,7 @@ class PostController extends Controller
     public function show(Request $request, $id)
     {
         $post = Post::where(['id' => $id, 'published' => true])->with('comments.replies')->firstOrFail();
-        dd($post->comments);
+        dd(CommentResource::collection($post->comments));
         return response(['status' => 'success', 'data' => new PostResource($post)]);
     }
 
