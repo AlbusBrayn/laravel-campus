@@ -16,10 +16,10 @@ class CommentResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'content' => $this->body,
+            'body' => $this->body,
             'avatar' => $this->user->avatar,
             'parent_id' => $this->parent_id,
-            'replies' => $this->replies,
+            'replies' => (count($this->replies) > 0) ? CommentResource::collection($this->replies) : [],
         ];
     }
 }
