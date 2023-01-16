@@ -16,7 +16,7 @@ class PostController extends Controller
 
     public function index(Request $request)
     {
-        $posts = Post::where(['published' => 1])->with('comments.replies')->orderBy('created_at', 'desc')->paginate(10);
+        $posts = Post::where(['published' => 1])->with('comments.replies')->orderBy('created_at', $request->sort ?? 'desc')->paginate(10);
         return PostResource::collection($posts);
     }
 
