@@ -58,7 +58,7 @@ class ProfileController extends Controller
             'avatar' => $visitor->avatar,
             'followers' => $visitor->getFriendsCount(),
             'posts' => $visitor->posts->count(),
-            'is_follow' => $user->isFriendWith($visitor),
+            'is_follow' => isFriend($user->id, $visitor->id),
             'is_admin' => $user->id === $visitor->id,
             'posts_list' => PostResource::collection($visitor->posts),
             'followers_list' => $visitor->getFriends(),
@@ -93,20 +93,26 @@ class ProfileController extends Controller
         return response(['message' => 'Arkadaşlık isteği reddedildi!']);
     }
 
-    public function connect(Request $request, $id)
+    public function sendRequest(Request $request, $id)
     {
         $user = $request->user();
         $visitor = User::find($id);
 
-        if ($user->isFriendWith($visitor)) {
-            $user->unfriend($visitor);
-            $d = "unfollow";
-        } else {
-            $user->befriend($visitor);
-            $d = "follow";
+        if ($user->id === $visitor->id) {
+            return response(['message' => 'Kendinize arkadaşlık isteği gönderemezsiniz!'], 400);
         }
 
-        return response(['message' => 'success', 'data' => $d]);
+        if ($user->isFriendWith($visitor)) {
+            return response(['message' => 'Zaten arkadaşsınız!'], 400);
+        }
+
+        if ($user->hasSentFriendRequestTo($visitor)) {
+            return response(['message' => 'Zaten arkadaşlık isteği göndermişsiniz!'], 400);
+        }
+
+        $user->befriend($visitor);
+
+        return response(['message' => 'Arkadaşlık isteği gönderildi!']);
     }
 
     public function block(Request $request, $id)

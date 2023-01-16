@@ -39,7 +39,7 @@ Route::middleware('auth:api')->group(function () {
 
     Route::prefix('profile')->group(function () {
         Route::post('/visitor/{id}', [ProfileController::class, 'visitor']);
-        Route::post('/visitor/connect/{id}', [ProfileController::class, 'connect']);
+        Route::post('/visitor/request/send/{id}', [ProfileController::class, 'sendRequest']);
         Route::post('/visitor/block/{id}', [ProfileController::class, 'block']);
         Route::post('/friend/request', [ProfileController::class, 'friendRequest']);
         Route::post('/friend/accept/{id}', [ProfileController::class, 'friendAccept']);
