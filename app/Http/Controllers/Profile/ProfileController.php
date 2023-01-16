@@ -37,10 +37,10 @@ class ProfileController extends Controller
             'hide_location' => (bool)$user->hide_location,
             'lat' => $user->lat,
             'lng' => $user->lng,
-            'followers' => $user->followersCount(),
+            'followers' => $user->getFriendsCount(),
             'posts' => $user->posts->count(),
             'posts_list' => $user->posts,
-            'followers_list' => $user->followers,
+            'followers_list' => $user->friends,
             'follow_requests' => $user->getFriendRequests()->count(),
         ];
 
@@ -55,12 +55,12 @@ class ProfileController extends Controller
         $data = [
             'name' => $visitor->name,
             'avatar' => $visitor->avatar,
-            'followers' => $visitor->followersCount(),
+            'followers' => $visitor->getFriendsCount(),
             'posts' => $visitor->posts->count(),
-            'is_follow' => $user->isFollowing($visitor->id),
+            'is_follow' => $user->isFriendWith($visitor->id),
             'is_admin' => $user->id === $visitor->id,
             'posts_list' => $visitor->posts,
-            'followers_list' => $visitor->followers,
+            'followers_list' => $visitor->friends,
         ];
 
         return response(['user' => $data]);
@@ -97,11 +97,11 @@ class ProfileController extends Controller
         $user = $request->user();
         $visitor = User::find($id);
 
-        if ($user->isFollowing($visitor->id)) {
-            $user->unfollow($visitor->id);
+        if ($user->isFriendWith($visitor)) {
+            $user->unfriend($visitor);
             $d = "unfollow";
         } else {
-            $user->follow($visitor->id);
+            $user->befriend($visitor);
             $d = "follow";
         }
 
@@ -113,11 +113,11 @@ class ProfileController extends Controller
         $user = $request->user();
         $visitor = User::find($id);
 
-        if ($user->isBlocking($visitor->id)) {
-            $user->unblock($visitor->id);
+        if ($user->hasBlocked($visitor->id)) {
+            $user->unblockFriend($visitor);
             $d = "unblock";
         } else {
-            $user->block($visitor->id);
+            $user->blockFriend($visitor);
             $d = "block";
         }
 
