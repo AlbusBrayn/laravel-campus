@@ -17,7 +17,7 @@ function isLiked(int $user_id, int $post_id): string
     }
 }
 
-function isFriend(int $user_id, int $friend_id): bool
+function isFriend(int $user_id, int $friend_id): string
 {
     $user = User::find($user_id);
     $visitor = User::find($friend_id);
