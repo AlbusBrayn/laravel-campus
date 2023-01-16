@@ -57,7 +57,7 @@ class ProfileController extends Controller
         $friendRequests = [];
         foreach ($visitor->getFriendRequests() as $request) {
             $friendRequests[] = [
-                'id' => $request->id,
+                'id' => $request->sender->id,
                 'name' => $request->sender->name,
                 'avatar' => $request->sender->avatar,
                 'created_at' => $request->created_at
