@@ -60,7 +60,7 @@ class ProfileController extends Controller
             'is_follow' => $user->isFriendWith($visitor),
             'is_admin' => $user->id === $visitor->id,
             'posts_list' => $visitor->posts,
-            'followers_list' => $visitor->friends,
+            'followers_list' => $visitor->getFriends(),
         ];
 
         return response(['user' => $data]);
