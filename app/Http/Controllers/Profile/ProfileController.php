@@ -40,7 +40,7 @@ class ProfileController extends Controller
             'followers' => $user->getFriendsCount(),
             'posts' => $user->posts->count(),
             'posts_list' => $user->posts,
-            'followers_list' => $user->friends,
+            'followers_list' => $user->getFriends(),
             'follow_requests' => $user->getFriendRequests()->count(),
         ];
 
