@@ -15,7 +15,6 @@ class UserResource extends JsonResource
      */
     public function toArray($request)
     {
-        dd($request->all());
         $sender = User::find($request->sender_id);
 
         return [
