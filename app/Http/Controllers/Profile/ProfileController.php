@@ -113,7 +113,7 @@ class ProfileController extends Controller
         $user = $request->user();
         $visitor = User::find($id);
 
-        if ($user->hasBlocked($visitor->id)) {
+        if ($user->hasBlocked($visitor)) {
             $user->unblockFriend($visitor);
             $d = "unblock";
         } else {
