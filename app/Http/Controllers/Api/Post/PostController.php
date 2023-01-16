@@ -21,7 +21,6 @@ class PostController extends Controller
         if (in_array($request->user()->id, $blockedIds)) {
             $blockedIds = array_diff($blockedIds, [$request->user()->id]);
         }
-        $request->user()->unblockFriend(User::find(3));
         $posts = Post::where(['published' => 1])->whereNotIn('user_id', $blockedIds)->with('comments.replies')->orderBy('created_at', 'desc')->paginate(10);
         return PostResource::collection($posts);
     }
