@@ -96,9 +96,9 @@ class ProfileController extends Controller
 
         if ($friend->hasSentFriendRequestTo($user)) {
             $user->acceptFriendRequest($friend);
-            return response(['message' => 'Arkadaşlık isteği kabul edildi.']);
+            return response(['status' => 'success', 'message' => 'Arkadaşlık isteği kabul edildi.']);
         } else {
-            return response(['message' => 'Arkadaşlık isteği bulunamadı.'], 404);
+            return response(['status' => 'error', 'message' => 'Arkadaşlık isteği bulunamadı.'], 404);
         }
     }
 
@@ -109,9 +109,9 @@ class ProfileController extends Controller
 
         if ($friend->hasSentFriendRequestTo($user)) {
             $user->denyFriendRequest($friend);
-            return response(['message' => 'Arkadaşlık isteği reddedildi.']);
+            return response(['status' => 'success', 'message' => 'Arkadaşlık isteği reddedildi.']);
         } else {
-            return response(['message' => 'Arkadaşlık isteği bulunamadı.'], 404);
+            return response(['status' => 'error', 'message' => 'Arkadaşlık isteği bulunamadı.'], 404);
         }
     }
 
