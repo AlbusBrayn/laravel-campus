@@ -18,7 +18,7 @@ class PostController extends Controller
     {
         $blockedIds = $request->user()->getBlockedFriendships();
         foreach ($blockedIds as $blockedId) {
-            dd($blockedId);
+            dd($blockedId->sender_id, $blockedId->recipient_id);
         }
         dd($blockedIds);
         $posts = Post::where(['published' => 1])->whereNotIn('user_id', $blockedIds)->with('comments.replies')->orderBy('created_at', 'desc')->paginate(10);
