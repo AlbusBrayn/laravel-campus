@@ -187,7 +187,7 @@ class PostController extends Controller
         }
 
         $data = $validator->validated();
-        $posts = Post::where(['published' => true])->where('title', 'like', '%' . $data['q'] . '%')->orderBy('created_at', 'desc')->paginate(10);
+        $posts = Post::where(['published' => true])->where('title', 'like', '%' . $data['q'] . '%')->with('comments.replies')->orderBy('created_at', 'desc')->paginate(10);
         return response(['status' => 'success', 'message' => 'Postlar başarıyla listelendi!', 'data' => PostResource::collection($posts)]);
     }
 
