@@ -16,16 +16,18 @@ class PostResource extends JsonResource
      */
     public function toArray($request)
     {
+        $user = User::find($this->user_id);
         return [
             'id' => $this->id,
             'title' => $this->title,
             'content' => $this->content,
             'like' => $this->like,
             'dislike' => $this->dislike,
-            'writer' => User::find($this->user_id)->name,
+            'writer_id' => $user->id,
+            'writer' => $user->name,
             'action' => isLiked($request->user()->id, $this->id),
             'is_admin' => $request->user()->id === $this->user_id,
-            'profile' => User::find($this->user_id)->avatar,
+            'profile' => $user->avatar,
             'comments' => CommentResource::collection($this->comments),
             'comments_count' => $this->comments->count(),
             'created_at' => $this->created_at,

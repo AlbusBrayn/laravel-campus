@@ -8,6 +8,7 @@ use App\Http\Resources\PostResource;
 use App\Models\Comment;
 use App\Models\Like;
 use App\Models\Post;
+use App\Models\PostReport;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -156,6 +157,19 @@ class PostController extends Controller
         } else {
             return response(['status' => 'error', 'message' => 'Bu yorumu silemezsiniz!'], 403);
         }
+    }
+
+    public function report(Request $request, $id)
+    {
+        $user = $request->user();
+        $post = Post::findOrFail($id);
+
+        PostReport::create([
+            'user_id' => $user->id,
+            'post_id' => $post->id,
+        ]);
+
+        return response(['status' => 'success', 'message' => 'Rapor başarıyla oluşturuldu!']);
     }
 
     public function destroy($id)
