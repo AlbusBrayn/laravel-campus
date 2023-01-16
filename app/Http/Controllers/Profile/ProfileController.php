@@ -54,6 +54,7 @@ class ProfileController extends Controller
         $visitor = User::findOrFail($id);
 
         $data = [
+            'id' => $visitor->id,
             'name' => $visitor->name,
             'avatar' => $visitor->avatar,
             'followers' => $visitor->getFriendsCount(),
