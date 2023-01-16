@@ -172,6 +172,25 @@ class PostController extends Controller
         return response(['status' => 'success', 'message' => 'Rapor başarıyla oluşturuldu!']);
     }
 
+    public function search(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'q' => 'required|string',
+        ]);
+
+        $validator->setAttributeNames([
+            'q' => 'Arama Terimi'
+        ]);
+
+        if ($validator->fails()) {
+            return response(['status' => 'error', 'message' => 'validate error!', 'data' => $validator->errors()], 400);
+        }
+
+        $data = $validator->validated();
+        $posts = Post::where(['is_active' => true])->where('title', 'like', '%' . $data['q'] . '%')->orderBy('created_at', 'desc')->paginate(10);
+        return response(['status' => 'success', 'message' => 'Postlar başarıyla listelendi!', 'data' => PostResource::collection($posts)]);
+    }
+
     public function destroy($id)
     {
         $post = Post::find($id);

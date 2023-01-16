@@ -72,5 +72,7 @@ Route::middleware('auth:api')->group(function () {
        Route::post('/comment/delete/{id}', [PostController::class, 'commentDelete']);
 
        Route::post('/report/{id}', [PostController::class, 'report']);
+
+       Route::post('/search', [PostController::class, 'search']);
     });
 });
