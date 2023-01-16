@@ -63,6 +63,7 @@ class ProfileController extends Controller
             'is_admin' => $user->id === $visitor->id,
             'posts_list' => PostResource::collection($visitor->posts),
             'followers_list' => $visitor->getFriends(),
+            'follow_requests' => $visitor->getFriendRequests(),
         ];
 
         return response(['user' => $data]);
