@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Profile;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PostResource;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Models\UserMajor;
 use Illuminate\Http\Request;
@@ -63,7 +64,8 @@ class ProfileController extends Controller
             'is_admin' => $user->id === $visitor->id,
             'posts_list' => PostResource::collection($visitor->posts),
             'followers_list' => $visitor->getFriends(),
-            'follow_requests' => $visitor->getFriendRequests(),
+            'follow_requests_count' => $visitor->getFriendRequests()->count(),
+            'follow_requests' => UserResource::collection($visitor->getFriendRequests()),
         ];
 
         return response(['user' => $data]);
