@@ -41,7 +41,7 @@ class ProfileController extends Controller
             'posts' => $user->posts->count(),
             'posts_list' => $user->posts,
             'followers_list' => $user->followers,
-            'follow_requests' => $user->followRequests->count(),
+            'follow_requests' => $user->getFriendRequests()->count(),
         ];
 
         return response(['user' => $profile]);
