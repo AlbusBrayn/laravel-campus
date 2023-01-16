@@ -59,8 +59,6 @@ class ProfileController extends Controller
             $friendRequests[] = ['sender_id' => $request->sender_id, 'created_at' => $request->created_at];
         }
 
-        dd($visitor->getFriends());
-
         $data = [
             'id' => $visitor->id,
             'name' => $visitor->name,
