@@ -191,11 +191,14 @@ class PostController extends Controller
         return PostResource::collection($posts);
     }
 
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         $post = Post::find($id);
-        $post->delete();
-
-        return response(['status' => 'success', 'message' => 'Post başarıyla silindi!']);
+        if ($request->user()->id === $post->user_id) {
+            $post->delete();
+            return response(['status' => 'success', 'message' => 'Post başarıyla silindi!']);
+        } else {
+            return response(['status' => 'error', 'message' => 'Bu postu silemezsiniz!'], 403);
+        }
     }
 }
