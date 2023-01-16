@@ -164,11 +164,11 @@ class PostController extends Controller
         $user = $request->user();
         $post = Post::findOrFail($id);
 
-        PostReport::create([
-            'user_id' => $user->id,
-            'post_id' => $post->id,
-        ]);
+        if (PostReport::where(['user_id' => $user->id, 'post_id' => $post->id])->exists()) {
+            return response(['status' => 'error', 'message' => 'Bu postu zaten bildirdiniz!'], 400);
+        }
 
+        PostReport::create(['user_id' => $user->id, 'post_id' => $post->id]);
         return response(['status' => 'success', 'message' => 'Rapor başarıyla oluşturuldu!']);
     }
 
