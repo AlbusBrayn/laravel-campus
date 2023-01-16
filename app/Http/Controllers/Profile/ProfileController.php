@@ -54,6 +54,13 @@ class ProfileController extends Controller
         $user = $request->user();
         $visitor = User::findOrFail($id);
 
+        $friendRequests = [];
+        foreach ($visitor->getFriendRequests() as $request) {
+            $friendRequests[] = ['sender_id' => $request->sender_id, 'created_at' => $request->created_at];
+        }
+
+        dd($visitor->getFriends());
+
         $data = [
             'id' => $visitor->id,
             'name' => $visitor->name,
@@ -65,7 +72,7 @@ class ProfileController extends Controller
             'posts_list' => PostResource::collection($visitor->posts),
             'followers_list' => $visitor->getFriends(),
             'follow_requests_count' => $visitor->getFriendRequests()->count(),
-            'follow_requests' => UserResource::collection($visitor->getFriendRequests()),
+            'follow_requests' => UserResource::collection($friendRequests),
         ];
 
         return response(['user' => $data]);
