@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Profile;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\PostResource;
 use App\Models\User;
 use App\Models\UserMajor;
 use Illuminate\Http\Request;
@@ -59,7 +60,7 @@ class ProfileController extends Controller
             'posts' => $visitor->posts->count(),
             'is_follow' => $user->isFriendWith($visitor),
             'is_admin' => $user->id === $visitor->id,
-            'posts_list' => $visitor->posts,
+            'posts_list' => PostResource::collection($visitor->posts),
             'followers_list' => $visitor->getFriends(),
         ];
 
