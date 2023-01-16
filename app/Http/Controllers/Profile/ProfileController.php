@@ -93,18 +93,26 @@ class ProfileController extends Controller
     {
         $user = $request->user();
         $friend = User::findOrFail($id);
-        $user->acceptFriendRequest($friend);
 
-        return response(['message' => 'Arkadaşlık isteği kabul edildi!']);
+        if ($friend->hasSentFriendRequestTo($user)) {
+            $user->acceptFriendRequest($friend);
+            return response(['message' => 'Arkadaşlık isteği kabul edildi.']);
+        } else {
+            return response(['message' => 'Arkadaşlık isteği bulunamadı.'], 404);
+        }
     }
 
     public function friendDecline(Request $request, $id)
     {
         $user = $request->user();
         $friend = User::findOrFail($id);
-        $user->denyFriendRequest($friend);
 
-        return response(['message' => 'Arkadaşlık isteği reddedildi!']);
+        if ($friend->hasSentFriendRequestTo($user)) {
+            $user->denyFriendRequest($friend);
+            return response(['message' => 'Arkadaşlık isteği reddedildi.']);
+        } else {
+            return response(['message' => 'Arkadaşlık isteği bulunamadı.'], 404);
+        }
     }
 
     public function sendRequest(Request $request, $id)
