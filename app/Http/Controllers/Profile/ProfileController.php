@@ -100,20 +100,20 @@ class ProfileController extends Controller
         $visitor = User::find($id);
 
         if ($user->id === $visitor->id) {
-            return response(['message' => 'Kendinize arkadaşlık isteği gönderemezsiniz!'], 400);
+            return response(['status' => 'error', 'message' => 'Kendinize arkadaşlık isteği gönderemezsiniz!'], 400);
         }
 
         if ($user->isFriendWith($visitor)) {
-            return response(['message' => 'Zaten arkadaşsınız!'], 400);
+            return response(['status' => 'error', 'message' => 'Zaten arkadaşsınız!'], 400);
         }
 
         if ($user->hasSentFriendRequestTo($visitor)) {
-            return response(['message' => 'Zaten arkadaşlık isteği göndermişsiniz!'], 400);
+            return response(['status' => 'error', 'message' => 'Zaten arkadaşlık isteği göndermişsiniz!'], 400);
         }
 
         $user->befriend($visitor);
 
-        return response(['message' => 'Arkadaşlık isteği gönderildi!']);
+        return response(['status' => 'success', 'message' => 'Arkadaşlık isteği gönderildi!']);
     }
 
     public function block(Request $request, $id)
