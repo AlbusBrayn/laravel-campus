@@ -57,7 +57,7 @@ class ProfileController extends Controller
             'avatar' => $visitor->avatar,
             'followers' => $visitor->getFriendsCount(),
             'posts' => $visitor->posts->count(),
-            'is_follow' => $user->isFriendWith($visitor->id),
+            'is_follow' => $user->isFriendWith($visitor),
             'is_admin' => $user->id === $visitor->id,
             'posts_list' => $visitor->posts,
             'followers_list' => $visitor->friends,
