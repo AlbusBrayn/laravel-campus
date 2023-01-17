@@ -15,12 +15,11 @@ class UserResource extends JsonResource
      */
     public function toArray($request)
     {
-        $sender = User::find($request->sender_id);
-
         return [
-            'name' => $sender->name,
-            'avatar' => $sender->avatar,
-            'created_at' => $request->created_at
+            'id' => $this->id,
+            'name' => $this->name,
+            'avatar' => $this->avatar,
+            'created_at' => $this->created_at
         ];
     }
 }

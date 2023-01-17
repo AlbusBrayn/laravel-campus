@@ -64,8 +64,6 @@ class ProfileController extends Controller
             ];
         }
 
-        dd($visitor->getFriends());
-
         $data = [
             'id' => $visitor->id,
             'name' => $visitor->name,
@@ -75,7 +73,7 @@ class ProfileController extends Controller
             'is_follow' => isFriend($user->id, $visitor->id),
             'is_admin' => $user->id === $visitor->id,
             'posts_list' => PostResource::collection($visitor->posts),
-            'followers_list' => $visitor->getFriends(),
+            'followers_list' => UserResource::collection($visitor->getFriends()),
             'follow_requests_count' => $visitor->getFriendRequests()->count(),
             'follow_requests' => $friendRequests,
         ];
