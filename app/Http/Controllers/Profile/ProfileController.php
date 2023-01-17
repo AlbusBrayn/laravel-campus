@@ -87,12 +87,20 @@ class ProfileController extends Controller
         $user = $request->user();
         $visitor = User::findOrFail($id);
 
+        if ($user->id === $visitor->id) {
+            return response(['status' => 'error', 'message' => 'Kendini şikayet edemezsin.'], 400);
+        }
+
+        if (UserReport::where(['sender_id' => $user->id, 'receiver_id' => $visitor->id])->exists()) {
+            return response(['status' => 'error', 'message' => 'Bu kullanıcıyı daha önce şikayet ettin.'], 400);
+        }
+
         UserReport::create([
             'sender_id' => $user->id,
             'receiver_id' => $visitor->id,
         ]);
 
-        return response(['message' => 'Şikayet başarıyla gönderildi.']);
+        return response(['status' => 'success', 'message' => 'Şikayet başarıyla gönderildi.']);
     }
 
     public function deleteFriend(Request $request, $id)
