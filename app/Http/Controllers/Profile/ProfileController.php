@@ -56,6 +56,16 @@ class ProfileController extends Controller
         $user = $request->user();
         $visitor = User::findOrFail($id);
 
+        if ($user->major) {
+            $major = [
+                'id' => $user->major->major->id,
+                'title' => $user->major->major->title,
+                'major_user_count' => UserMajor::where(['school_id' => $user->school_id, 'major_id' => $user->major->major_id])->count()
+            ];
+        } else {
+            $major = [];
+        }
+
         $friendRequests = [];
         foreach ($visitor->getFriendRequests() as $request) {
             $friendRequests[] = [
@@ -78,6 +88,7 @@ class ProfileController extends Controller
             'followers_list' => UserResource::collection($visitor->getFriends()),
             'follow_requests_count' => $visitor->getFriendRequests()->count(),
             'follow_requests' => $friendRequests,
+            'major' => $major,
         ];
 
         return response(['user' => $data]);
