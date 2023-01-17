@@ -40,6 +40,7 @@ Route::middleware('auth:api')->group(function () {
     Route::prefix('profile')->group(function () {
         Route::post('/visitor/{id}', [ProfileController::class, 'visitor']);
         Route::post('/visitor/request/send/{id}', [ProfileController::class, 'sendRequest']);
+        Route::post('/visitor/delete/{id}', [ProfileController::class, 'deleteFriend']);
         Route::post('/visitor/block/{id}', [ProfileController::class, 'block']);
         Route::post('/friend/request', [ProfileController::class, 'friendRequest']);
         Route::post('/friend/accept/{id}', [ProfileController::class, 'friendAccept']);
@@ -48,6 +49,7 @@ Route::middleware('auth:api')->group(function () {
         Route::post('/avatar', [AvatarController::class, 'index']);
         Route::post('/avatar/set', [AvatarController::class, 'store']);
         Route::post('/avatar/update', [AvatarController::class, 'update']);
+        Route::post('/report/{id}', [ProfileController::class, 'report']);
 
         Route::post('/majors', [MajorController::class, 'index']);
     });

@@ -7,6 +7,7 @@ use App\Http\Resources\PostResource;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Models\UserMajor;
+use App\Models\UserReport;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
@@ -79,6 +80,32 @@ class ProfileController extends Controller
         ];
 
         return response(['user' => $data]);
+    }
+
+    public function report(Request $request, $id)
+    {
+        $user = $request->user();
+        $visitor = User::findOrFail($id);
+
+        UserReport::create([
+            'sender_id' => $user->id,
+            'receiver_id' => $visitor->id,
+        ]);
+
+        return response(['message' => 'Şikayet başarıyla gönderildi.']);
+    }
+
+    public function deleteFriend(Request $request, $id)
+    {
+        $user = $request->user();
+        $visitor = User::findOrFail($id);
+
+        if ($user->isFriendWith($visitor)) {
+            $user->unfriend($visitor);
+            return response(['message' => 'Kullanıcı başarıyla arkadaşlıktan çıkarıldı.']);
+        } else {
+            return response(['message' => 'Arkadaşlık bulunamadı.'], 404);
+        }
     }
 
     public function friendRequest(Request $request)
