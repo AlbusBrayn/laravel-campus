@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Service;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class MapController extends Controller
@@ -57,5 +58,23 @@ class MapController extends Controller
     public function getMap(Request $request)
     {
         $user = $request->user();
+        $users = User::where('id', '!=', $user->id)->where('hide_location', false)->get();
+
+        $mapUsers = [];
+        foreach ($users as $key) {
+            if ($user->isFriendWith($key)) {
+                if ($key->lat && $key->lng) {
+                    $mapUsers[] = [
+                        'id' => $key->id,
+                        'name' => $key->name,
+                        'lat' => $key->lat,
+                        'lng' => $key->lng,
+                        'avatar' => $key->avatar,
+                    ];
+                }
+            }
+        }
+
+        return response(['status' => 'success', 'message' => 'Konumlar getirildi!', 'data' => $mapUsers]);
     }
 }
