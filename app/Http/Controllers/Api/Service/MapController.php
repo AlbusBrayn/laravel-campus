@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Service;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\UserMajor;
 use Illuminate\Http\Request;
 
 class MapController extends Controller
@@ -64,9 +65,20 @@ class MapController extends Controller
         foreach ($users as $key) {
             if ($user->isFriendWith($key)) {
                 if ($key->lat && $key->lng) {
+                    if ($key->major) {
+                        $major = [
+                            'id' => $key->major->major->id,
+                            'title' => $key->major->major->title,
+                            'major_user_count' => UserMajor::where(['school_id' => $key->school_id, 'major_id' => $key->major->major_id])->count()
+                        ];
+                    } else {
+                        $major = [];
+                    }
+
                     $mapUsers[] = [
                         'id' => $key->id,
                         'name' => $key->name,
+                        'major' => $major,
                         'lat' => $key->lat,
                         'lng' => $key->lng,
                         'avatar' => $key->avatar,
