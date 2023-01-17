@@ -167,12 +167,15 @@ class ProfileController extends Controller
     public function block(Request $request, $id)
     {
         $user = $request->user();
-        $visitor = User::find($id);
+        $visitor = User::findOrFail($id);
 
         if ($user->hasBlocked($visitor)) {
             $user->unblockFriend($visitor);
             $d = "unblock";
         } else {
+            if ($user->isFriendWith($visitor)) {
+                $user->unfriend($visitor);
+            }
             $user->blockFriend($visitor);
             $d = "block";
         }
