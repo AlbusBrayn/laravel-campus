@@ -180,6 +180,6 @@ class ProfileController extends Controller
             $d = "block";
         }
 
-        return response(['message' => 'success', 'data' => $d]);
+        return response(['status' => 'success', 'message' => 'Başarılı', 'data' => $d]);
     }
 }
