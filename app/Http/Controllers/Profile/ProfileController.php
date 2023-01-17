@@ -102,9 +102,9 @@ class ProfileController extends Controller
 
         if ($user->isFriendWith($visitor)) {
             $user->unfriend($visitor);
-            return response(['message' => 'Kullanıcı başarıyla arkadaşlıktan çıkarıldı.']);
+            return response(['status' => 'success', 'message' => 'Kullanıcı başarıyla arkadaşlıktan çıkarıldı.']);
         } else {
-            return response(['message' => 'Arkadaşlık bulunamadı.'], 404);
+            return response(['status' => 'error', 'message' => 'Arkadaşlık bulunamadı.'], 404);
         }
     }
 
