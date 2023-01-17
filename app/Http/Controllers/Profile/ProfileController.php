@@ -19,7 +19,7 @@ class ProfileController extends Controller
 
         if ($user->major) {
             $major = [
-                'id' => $user->major->major->id,
+                'id' => $user->major->major_id,
                 'title' => $user->major->major->title,
                 'major_user_count' => UserMajor::where(['school_id' => $user->school_id, 'major_id' => $user->major->major_id])->count()
             ];
