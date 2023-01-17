@@ -64,6 +64,8 @@ class ProfileController extends Controller
             ];
         }
 
+        dd($visitor->getFriends());
+
         $data = [
             'id' => $visitor->id,
             'name' => $visitor->name,
