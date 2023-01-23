@@ -16,8 +16,6 @@ class PostController extends Controller
 {
 
     public array $sort = [
-        "highest_comment",
-        "lowest_comment",
         "highest_like",
         "lowest_like",
         "newest",
@@ -37,12 +35,6 @@ class PostController extends Controller
         }
 
         switch ($sort) {
-            case "highest_comment":
-                $posts = Post::where('published', true)->whereNotIn('user_id', $blockedIds)->with('comments.replies')->orderBy('comments_count', 'desc')->paginate(10);
-                break;
-            case "lowest_comment":
-                $posts = Post::where('published', true)->whereNotIn('user_id', $blockedIds)->with('comments.replies')->orderBy('comments_count', 'asc')->paginate(10);
-                break;
             case "highest_like":
                 $posts = Post::where('published', true)->whereNotIn('user_id', $blockedIds)->with('comments.replies')->orderBy('like', 'desc')->paginate(10);
                 break;
