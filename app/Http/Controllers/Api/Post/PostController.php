@@ -202,6 +202,10 @@ class PostController extends Controller
             return response(['status' => 'error', 'message' => 'Bu postu zaten bildirdiniz!'], 400);
         }
 
+        if ($user->id === $post->user_id) {
+            return response(['status' => 'error', 'message' => 'Kendi gönderini bildiremezsin!'], 400);
+        }
+
         PostReport::create(['user_id' => $user->id, 'post_id' => $post->id]);
         return response(['status' => 'success', 'message' => 'Rapor başarıyla oluşturuldu!']);
     }
