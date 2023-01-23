@@ -19,4 +19,9 @@ class UserMajor extends Model
     {
         return $this->belongsTo(Major::class);
     }
+
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }
