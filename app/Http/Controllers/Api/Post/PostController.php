@@ -15,6 +15,15 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
 
+    public array $sort = [
+        "highest_comment",
+        "lowest_comment",
+        "highest_like",
+        "lowest_like",
+        "newest",
+        "oldest"
+    ];
+
     public function index(Request $request)
     {
         $blockedIds = $request->user()->getBlockedFriendships()->pluck('recipient_id')->toArray();
@@ -22,7 +31,35 @@ class PostController extends Controller
             $blockedIds = array_diff($blockedIds, [$request->user()->id]);
         }
 
-        $posts = Post::where(['published' => 1])->whereNotIn('user_id', $blockedIds)->with('comments.replies')->orderBy('created_at', 'desc')->paginate(10);
+        $sort = $request->sort;
+        if (!in_array($sort, $this->sort)) {
+            $sort = "newest";
+        }
+
+        switch ($sort) {
+            case "highest_comment":
+                $posts = Post::where('published', true)->whereNotIn('user_id', $blockedIds)->with('comments.replies')->orderBy('comments_count', 'desc');
+                break;
+            case "lowest_comment":
+                $posts = Post::where('published', true)->whereNotIn('user_id', $blockedIds)->with('comments.replies')->orderBy('comments_count', 'asc');
+                break;
+            case "highest_like":
+                $posts = Post::where('published', true)->whereNotIn('user_id', $blockedIds)->with('comments.replies')->orderBy('like', 'desc');
+                break;
+            case "lowest_like":
+                $posts = Post::where('published', true)->whereNotIn('user_id', $blockedIds)->with('comments.replies')->orderBy('like', 'asc');
+                break;
+            case "newest":
+                $posts = Post::where('published', true)->whereNotIn('user_id', $blockedIds)->with('comments.replies')->orderBy('created_at', 'desc');
+                break;
+            case "oldest":
+                $posts = Post::where('published', true)->whereNotIn('user_id', $blockedIds)->with('comments.replies')->orderBy('created_at', 'asc');
+                break;
+            default:
+                return false;
+        }
+
+        $posts->paginate(10);
         return PostResource::collection($posts);
     }
 
