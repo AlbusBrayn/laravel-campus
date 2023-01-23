@@ -38,29 +38,27 @@ class PostController extends Controller
 
         switch ($sort) {
             case "highest_comment":
-                $posts = Post::where('published', true)->whereNotIn('user_id', $blockedIds)->with('comments.replies')->orderBy('comments_count', 'desc');
+                $posts = Post::where('published', true)->whereNotIn('user_id', $blockedIds)->with('comments.replies')->orderBy('comments_count', 'desc')->paginate(10);
                 break;
             case "lowest_comment":
-                $posts = Post::where('published', true)->whereNotIn('user_id', $blockedIds)->with('comments.replies')->orderBy('comments_count', 'asc');
+                $posts = Post::where('published', true)->whereNotIn('user_id', $blockedIds)->with('comments.replies')->orderBy('comments_count', 'asc')->paginate(10);
                 break;
             case "highest_like":
-                $posts = Post::where('published', true)->whereNotIn('user_id', $blockedIds)->with('comments.replies')->orderBy('like', 'desc');
+                $posts = Post::where('published', true)->whereNotIn('user_id', $blockedIds)->with('comments.replies')->orderBy('like', 'desc')->paginate(10);
                 break;
             case "lowest_like":
-                $posts = Post::where('published', true)->whereNotIn('user_id', $blockedIds)->with('comments.replies')->orderBy('like', 'asc');
+                $posts = Post::where('published', true)->whereNotIn('user_id', $blockedIds)->with('comments.replies')->orderBy('like', 'asc')->paginate(10);
                 break;
             case "newest":
-                $posts = Post::where('published', true)->whereNotIn('user_id', $blockedIds)->with('comments.replies')->orderBy('created_at', 'desc');
+                $posts = Post::where('published', true)->whereNotIn('user_id', $blockedIds)->with('comments.replies')->orderBy('created_at', 'desc')->paginate(10);
                 break;
             case "oldest":
-                $posts = Post::where('published', true)->whereNotIn('user_id', $blockedIds)->with('comments.replies')->orderBy('created_at', 'asc');
+                $posts = Post::where('published', true)->whereNotIn('user_id', $blockedIds)->with('comments.replies')->orderBy('created_at', 'asc')->paginate(10);
                 break;
             default:
                 return false;
         }
 
-        $posts->paginate(10);
-        dd($posts);
         return PostResource::collection($posts);
     }
 
