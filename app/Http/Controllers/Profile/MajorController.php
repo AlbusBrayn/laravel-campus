@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Profile;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
 use App\Models\School;
 use App\Models\SchoolMajor;
+use App\Models\UserMajor;
 use Illuminate\Http\Request;
 
 class MajorController extends Controller
@@ -25,5 +27,20 @@ class MajorController extends Controller
         }
 
         return response(['majors' => $data]);
+    }
+
+    public function students(Request $request)
+    {
+        $user = $request->user();
+        $data = [];
+        $majorId = $user->major->major->id;
+
+        $relations = UserMajor::where('major_id', $majorId)->get();
+
+        foreach ($relations as $relation) {
+            $data[] = $relation->user;
+        }
+
+        return response(['students' => UserResource::collection($data)]);
     }
 }

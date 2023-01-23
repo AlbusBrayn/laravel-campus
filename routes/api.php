@@ -52,6 +52,7 @@ Route::middleware('auth:api')->group(function () {
         Route::post('/report/{id}', [ProfileController::class, 'report']);
 
         Route::post('/majors', [MajorController::class, 'index']);
+        Route::post('/major/students', [MajorController::class, 'students']);
     });
 
     Route::prefix('/location')->group(function () {
