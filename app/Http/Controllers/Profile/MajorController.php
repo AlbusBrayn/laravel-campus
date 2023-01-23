@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use App\Models\School;
 use App\Models\SchoolMajor;
+use App\Models\User;
 use App\Models\UserMajor;
 use Illuminate\Http\Request;
 
@@ -38,11 +39,12 @@ class MajorController extends Controller
         $relations = UserMajor::where('major_id', $majorId)->get();
 
         foreach ($relations as $relation) {
+            $user = User::find($relation->user_id);
             $data[] = [
-                'id' => $relation->user->id,
-                'name' => $relation->user->name,
-                'avatar' => $relation->user->avatar,
-                'created_at' => $relation->user->created_at
+                'id' => $user->id,
+                'name' => $user->name,
+                'avatar' => $user->avatar,
+                'created_at' => $relation->created_at
             ];
         }
 
