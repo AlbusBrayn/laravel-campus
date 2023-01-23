@@ -36,7 +36,8 @@ class MajorController extends Controller
         $data = [];
         $majorId = $user->major->major_id;
 
-        $relations = UserMajor::where('major_id', $majorId)->get();
+        $blockedIds = $request->user()->getBlockedFriendships()->pluck('recipient_id')->toArray();
+        $relations = UserMajor::where('major_id', $majorId)->whereNotIn('user_id', $blockedIds)->get();
 
         foreach ($relations as $relation) {
             $user = User::find($relation->user_id);
