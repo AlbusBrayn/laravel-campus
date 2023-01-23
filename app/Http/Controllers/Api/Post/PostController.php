@@ -60,6 +60,7 @@ class PostController extends Controller
         }
 
         $posts->paginate(10);
+        dd($posts);
         return PostResource::collection($posts);
     }
 
