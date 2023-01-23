@@ -38,9 +38,14 @@ class MajorController extends Controller
         $relations = UserMajor::where('major_id', $majorId)->get();
 
         foreach ($relations as $relation) {
-            $data[] = $relation->user;
+            $data[] = [
+                'id' => $relation->user->id,
+                'name' => $relation->user->name,
+                'avatar' => $relation->user->avatar,
+                'created_at' => $relation->user->created_at
+            ];
         }
 
-        return response(['students' => UserResource::collection($data)]);
+        return response(['students' => $data]);
     }
 }
