@@ -33,7 +33,7 @@ class MajorController extends Controller
     {
         $user = $request->user();
         $data = [];
-        $majorId = $user->major->major->id;
+        $majorId = $user->major->major_id;
 
         $relations = UserMajor::where('major_id', $majorId)->get();
 
