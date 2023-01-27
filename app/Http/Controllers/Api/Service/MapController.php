@@ -60,6 +60,7 @@ class MapController extends Controller
     {
         $user = $request->user();
         $users = $user->getFriends()->where('hide_location', false);
+        dd($users);
 
         $mapUsers = [];
         foreach ($users as $key) {
