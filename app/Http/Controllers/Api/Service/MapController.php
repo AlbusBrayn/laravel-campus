@@ -60,7 +60,6 @@ class MapController extends Controller
     {
         $user = $request->user();
         $users = $user->getFriends();
-        dd($users);
 
         $mapUsers = [];
         foreach ($users as $key) {
