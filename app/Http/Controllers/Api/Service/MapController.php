@@ -59,7 +59,7 @@ class MapController extends Controller
     public function getMap(Request $request)
     {
         $user = $request->user();
-        $users = $user->getFriends()->where('hide_location', false);
+        $users = $user->getFriends();
         dd($users);
 
         $mapUsers = [];
