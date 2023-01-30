@@ -8,6 +8,7 @@ use App\Http\Controllers\Profile\MajorController;
 use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\Api\Service\MapController;
 use App\Http\Controllers\Api\Post\PostController;
+use App\Http\Controllers\Api\Courses\CoursesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -77,5 +78,9 @@ Route::middleware('auth:api')->group(function () {
        Route::post('/report/{id}', [PostController::class, 'report']);
 
        Route::post('/search', [PostController::class, 'search']);
+    });
+
+    Route::prefix('courses')->group(function () {
+       Route::post('/list', [CoursesController::class, 'list']);
     });
 });
