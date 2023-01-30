@@ -17,6 +17,6 @@ class CoursesController extends Controller
         $majorId = $user->major->major_id;
 
         $courses = Courses::where(['school_id' => $schoolId, 'major_id' => $majorId])->get();
-        dd($courses);
+        dd($courses->toArray());
     }
 }
