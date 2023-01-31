@@ -81,8 +81,22 @@ class CoursesController extends Controller
     public function teachers(Request $request)
     {
         $user =  $request->user();
-        $userTeachers = UserTeacher::where(['user_id' => $user->id])->get();
+        $type = $request->type ?? 'all';
 
-        return response()->json(['status' => 'success', 'data' => UserTeacherResource::collection($userTeachers)]);
+        if ($type == 'all') {
+            $teachers = Teachers::all();
+            $data = [];
+
+            foreach ($teachers as $teacher) {
+                $data[] = [
+                    'id' => $teacher->id,
+                    'name' => $teacher->name,
+                    'is_admin' => (bool)$teacher->is_admin,
+                    'points' => 10,
+                    'color' => 'green'
+                ];
+            }
+            return response()->json(['status' => 'success', 'data' => $data]);
+        }
     }
 }
