@@ -84,4 +84,8 @@ Route::middleware('auth:api')->group(function () {
        Route::post('/list', [CoursesController::class, 'list']);
        Route::post('/save', [CoursesController::class, 'save']);
     });
+
+    Route::prefix('teachers')->group(function () {
+       Route::post('/list', [CoursesController::class, 'teachers']);
+    });
 });

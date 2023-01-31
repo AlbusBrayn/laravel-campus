@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Courses;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\TeacherResource;
+use App\Http\Resources\UserTeacherResource;
 use App\Models\Courses;
 use App\Models\School;
 use App\Models\TeacherCourses;
@@ -75,5 +76,13 @@ class CoursesController extends Controller
         }
 
         return response(['status' => 'success', 'message' => 'Dersler kaydedildi!']);
+    }
+
+    public function teachers(Request $request)
+    {
+        $user =  $request->user();
+        $userTeachers = UserTeacher::where(['user_id' => $user->id])->get();
+
+        return response()->json(['status' => 'success', 'data' => UserTeacherResource::collection($userTeachers)]);
     }
 }
