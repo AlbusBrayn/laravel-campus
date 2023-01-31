@@ -102,82 +102,66 @@ class TestSeeder extends Seeder
 
         \DB::table('teachers')->insert([
             [
-                'course_id' => 1,
                 'name' => 'Prof. Dr. Mehmet Ali Özkan',
                 'is_admin' => false
             ],
             [
-                'course_id' => 1,
                 'name' => 'Doç. Dr. Özlem Özkan',
                 'is_admin' => false
             ],
             [
-                'course_id' => 2,
                 'name' => 'Prof. Dr. Necati Özkan',
                 'is_admin' => false
             ],
             [
-                'course_id' => 2,
                 'name' => 'Prof. Dr. Ekmelettin Buhranoğlu',
                 'is_admin' => false
             ],
             [
-                'course_id' => 3,
                 'name' => 'Prof. Dr. Necbahat Bayraktar',
                 'is_admin' => false
             ],
             [
-                'course_id' => 3,
                 'name' => 'Prof. Dr. Mehmet Ali Bayraktar',
                 'is_admin' => false
             ],
             [
-                'course_id' => 4,
                 'name' => 'Prof. Dr. Serpil Damsız',
                 'is_admin' => false
             ],
             [
-                'course_id' => 4,
                 'name' => 'Doç. Dr. Mehmet Ali Erbil',
                 'is_admin' => false
             ],
             [
-                'course_id' => 5,
                 'name' => 'Prof. Dr. Remzi Ütübaşlı',
                 'is_admin' => false
             ],
             [
-                'course_id' => 5,
                 'name' => 'Doç. Dr. Remziye Ütenoğlu',
                 'is_admin' => false
             ],
             [
-                'course_id' => 6,
                 'name' => 'Prof. Dr. Mohammad Alim',
                 'is_admin' => false
             ],
             [
-                'course_id' => 6,
                 'name' => 'Doç. Dr. Rümeysa Konakoğlu',
                 'is_admin' => false
             ],
             [
-                'course_id' => 7,
                 'name' => 'Prof. Dr. Şabahat Taşralı',
                 'is_admin' => false
             ],
             [
-                'course_id' => 7,
                 'name' => 'Doç. Dr. Rukiye Romanov',
                 'is_admin' => false
             ],
             [
-                'course_id' => 8,
                 'name' => 'Prof. Dr. İbram İbramov',
                 'is_admin' => false
             ],
             [
-                'course_id' => 8,
                 'name' => 'Doç. Dr. Kadir Kerim Kerimoğulları',
                 'is_admin' => false
             ]
