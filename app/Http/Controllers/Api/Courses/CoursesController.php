@@ -8,6 +8,7 @@ use App\Models\Courses;
 use App\Models\School;
 use App\Models\TeacherCourses;
 use App\Models\Teachers;
+use App\Models\UserTeacher;
 use Illuminate\Http\Request;
 
 class CoursesController extends Controller
@@ -31,5 +32,48 @@ class CoursesController extends Controller
         }
 
         return response()->json(['status' => 'success', 'data' => $data]);
+    }
+
+    public function save(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'course_ids' => 'required|array',
+            'course_ids.*' => 'required|integer',
+            'teacher_ids' => 'required|array',
+            'teacher_ids.*' => 'required|integer',
+        ]);
+
+        $validator->setAttributeNames([
+            'course_ids' => 'Dersler',
+            'course_ids.*' => 'Ders',
+            'teacher_ids' => 'Öğretmenler',
+            'teacher_ids.*' => 'Öğretmen',
+        ]);
+
+        if ($validator->fails()) {
+            return response(['status' => 'error', 'message' => 'validate error!', 'data' => $validator->errors()], 400);
+        }
+
+        $user = $request->user();
+        $userTeachers = UserTeacher::where(['user_id' => $user->id])->get();
+        foreach ($userTeachers as $userTeacher) {
+            $userTeacher->delete();
+        }
+
+        $course_ids = $request->course_ids;
+        $teacher_ids = $request->teacher_ids;
+
+        foreach ($course_ids as $key => $course_id) {
+            $teacher_id = $teacher_ids[$key];
+            $teacherCourses = TeacherCourses::where(['course_id' => $course_id, 'teacher_id' => $teacher_id])->first();
+            if ($teacherCourses) {
+                UserTeacher::create([
+                    'user_id' => $user->id,
+                    'teacher_course_id' => $teacherCourses->id,
+                ]);
+            }
+        }
+
+        return response(['status' => 'success', 'message' => 'Dersler kaydedildi!']);
     }
 }
