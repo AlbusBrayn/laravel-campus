@@ -17,7 +17,7 @@ class TeacherResource extends JsonResource
         return [
             'id' => $this->teacher->id,
             'name' => $this->teacher->name,
-            'is_admin' => $this->teacher->is_admin,
+            'is_admin' => (bool)$this->teacher->is_admin,
         ];
     }
 }
