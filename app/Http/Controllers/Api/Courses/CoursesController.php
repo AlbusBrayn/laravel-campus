@@ -37,9 +37,9 @@ class CoursesController extends Controller
     public function save(Request $request)
     {
         $validator = \Validator::make($request->all(), [
-            'course_ids' => 'required|array',
+            'course_ids' => 'required|array|min:1',
             'course_ids.*' => 'required|integer',
-            'teacher_ids' => 'required|array',
+            'teacher_ids' => 'required|array:min:1',
             'teacher_ids.*' => 'required|integer',
         ]);
 
