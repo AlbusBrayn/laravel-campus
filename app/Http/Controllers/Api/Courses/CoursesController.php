@@ -52,7 +52,14 @@ class CoursesController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response(['status' => 'error', 'message' => 'validate error!', 'data' => $validator->errors()], 400);
+            return response(['status' => 'error', 'message' => 'Bir seçim işlemi yapmadınız!', 'data' => $validator->errors()], 400);
+        }
+
+        $course_ids = $request->course_ids;
+        $teacher_ids = $request->teacher_ids;
+
+        if (count($course_ids) !== count($teacher_ids)) {
+            return response(['status' => 'error', 'message' => 'Aynı ders üzerinde sadece bir öğretmen seçebilirsin!'], 400);
         }
 
         $user = $request->user();
@@ -60,9 +67,6 @@ class CoursesController extends Controller
         foreach ($userTeachers as $userTeacher) {
             $userTeacher->delete();
         }
-
-        $course_ids = $request->course_ids;
-        $teacher_ids = $request->teacher_ids;
 
         foreach ($course_ids as $key => $course_id) {
             $teacher_id = $teacher_ids[$key];

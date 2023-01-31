@@ -32,3 +32,8 @@ function isFriend(int $user_id, int $friend_id): string
        }
     }
 }
+
+function array_has_dupes(array $array): bool
+{
+    return count($array) !== count(array_unique($array));
+}
