@@ -10,7 +10,6 @@ class Teachers extends Model
     use HasFactory;
 
     protected $fillable = [
-        'courses_id',
         'name',
         'is_admin'
     ];

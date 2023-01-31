@@ -15,12 +15,9 @@ return new class extends Migration
     {
         Schema::create('teachers', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('course_id')->unsigned();
             $table->string('name');
             $table->boolean('is_admin')->default(false);
             $table->timestamps();
-
-            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
         });
     }
 

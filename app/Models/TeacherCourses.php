@@ -13,4 +13,14 @@ class TeacherCourses extends Model
         'teacher_id',
         'course_id'
     ];
+
+    public function teacher(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Teachers::class);
+    }
+
+    public function course(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Courses::class);
+    }
 }
