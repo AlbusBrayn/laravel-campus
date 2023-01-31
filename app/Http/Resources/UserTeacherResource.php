@@ -16,6 +16,10 @@ class UserTeacherResource extends JsonResource
     {
         return [
             'id' => $this->teacherCourse->teacher->id,
+            'name' => $this->teacherCourse->teacher->name,
+            'is_admin' => (bool)$this->teacherCourse->teacher->is_admin,
+            'points' => 10,
+            'color' => 'green'
         ];
     }
 }
