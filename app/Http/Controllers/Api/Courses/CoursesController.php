@@ -39,7 +39,7 @@ class CoursesController extends Controller
         $validator = \Validator::make($request->all(), [
             'course_ids' => 'required|array|min:1',
             'course_ids.*' => 'required|integer',
-            'teacher_ids' => 'required|array:min:1',
+            'teacher_ids' => 'required|array|min:1',
             'teacher_ids.*' => 'required|integer',
         ]);
 
