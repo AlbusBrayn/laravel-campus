@@ -88,7 +88,7 @@ class CoursesController extends Controller
         $type = $request->type ?? 'all';
 
         if ($type == 'all') {
-            $teachers = Teachers::all();
+            $teachers = Teachers::paginate(10);
             $data = [];
 
             foreach ($teachers as $teacher) {
