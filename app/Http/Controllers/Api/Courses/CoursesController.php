@@ -255,11 +255,10 @@ class CoursesController extends Controller
         return response(['status' => 'success', 'message' => 'İşleminiz başarıyla gerçekleştirildi!']);
     }
 
-    public function teacherDetail(Request $request)
+    public function teacherDetail(int $id, Request $request)
     {
         $user = $request->user();
-        $teacherId = $request->teacher_id;
-        $teacher = Teachers::find($teacherId);
+        $teacher = Teachers::find($id);
         if (!$teacher) {
             return response(['status' => 'error', 'message' => 'Öğretmen bulunamadı!'], 400);
         }
@@ -293,11 +292,10 @@ class CoursesController extends Controller
         ]]);
     }
 
-    public function teacherReviews(Request $request)
+    public function teacherReviews(int $id, Request $request)
     {
         $user = $request->user();
-        $teacherId = $request->teacher_id;
-        $teacher = Teachers::find($teacherId);
+        $teacher = Teachers::find($id);
 
         if (!$teacher) {
             return response(['status' => 'error', 'message' => 'Öğretmen bulunamadı!'], 400);
