@@ -255,7 +255,7 @@ class CoursesController extends Controller
         return response(['status' => 'success', 'message' => 'İşleminiz başarıyla gerçekleştirildi!']);
     }
 
-    public function teacherDetail(int $id, Request $request)
+    public function teacherDetail(Request $request, $id)
     {
         $user = $request->user();
         $teacher = Teachers::find($id);
@@ -263,8 +263,8 @@ class CoursesController extends Controller
             return response(['status' => 'error', 'message' => 'Öğretmen bulunamadı!'], 400);
         }
 
-        if (TeacherVote::where(['teacher_id' => $this->id])->exists()) {
-            $votes = TeacherVote::where(['teacher_id' => $this->id])->get();
+        if (TeacherVote::where(['teacher_id' => $id])->exists()) {
+            $votes = TeacherVote::where(['teacher_id' => $id])->get();
             $quality = 0;
             $attitude = 0;
             $performance = 0;
@@ -292,7 +292,7 @@ class CoursesController extends Controller
         ]]);
     }
 
-    public function teacherReviews(int $id, Request $request)
+    public function teacherReviews(Request $request, $id)
     {
         $user = $request->user();
         $teacher = Teachers::find($id);
