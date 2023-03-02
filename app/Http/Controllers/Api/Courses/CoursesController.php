@@ -98,8 +98,13 @@ class CoursesController extends Controller
                 $teachers = collect();
                 $teachersQuery = Teachers::all();
                 foreach ($teachersQuery as $teacher) {
-                    $teacherPoints = TeacherVote::find($teacher->id);
-                    $point = ($teacherPoints->quality + $teacherPoints->attitude + $teacherPoints->performance) / 3;
+                    if (TeacherVote::where(['teacher_id' => $teacher->id])->exists()) {
+                        $teacherPoints = TeacherVote::find($teacher->id);
+                        $point = ($teacherPoints->quality + $teacherPoints->attitude + $teacherPoints->performance) / 3;
+                    } else {
+                        $point = 10;
+                    }
+
                     $teachers->add([
                         'id' => $teacher->id,
                         'name' => $teacher->name,
@@ -114,8 +119,13 @@ class CoursesController extends Controller
                 $teachers = collect();
                 $teachersQuery = Teachers::all();
                 foreach ($teachersQuery as $teacher) {
-                    $teacherPoints = TeacherVote::find($teacher->id);
-                    $point = ($teacherPoints->quality + $teacherPoints->attitude + $teacherPoints->performance) / 3;
+                    if (TeacherVote::where(['teacher_id' => $teacher->id])->exists()) {
+                        $teacherPoints = TeacherVote::find($teacher->id);
+                        $point = ($teacherPoints->quality + $teacherPoints->attitude + $teacherPoints->performance) / 3;
+                    } else {
+                        $point = 10;
+                    }
+
                     $teachers->add([
                         'id' => $teacher->id,
                         'name' => $teacher->name,
