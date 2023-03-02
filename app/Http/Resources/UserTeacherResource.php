@@ -15,7 +15,7 @@ class UserTeacherResource extends JsonResource
      */
     public function toArray($request)
     {
-        dd($this->id);
+        dd($this);
         return [
             'id' => $this->id,
             'name' => $this->name,
