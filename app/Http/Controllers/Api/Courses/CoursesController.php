@@ -99,8 +99,19 @@ class CoursesController extends Controller
                 $teachersQuery = Teachers::all();
                 foreach ($teachersQuery as $teacher) {
                     if (TeacherVote::where(['teacher_id' => $teacher->id])->exists()) {
-                        $teacherPoints = TeacherVote::find($teacher->id);
-                        $point = ($teacherPoints->quality + $teacherPoints->attitude + $teacherPoints->performance) / 3;
+                        $votes = TeacherVote::where(['teacher_id' => $teacher->id])->get();
+                        $quality = 0;
+                        $attitude = 0;
+                        $performance = 0;
+                        foreach ($votes as $vote) {
+                            $quality += $vote->quality;
+                            $attitude += $vote->attitude;
+                            $performance += $vote->performance;
+                        }
+                        $qualityRate = $quality / count($votes);
+                        $attitudeRate = $attitude / count($votes);
+                        $performanceRate = $performance / count($votes);
+                        $point = ($qualityRate + $attitudeRate + $performanceRate) / 3;
                     } else {
                         $point = 10;
                     }
@@ -124,8 +135,19 @@ class CoursesController extends Controller
                 $teachersQuery = Teachers::all();
                 foreach ($teachersQuery as $teacher) {
                     if (TeacherVote::where(['teacher_id' => $teacher->id])->exists()) {
-                        $teacherPoints = TeacherVote::find($teacher->id);
-                        $point = ($teacherPoints->quality + $teacherPoints->attitude + $teacherPoints->performance) / 3;
+                        $votes = TeacherVote::where(['teacher_id' => $teacher->id])->get();
+                        $quality = 0;
+                        $attitude = 0;
+                        $performance = 0;
+                        foreach ($votes as $vote) {
+                            $quality += $vote->quality;
+                            $attitude += $vote->attitude;
+                            $performance += $vote->performance;
+                        }
+                        $qualityRate = $quality / count($votes);
+                        $attitudeRate = $attitude / count($votes);
+                        $performanceRate = $performance / count($votes);
+                        $point = ($qualityRate + $attitudeRate + $performanceRate) / 3;
                     } else {
                         $point = 10;
                     }
