@@ -89,7 +89,7 @@ class CoursesController extends Controller
 
         if ($type == 'all') {
             $teachers = Teachers::paginate(10);
-            return response()->json(['status' => 'success', 'data' => new UserTeacherResource($teachers)]);
+            return response()->json(['status' => 'success', 'data' => UserTeacherResource::collection($teachers)]);
         }
     }
 
