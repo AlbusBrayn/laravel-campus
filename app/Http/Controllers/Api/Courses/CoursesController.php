@@ -214,7 +214,7 @@ class CoursesController extends Controller
             'quality' => 'required|integer',
             'attitude' => 'required|integer',
             'performance' => 'required|integer',
-            'comment' => 'required|string|min:25|max:255',
+            'comment' => 'required|string|min:10|max:255',
         ]);
 
         $validator->setAttributeNames([
