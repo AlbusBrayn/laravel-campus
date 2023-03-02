@@ -87,9 +87,11 @@ class CoursesController extends Controller
     public function teachers(Request $request)
     {
         $sort = $request->sort;
-        if (!in_array($sort, ['highest_points', 'lowest_points', 'name'])) {
+        if (!in_array($sort, ['highest_points', 'lowest_points', 'name', 'department'])) {
             $sort = 'all';
         }
+
+        $departmentId = $request->department_id ?? null;
 
         switch ($sort) {
             case 'highest_points':
@@ -121,6 +123,22 @@ class CoursesController extends Controller
         }
 
         return UserTeacherResource::collection($teachers);
+    }
+
+    public function departments(Request $request)
+    {
+        $schoolId = School::first()->id;
+
+        $data = [];
+        $courses = Courses::where(['school_id' => $schoolId])->get();
+        foreach ($courses as $course) {
+            $data[] = [
+                'id' => $course->id,
+                'name' => $course->name
+            ];
+        }
+
+        return response()->json(['status' => 'success', 'data' => $data]);
     }
 
     private function getColor(float|int $point)
