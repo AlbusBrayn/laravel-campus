@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Courses;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\TeacherResource;
+use App\Http\Resources\TeacherVoteResource;
 use App\Http\Resources\UserTeacherResource;
 use App\Models\Courses;
 use App\Models\School;
@@ -323,32 +324,7 @@ class CoursesController extends Controller
             return response(['status' => 'error', 'message' => 'Öğretmen bulunamadı!'], 400);
         }
 
-        $datas = [];
         $votes = TeacherVote::where(['teacher_id' => $teacher->id])->with('user')->paginate(10);
-
-        foreach ($votes as $vote) {
-            $point = ($vote->quality + $vote->attitude + $vote->performance) / 3;
-            $datas[] = [
-                'id' => $vote->id,
-                'user' => [
-                    'id' => $vote->user->id,
-                    'name' => $vote->user->name,
-                    'avatar' => $vote->user->avatar
-                ],
-                'point' => $point,
-                'pointColor' => getColor($point),
-                'quality' => $vote->quality,
-                'qualityColor' => getColor($vote->quality),
-                'attitude' => $vote->attitude,
-                'attitudeColor' => getColor($vote->attitude),
-                'performance' => $vote->performance,
-                'performanceColor' => getColor($vote->performance),
-                'comment' => $vote->comment,
-                'created_at' => $vote->created_at,
-                'updated_at' => $vote->updated_at,
-            ];
-        }
-
-        return response(['status' => 'success', 'data' => $datas]);
+        return TeacherVoteResource::collection($votes);
     }
 }
