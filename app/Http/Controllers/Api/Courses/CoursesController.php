@@ -153,11 +153,7 @@ class CoursesController extends Controller
                 foreach ($teachersQuery as $teacher) {
                     $t = TeacherCourses::where(['teacher_id' => $teacher->id, 'course_id' => $departmentId])->first();
                     if ($t) {
-                        $teachers->add([
-                            'id' => $teacher->id,
-                            'name' => $teacher->name,
-                            'is_admin' => (bool)$teacher->is_admin
-                        ]);
+                        $teachers->add($teacher);
                     }
                 }
 
