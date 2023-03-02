@@ -248,6 +248,7 @@ class CoursesController extends Controller
         $teacherVote = TeacherVote::where(['teacher_id' => $teacher->id])->first();
         if (!$teacherVote) {
             $teacherVote = TeacherVote::create([
+                'user_id' => $user->id,
                 'teacher_id' => $teacher->id,
                 'quality' => $request->quality,
                 'attitude' => $request->attitude,
