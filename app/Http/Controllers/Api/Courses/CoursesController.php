@@ -86,8 +86,7 @@ class CoursesController extends Controller
     {
         //$user =  $request->user();
         $teachers = Teachers::orderBy('id', 'desc')->paginate(10);
-
-        return response()->json(['status' => 'success', 'data' => UserTeacherResource::collection($teachers)]);
+        return UserTeacherResource::collection($teachers);
     }
 
     public function searchTeacher(Request $request)
