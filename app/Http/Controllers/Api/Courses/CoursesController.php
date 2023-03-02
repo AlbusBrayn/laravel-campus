@@ -89,8 +89,11 @@ class CoursesController extends Controller
 
         if ($type == 'all') {
             $teachers = Teachers::paginate(10);
-            return response()->json(['status' => 'success', 'data' => UserTeacherResource::collection($teachers)]);
+        } else {
+            $teachers = Teachers::all();
         }
+
+        return response()->json(['status' => 'success', 'data' => UserTeacherResource::collection($teachers)]);
     }
 
     public function searchTeacher(Request $request)
