@@ -114,7 +114,6 @@ class CoursesController extends Controller
                 }
                 $teachers = $teachers->sortByDesc('point');
                 $newTeachers = collect();
-                dd($teachers);
                 foreach ($teachers as $teacher) {
                     $newTeachers->add(Teachers::find($teacher['id']));
                 }
