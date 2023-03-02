@@ -139,7 +139,6 @@ class CoursesController extends Controller
                 break;
             case 'name':
                 $teachers = Teachers::orderBy('name')->paginate(10);
-                dd($teachers);
                 break;
             case 'department':
                 $teachers = collect();
