@@ -19,7 +19,7 @@ class UserTeacherResource extends JsonResource
             $teacherPoints = TeacherVote::find($this->id);
             $point = ($teacherPoints->quality + $teacherPoints->attitude + $teacherPoints->performance) / 3;
         } else {
-            $point = 10;
+            $point = rand(1, 10);
         }
         return [
             'id' => $this->id,
