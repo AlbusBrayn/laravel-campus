@@ -349,6 +349,6 @@ class CoursesController extends Controller
             ];
         }
 
-        return $datas;
+        return response(['status' => 'success', 'data' => $datas]);
     }
 }
