@@ -84,7 +84,6 @@ class CoursesController extends Controller
 
     public function teachers(Request $request)
     {
-        //$user =  $request->user();
         $teachers = Teachers::paginate(10);
         return UserTeacherResource::collection($teachers);
     }
