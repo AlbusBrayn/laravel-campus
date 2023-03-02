@@ -288,8 +288,11 @@ class CoursesController extends Controller
             'points' => $point,
             'color' => getColor($point),
             'qualityRate' => $qualityRate ?? 10,
+            'qualityColor' => getColor($qualityRate ?? 10),
             'attitudeRate' => $attitudeRate ?? 10,
-            'performanceRate' => $performanceRate ?? 10
+            'attitudeColor' => getColor($attitudeRate ?? 10),
+            'performanceRate' => $performanceRate ?? 10,
+            'performanceColor' => getColor($performanceRate ?? 10),
         ]]);
     }
 
