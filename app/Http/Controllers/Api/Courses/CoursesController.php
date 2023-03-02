@@ -214,7 +214,7 @@ class CoursesController extends Controller
             'quality' => 'required|integer',
             'attitude' => 'required|integer',
             'performance' => 'required|integer',
-            'comment' => 'required|string',
+            'comment' => 'required|string|min:25|max:255',
         ]);
 
         $validator->setAttributeNames([
@@ -233,6 +233,16 @@ class CoursesController extends Controller
 
         if (!$teacher) {
             return response(['status' => 'error', 'message' => 'Öğretmen bulunamadı!'], 400);
+        }
+
+        $teacherCourses = TeacherCourses::where(['teacher_id' => $teacher->id])->get();
+        $courses = [];
+        foreach ($teacherCourses as $teacherCourse) {
+            $courses[] = $teacherCourse->id;
+        }
+
+        if (!UserTeacher::where('user_id', '=', $user->id)->whereIn('teacher_course_id', $courses)->exists()) {
+            return response(['status' => 'error', 'message' => 'Bu öğretmene ait dersi almadığınız için yorum yapamazsınız!'], 400);
         }
 
         $teacherVote = TeacherVote::where(['teacher_id' => $teacher->id])->first();
@@ -281,6 +291,12 @@ class CoursesController extends Controller
             $point = 10;
         }
 
+        if (TeacherVote::where(['teacher_id' => $id, 'user_id' => $user->id])->exists()) {
+            $vote = TeacherVote::where(['teacher_id' => $id, 'user_id' => $user->id])->first();
+        } else {
+            $vote = null;
+        }
+
         return response(['status' => 'success', 'data' => [
             'id' => $teacher->id,
             'name' => $teacher->name,
@@ -293,6 +309,7 @@ class CoursesController extends Controller
             'attitudeColor' => getColor($attitudeRate ?? 10),
             'performanceRate' => $performanceRate ?? 10,
             'performanceColor' => getColor($performanceRate ?? 10),
+            'vote' => $vote
         ]]);
     }
 
