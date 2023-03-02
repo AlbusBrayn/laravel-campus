@@ -84,14 +84,8 @@ class CoursesController extends Controller
 
     public function teachers(Request $request)
     {
-        $user =  $request->user();
-        $type = $request->type ?? 'all';
-
-        if ($type == 'all') {
-            $teachers = Teachers::paginate(10);
-        } else {
-            $teachers = Teachers::all();
-        }
+        //$user =  $request->user();
+        $teachers = Teachers::orderBy('id', 'desc')->paginate(10);
 
         return response()->json(['status' => 'success', 'data' => UserTeacherResource::collection($teachers)]);
     }
