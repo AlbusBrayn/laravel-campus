@@ -90,5 +90,6 @@ Route::middleware('auth:api')->group(function () {
        Route::post('/list/departments', [CoursesController::class, 'departments']);
        Route::post('/review/upsert', [CoursesController::class, 'reviewUpsert']);
        Route::post('/detail/{id}', [CoursesController::class, 'teacherDetail']);
+       Route::post('/detail/reviews/{id}', [CoursesController::class, 'teacherReviews']);
     });
 });

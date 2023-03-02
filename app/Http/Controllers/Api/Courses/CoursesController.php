@@ -259,7 +259,7 @@ class CoursesController extends Controller
     {
         $user = $request->user();
         $teacherId = $request->teacher_id;
-        $teacher = Teachers::findOrFail($teacherId);
+        $teacher = Teachers::find($teacherId);
         if (!$teacher) {
             return response(['status' => 'error', 'message' => 'Öğretmen bulunamadı!'], 400);
         }
@@ -291,5 +291,18 @@ class CoursesController extends Controller
             'attitudeRate' => $attitudeRate ?? 10,
             'performanceRate' => $performanceRate ?? 10
         ]]);
+    }
+
+    public function teacherReviews(Request $request)
+    {
+        $user = $request->user();
+        $teacherId = $request->teacher_id;
+        $teacher = Teachers::find($teacherId);
+
+        if (!$teacher) {
+            return response(['status' => 'error', 'message' => 'Öğretmen bulunamadı!'], 400);
+        }
+
+        return TeacherVote::where(['teacher_id' => $teacher->id])->paginate(10);
     }
 }
