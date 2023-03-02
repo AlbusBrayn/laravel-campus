@@ -85,27 +85,7 @@ class CoursesController extends Controller
     public function teachers(Request $request)
     {
         //$user =  $request->user();
-        $teachers = Teachers::orderBy('id', 'desc')->paginate(10);
+        $teachers = Teachers::paginate(10);
         return UserTeacherResource::collection($teachers);
-    }
-
-    public function searchTeacher(Request $request)
-    {
-        $user =  $request->user();
-        $search = $request->search;
-
-        $teachers = Teachers::where('name', 'like', '%' . $search . '%');
-        $data = [];
-
-        foreach ($teachers as $teacher) {
-            $data[] = [
-                'id' => $teacher->id,
-                'name' => $teacher->name,
-                'is_admin' => (bool)$teacher->is_admin,
-                'points' => 10,
-                'color' => 'green'
-            ];
-        }
-        return response()->json(['status' => 'success', 'data' => $data]);
     }
 }
