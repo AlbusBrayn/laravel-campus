@@ -323,6 +323,32 @@ class CoursesController extends Controller
             return response(['status' => 'error', 'message' => 'Öğretmen bulunamadı!'], 400);
         }
 
-        return TeacherVote::where(['teacher_id' => $teacher->id])->with('user')->paginate(10);
+        $datas = [];
+        $votes = TeacherVote::where(['teacher_id' => $teacher->id])->with('user')->paginate(10);
+
+        foreach ($votes as $vote) {
+            $point = ($vote->quality + $vote->attitude + $vote->performance) / 3;
+            $datas[] = [
+                'id' => $vote->id,
+                'user' => [
+                    'id' => $vote->user->id,
+                    'name' => $vote->user->name,
+                    'avatar' => $vote->user->avatar
+                ],
+                'point' => $point,
+                'pointColor' => getColor($point),
+                'quality' => $vote->quality,
+                'qualityColor' => getColor($vote->quality),
+                'attitude' => $vote->attitude,
+                'attitudeColor' => getColor($vote->attitude),
+                'performance' => $vote->performance,
+                'performanceColor' => getColor($vote->performance),
+                'comment' => $vote->comment,
+                'created_at' => $vote->created_at,
+                'updated_at' => $vote->updated_at,
+            ];
+        }
+
+        return $datas;
     }
 }
