@@ -323,6 +323,6 @@ class CoursesController extends Controller
             return response(['status' => 'error', 'message' => 'Öğretmen bulunamadı!'], 400);
         }
 
-        return TeacherVote::where(['teacher_id' => $teacher->id])->paginate(10);
+        return TeacherVote::where(['teacher_id' => $teacher->id])->with('user')->paginate(10);
     }
 }
