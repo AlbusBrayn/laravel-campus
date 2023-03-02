@@ -113,7 +113,11 @@ class CoursesController extends Controller
                     ]);
                 }
                 $teachers = $teachers->sortByDesc('point');
-                $teachers = paginate($teachers, 10);
+                $newTeachers = [];
+                foreach ($teachers as $teacher) {
+                    $newTeachers[] = Teachers::find($teacher['id']);
+                }
+                $teachers = paginate($newTeachers, 10);
                 break;
             case 'lowest_points':
                 $teachers = collect();
@@ -134,7 +138,11 @@ class CoursesController extends Controller
                     ]);
                 }
                 $teachers = $teachers->sortBy('point');
-                $teachers = paginate($teachers, 10);
+                $newTeachers = [];
+                foreach ($teachers as $teacher) {
+                    $newTeachers[] = Teachers::find($teacher['id']);
+                }
+                $teachers = paginate($newTeachers, 10);
                 break;
             case 'name':
                 $teachers = Teachers::orderBy('name')->paginate(10);
