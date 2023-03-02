@@ -89,18 +89,27 @@ class CoursesController extends Controller
 
         if ($type == 'all') {
             $teachers = Teachers::paginate(10);
-            $data = [];
-
-            foreach ($teachers as $teacher) {
-                $data[] = [
-                    'id' => $teacher->id,
-                    'name' => $teacher->name,
-                    'is_admin' => (bool)$teacher->is_admin,
-                    'points' => 10,
-                    'color' => 'green'
-                ];
-            }
-            return response()->json(['status' => 'success', 'data' => $data]);
+            return response()->json(['status' => 'success', 'data' => new UserTeacherResource($teachers)]);
         }
+    }
+
+    public function searchTeacher(Request $request)
+    {
+        $user =  $request->user();
+        $search = $request->search;
+
+        $teachers = Teachers::where('name', 'like', '%' . $search . '%');
+        $data = [];
+
+        foreach ($teachers as $teacher) {
+            $data[] = [
+                'id' => $teacher->id,
+                'name' => $teacher->name,
+                'is_admin' => (bool)$teacher->is_admin,
+                'points' => 10,
+                'color' => 'green'
+            ];
+        }
+        return response()->json(['status' => 'success', 'data' => $data]);
     }
 }

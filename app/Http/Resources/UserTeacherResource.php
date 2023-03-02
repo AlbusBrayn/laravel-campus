@@ -15,9 +15,9 @@ class UserTeacherResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->teacherCourse->teacher->id,
-            'name' => $this->teacherCourse->teacher->name,
-            'is_admin' => (bool)$this->teacherCourse->teacher->is_admin,
+            'id' => $this->id,
+            'name' => $this->name,
+            'is_admin' => (bool)$this->is_admin,
             'points' => 10,
             'color' => 'green'
         ];
