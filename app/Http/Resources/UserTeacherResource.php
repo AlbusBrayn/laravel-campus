@@ -41,6 +41,7 @@ class UserTeacherResource extends JsonResource
             'attitudeRate' => $attitudeRate ?? 10,
             'performanceRate' => $performanceRate ?? 10,
             'color' => getColor($this->point ?? $point),
+            'reviews' => $votes ?? []
         ];
     }
 }

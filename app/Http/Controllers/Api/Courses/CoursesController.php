@@ -254,4 +254,16 @@ class CoursesController extends Controller
 
         return response(['status' => 'success', 'message' => 'İşleminiz başarıyla gerçekleştirildi!']);
     }
+
+    public function teacherDetail(Request $request)
+    {
+        $user = $request->user();
+        $teacherId = $request->teacher_id;
+        $teacher = Teachers::find($teacherId);
+        if (!$teacher) {
+            return response(['status' => 'error', 'message' => 'Öğretmen bulunamadı!'], 400);
+        }
+
+        return new UserTeacherResource($teacher);
+    }
 }
