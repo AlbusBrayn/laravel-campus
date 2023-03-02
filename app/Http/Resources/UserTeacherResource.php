@@ -15,27 +15,23 @@ class UserTeacherResource extends JsonResource
      */
     public function toArray($request)
     {
-        if (!isset($this->id)) {
-            $this->id = $this->resource->id;
-            $this->name = $this->resource->name;
-            $this->is_admin = $this->resource->is_admin;
-            if (isset($this->respource->point)) {
-                $this->point = $this->resource->point;
-            }
-        }
+        $id = $this->id ?? $this->resource->id;
+        $name = $this->name ?? $this->resource->name;
+        $is_admin = $this->is_admin ?? $this->resource->is_admin;
+        $tpoint = $this->point ?? $this->resource->point;
 
-        if (TeacherVote::where(['teacher_id' => $this->id])->exists()) {
-            $teacherPoints = TeacherVote::find($this->id);
+        if (TeacherVote::where(['teacher_id' => $id])->exists()) {
+            $teacherPoints = TeacherVote::find($id);
             $point = ($teacherPoints->quality + $teacherPoints->attitude + $teacherPoints->performance) / 3;
         } else {
             $point = 10;
         }
         return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'is_admin' => (bool)$this->is_admin,
-            'points' => $this->point ?? $point,
-            'color' => getColor($this->point ?? $point),
+            'id' => $id,
+            'name' => $name,
+            'is_admin' => (bool)$is_admin,
+            'points' => $tpoint ?? $point,
+            'color' => getColor($tpoint ?? $point),
         ];
     }
 }
