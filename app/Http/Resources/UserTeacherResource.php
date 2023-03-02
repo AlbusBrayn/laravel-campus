@@ -15,16 +15,7 @@ class UserTeacherResource extends JsonResource
      */
     public function toArray($request)
     {
-        if (isset($this->id)) {
-            if (TeacherVote::where(['teacher_id' => $this->id])->exists()) {
-                $teacherPoints = TeacherVote::find($this->id);
-                $point = ($teacherPoints->quality + $teacherPoints->attitude + $teacherPoints->performance) / 3;
-            } else {
-                $point = 10;
-            }
-        } else {
-            $point = 10;
-        }
+        dd($this);
         return [
             'id' => $this->id,
             'name' => $this->name,
