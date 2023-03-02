@@ -17,9 +17,4 @@ class TeacherVote extends Model
         'performance',
         'comment'
     ];
-
-    protected $hidden = [
-        'created_at',
-        'updated_at'
-    ];
 }
