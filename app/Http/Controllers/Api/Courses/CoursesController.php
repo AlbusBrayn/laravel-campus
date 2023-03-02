@@ -113,9 +113,9 @@ class CoursesController extends Controller
                     ]);
                 }
                 $teachers = $teachers->sortByDesc('point');
-                $newTeachers = [];
+                $newTeachers = collect();
                 foreach ($teachers as $teacher) {
-                    $newTeachers[] = Teachers::find($teacher['id']);
+                    $newTeachers->add(Teachers::find($teacher['id']));
                 }
                 $teachers = paginate($newTeachers, 10);
                 break;
@@ -138,9 +138,9 @@ class CoursesController extends Controller
                     ]);
                 }
                 $teachers = $teachers->sortBy('point');
-                $newTeachers = [];
+                $newTeachers = collect();
                 foreach ($teachers as $teacher) {
-                    $newTeachers[] = Teachers::find($teacher['id']);
+                    $newTeachers->add(Teachers::find($teacher['id']));
                 }
                 $teachers = paginate($newTeachers, 10);
                 break;
