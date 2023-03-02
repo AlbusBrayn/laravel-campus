@@ -113,7 +113,8 @@ class CoursesController extends Controller
                     ]);
                 }
                 $teachers = $teachers->sortByDesc('point');
-                $teachers = $teachers->values()->all();
+                $teachers = $teachers->values();
+                dd($teachers);
                 $teachers = paginate($teachers, 10);
                 break;
             case 'lowest_points':
