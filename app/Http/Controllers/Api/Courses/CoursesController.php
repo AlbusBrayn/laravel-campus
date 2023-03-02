@@ -114,6 +114,7 @@ class CoursesController extends Controller
                 }
                 $teachers = $teachers->sortByDesc('point');
                 $teachers = paginate($teachers, 10);
+                dd($teachers);
                 break;
             case 'lowest_points':
                 $teachers = collect();
