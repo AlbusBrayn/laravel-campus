@@ -102,7 +102,7 @@ class CoursesController extends Controller
                         $teacherPoints = TeacherVote::find($teacher->id);
                         $point = ($teacherPoints->quality + $teacherPoints->attitude + $teacherPoints->performance) / 3;
                     } else {
-                        $point = rand(1, 10);
+                        $point = 10;
                     }
 
                     $teachers->add([
