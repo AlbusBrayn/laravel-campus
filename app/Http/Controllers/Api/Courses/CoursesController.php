@@ -9,8 +9,10 @@ use App\Models\Courses;
 use App\Models\School;
 use App\Models\TeacherCourses;
 use App\Models\Teachers;
+use App\Models\TeacherVote;
 use App\Models\UserTeacher;
 use Illuminate\Http\Request;
+use Ramsey\Collection\Collection;
 
 class CoursesController extends Controller
 {
@@ -84,7 +86,51 @@ class CoursesController extends Controller
 
     public function teachers(Request $request)
     {
-        $teachers = Teachers::paginate(10);
+        $sort = $request->sort;
+        if (!in_array($sort, ['highest_points', 'lowest_points', 'name'])) {
+            $sort = 'all';
+        }
+
+        switch ($sort) {
+            case 'highest_points':
+                $teachers = collect();
+                $teachersQuery = Teachers::all();
+                foreach ($teachersQuery as $teacher) {
+                    $teacherPoints = TeacherVote::find($teacher->id);
+                    $point = ($teacherPoints->quality + $teacherPoints->attitude + $teacherPoints->performance) / 3;
+                    $teachers->add([
+                        'id' => $teacher->id,
+                        'name' => $teacher->name,
+                        'is_admin' => (bool)$teacher->is_admin,
+                        'point' => $point,
+                        'color' => $this->getColor($point),
+                    ]);
+                }
+
+                $teachers = paginate($teachers, 10);
+                break;
+            case 'lowest_points':
+                $teachers = Teachers::orderBy('points', 'asc')->get();
+                break;
+            case 'name':
+                $teachers = Teachers::orderBy('name')->get();
+                break;
+            default:
+                $teachers = Teachers::paginate(10);
+                break;
+        }
+
         return UserTeacherResource::collection($teachers);
+    }
+
+    private function getColor(float|int $point)
+    {
+        if ($point >= 8) {
+            return 'green';
+        } elseif ($point >= 5) {
+            return 'yellow';
+        } else {
+            return 'red';
+        }
     }
 }

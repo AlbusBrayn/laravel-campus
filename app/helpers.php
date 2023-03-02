@@ -37,3 +37,21 @@ function array_has_dupes(array $array): bool
 {
     return count($array) !== count(array_unique($array));
 }
+
+function paginate(\Illuminate\Support\Collection $results, $pageSize)
+{
+    $page = \Illuminate\Pagination\Paginator::resolveCurrentPage('page');
+    $total = $results->count();
+
+    return paginator($results->forPage($page, $pageSize), $total, $pageSize, $page, [
+        'path' => \Illuminate\Pagination\Paginator::resolveCurrentPath(),
+        'pageName' => 'page',
+    ]);
+}
+
+function paginator($items, $total, $perPage, $currentPage, $options)
+{
+    return \Illuminate\Container\Container::getInstance()->makeWith(\Illuminate\Pagination\LengthAwarePaginator::class, compact(
+        'items', 'total', 'perPage', 'currentPage', 'options'
+    ));
+}
