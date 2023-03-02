@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\TeacherVote;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserTeacherResource extends JsonResource
@@ -14,12 +15,14 @@ class UserTeacherResource extends JsonResource
      */
     public function toArray($request)
     {
+        $teacherPoints = TeacherVote::find($this->id);
+        $point = ($teacherPoints->quality + $teacherPoints->attitude + $teacherPoints->performance) / 3;
         return [
             'id' => $this->id,
             'name' => $this->name,
             'is_admin' => (bool)$this->is_admin,
-            'points' => 10,
-            'color' => 'green'
+            'points' => $this->point ?? $point,
+            'color' => getColor($point),
         ];
     }
 }

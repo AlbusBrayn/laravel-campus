@@ -104,18 +104,46 @@ class CoursesController extends Controller
                         'id' => $teacher->id,
                         'name' => $teacher->name,
                         'is_admin' => (bool)$teacher->is_admin,
-                        'point' => $point,
-                        'color' => $this->getColor($point),
+                        'point' => $point
                     ]);
                 }
-
+                $teachers = $teachers->sortByDesc('point');
                 $teachers = paginate($teachers, 10);
                 break;
             case 'lowest_points':
-                $teachers = Teachers::orderBy('points', 'asc')->get();
+                $teachers = collect();
+                $teachersQuery = Teachers::all();
+                foreach ($teachersQuery as $teacher) {
+                    $teacherPoints = TeacherVote::find($teacher->id);
+                    $point = ($teacherPoints->quality + $teacherPoints->attitude + $teacherPoints->performance) / 3;
+                    $teachers->add([
+                        'id' => $teacher->id,
+                        'name' => $teacher->name,
+                        'is_admin' => (bool)$teacher->is_admin,
+                        'point' => $point
+                    ]);
+                }
+                $teachers = $teachers->sortBy('point');
+                $teachers = paginate($teachers, 10);
                 break;
             case 'name':
-                $teachers = Teachers::orderBy('name')->get();
+                $teachers = Teachers::orderBy('name')->paginate(10);
+                break;
+            case 'department':
+                $teachers = collect();
+                $teachersQuery = Teachers::all();
+                foreach ($teachersQuery as $teacher) {
+                    $t = TeacherCourses::where(['teacher_id' => $teacher->id, 'course_id' => $departmentId])->first();
+                    if ($t) {
+                        $teachers->add([
+                            'id' => $teacher->id,
+                            'name' => $teacher->name,
+                            'is_admin' => (bool)$teacher->is_admin
+                        ]);
+                    }
+                }
+
+                $teachers = paginate($teachers, 10);
                 break;
             default:
                 $teachers = Teachers::paginate(10);
@@ -139,16 +167,5 @@ class CoursesController extends Controller
         }
 
         return response()->json(['status' => 'success', 'data' => $data]);
-    }
-
-    private function getColor(float|int $point)
-    {
-        if ($point >= 8) {
-            return 'green';
-        } elseif ($point >= 5) {
-            return 'yellow';
-        } else {
-            return 'red';
-        }
     }
 }

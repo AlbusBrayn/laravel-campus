@@ -49,6 +49,17 @@ function paginate(\Illuminate\Support\Collection $results, $pageSize)
     ]);
 }
 
+function getColor(float|int $point)
+{
+    if ($point >= 8) {
+        return 'green';
+    } elseif ($point >= 5) {
+        return 'yellow';
+    } else {
+        return 'red';
+    }
+}
+
 function paginator($items, $total, $perPage, $currentPage, $options)
 {
     return \Illuminate\Container\Container::getInstance()->makeWith(\Illuminate\Pagination\LengthAwarePaginator::class, compact(
