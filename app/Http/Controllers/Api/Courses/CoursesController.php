@@ -286,6 +286,7 @@ class CoursesController extends Controller
             'name' => $teacher->name,
             'is_admin' => (bool)$teacher->is_admin,
             'points' => $point,
+            'color' => getColor($point),
             'qualityRate' => $qualityRate ?? 10,
             'attitudeRate' => $attitudeRate ?? 10,
             'performanceRate' => $performanceRate ?? 10
