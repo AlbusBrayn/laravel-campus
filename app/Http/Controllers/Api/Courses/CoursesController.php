@@ -182,4 +182,54 @@ class CoursesController extends Controller
 
         return response()->json(['status' => 'success', 'data' => $data]);
     }
+
+    public function reviewUpsert(Request $request)
+    {
+        $user = $request->user();
+
+        $validator = \Validator::make($request->all(), [
+            'teacher_id' => 'required|integer',
+            'quality' => 'required|integer',
+            'attitude' => 'required|integer',
+            'performance' => 'required|integer',
+            'comment' => 'required|string',
+        ]);
+
+        $validator->setAttributeNames([
+            'teacher_id' => 'Öğretmen',
+            'quality' => 'Kalite',
+            'attitude' => 'Davranış',
+            'performance' => 'Performans',
+            'comment' => 'Yorum',
+        ]);
+
+        if ($validator->fails()) {
+            return response(['status' => 'error', 'message' => 'Tüm alanları doldurmalısınız.', 'data' => $validator->errors()], 400);
+        }
+
+        $teacher = Teachers::find($request->teacher_id);
+
+        if (!$teacher) {
+            return response(['status' => 'error', 'message' => 'Öğretmen bulunamadı!'], 400);
+        }
+
+        $teacherVote = TeacherVote::where(['teacher_id' => $teacher->id])->first();
+        if (!$teacherVote) {
+            $teacherVote = TeacherVote::create([
+                'teacher_id' => $teacher->id,
+                'quality' => $request->quality,
+                'attitude' => $request->attitude,
+                'performance' => $request->performance,
+                'comment' => $request->comment,
+            ]);
+        } else {
+            $teacherVote->quality = $request->quality;
+            $teacherVote->attitude = $request->attitude;
+            $teacherVote->performance = $request->performance;
+            $teacherVote->comment = $request->comment;
+            $teacherVote->save();
+        }
+
+        return response(['status' => 'success', 'message' => 'İşleminiz başarıyla gerçekleştirildi!']);
+    }
 }
