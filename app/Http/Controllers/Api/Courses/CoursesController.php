@@ -349,7 +349,7 @@ class CoursesController extends Controller
 
         $teachers = Teachers::where('name', 'like', '%' . $request->q . '%')->get();
 
-        return TeacherResource::collection($teachers);
+        return UserTeacherResource::collection($teachers);
     }
 
     public function client(Request $request)
