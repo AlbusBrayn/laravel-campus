@@ -63,33 +63,34 @@ Route::middleware('auth:api')->group(function () {
     });
 
     Route::prefix('post')->group(function () {
-       Route::post('/list', [PostController::class, 'index']);
-       Route::post('/create', [PostController::class, 'store']);
-       Route::post('/update/{id}', [PostController::class, 'update']);
-       Route::post('/delete/{id}', [PostController::class, 'destroy']);
-       Route::post('/show/{id}', [PostController::class, 'show']);
+        Route::post('/list', [PostController::class, 'index']);
+        Route::post('/create', [PostController::class, 'store']);
+        Route::post('/update/{id}', [PostController::class, 'update']);
+        Route::post('/delete/{id}', [PostController::class, 'destroy']);
+        Route::post('/show/{id}', [PostController::class, 'show']);
+        Route::post('/like/{id}', [PostController::class, 'like']);
+        Route::post('/unlike/{id}', [PostController::class, 'unlike']);
 
-       Route::post('/like/{id}', [PostController::class, 'like']);
-       Route::post('/unlike/{id}', [PostController::class, 'unlike']);
+        Route::post('/comment/{id}', [PostController::class, 'comment']);
+        Route::post('/comment/delete/{id}', [PostController::class, 'commentDelete']);
 
-       Route::post('/comment/{id}', [PostController::class, 'comment']);
-       Route::post('/comment/delete/{id}', [PostController::class, 'commentDelete']);
+        Route::post('/report/{id}', [PostController::class, 'report']);
 
-       Route::post('/report/{id}', [PostController::class, 'report']);
-
-       Route::post('/search', [PostController::class, 'search']);
+        Route::post('/search', [PostController::class, 'search']);
     });
 
     Route::prefix('courses')->group(function () {
-       Route::post('/list', [CoursesController::class, 'list']);
-       Route::post('/save', [CoursesController::class, 'save']);
+        Route::post('/list', [CoursesController::class, 'list']);
+        Route::post('/save', [CoursesController::class, 'save']);
     });
 
     Route::prefix('teachers')->group(function () {
-       Route::post('/list', [CoursesController::class, 'teachers']);
-       Route::post('/list/departments', [CoursesController::class, 'departments']);
-       Route::post('/review/upsert', [CoursesController::class, 'reviewUpsert']);
-       Route::post('/detail/{id}', [CoursesController::class, 'teacherDetail']);
-       Route::post('/detail/reviews/{id}', [CoursesController::class, 'teacherReviews']);
+        Route::post('/client', [CoursesController::class, 'client']);
+        Route::post('/search', [CoursesController::class, 'search']);
+        Route::post('/list', [CoursesController::class, 'teachers']);
+        Route::post('/list/departments', [CoursesController::class, 'departments']);
+        Route::post('/review/upsert', [CoursesController::class, 'reviewUpsert']);
+        Route::post('/detail/{id}', [CoursesController::class, 'teacherDetail']);
+        Route::post('/detail/reviews/{id}', [CoursesController::class, 'teacherReviews']);
     });
 });

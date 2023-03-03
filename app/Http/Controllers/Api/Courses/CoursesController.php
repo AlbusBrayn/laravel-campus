@@ -327,4 +327,33 @@ class CoursesController extends Controller
         $votes = TeacherVote::where(['teacher_id' => $teacher->id])->with('user')->paginate(10);
         return TeacherVoteResource::collection($votes);
     }
+
+    public function search(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'q' => 'required|string|min:3|max:255',
+        ]);
+
+        if ($validator->fails()) {
+            return response(['status' => 'error', 'message' => 'Arama yapabilmek için en az 3 karakter girmelisiniz.', 'data' => $validator->errors()], 400);
+        }
+
+        $teachers = Teachers::where('name', 'like', '%' . $request->q . '%')->get();
+
+        return TeacherResource::collection($teachers);
+    }
+
+    public function client(Request $request)
+    {
+        $user = $request->user();
+        $myTeachersCount = UserTeacher::where('user_id', '=', $user->id)->count();
+        $teachersCount = Teachers::count();
+        $votesCount = TeacherVote::where(['user_id' => $user->id])->count();
+
+        return response(['status' => 'success', 'data' => [
+            'myTeachersCount' => $myTeachersCount,
+            'teachersCount' => $teachersCount,
+            'votesCount' => $votesCount
+        ]]);
+    }
 }
