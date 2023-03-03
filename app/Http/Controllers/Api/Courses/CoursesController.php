@@ -88,7 +88,7 @@ class CoursesController extends Controller
     public function teachers(Request $request)
     {
         $sort = $request->sort;
-        if (!in_array($sort, ['highest_points', 'lowest_points', 'name', 'department'])) {
+        if (!in_array($sort, ['highest_points', 'lowest_points', 'name', 'my_teachers', 'department'])) {
             $sort = 'all';
         }
 
@@ -178,6 +178,15 @@ class CoursesController extends Controller
                     if ($t) {
                         $teachers->add($teacher);
                     }
+                }
+
+                $teachers = paginate($teachers, 10);
+                break;
+            case 'my_teachers':
+                $teachers = collect();
+                $userTeachers = UserTeacher::where(['user_id' => $request->user()->id])->get();
+                foreach ($userTeachers as $userTeacher) {
+                    $teachers->add($userTeacher->teacherCourse()->teacher());
                 }
 
                 $teachers = paginate($teachers, 10);
