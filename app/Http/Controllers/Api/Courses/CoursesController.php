@@ -186,7 +186,8 @@ class CoursesController extends Controller
                 $teachers = collect();
                 $userTeachers = UserTeacher::where(['user_id' => $request->user()->id])->get();
                 foreach ($userTeachers as $userTeacher) {
-                    $teachers->add($userTeacher->teacherCourse()->teacher());
+                    $teacher = Teachers::find($userTeacher->teacherCourse->teacher_id);
+                    $teachers->add($teacher);
                 }
 
                 $teachers = paginate($teachers, 10);
