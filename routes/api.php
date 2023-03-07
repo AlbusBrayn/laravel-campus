@@ -9,6 +9,7 @@ use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\Api\Service\MapController;
 use App\Http\Controllers\Api\Post\PostController;
 use App\Http\Controllers\Api\Courses\CoursesController;
+use App\Http\Controllers\Api\MessageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,7 @@ Route::middleware('auth:api')->group(function () {
     Route::prefix('profile')->group(function () {
         Route::post('/visitor/{id}', [ProfileController::class, 'visitor']);
         Route::post('/visitor/request/send/{id}', [ProfileController::class, 'sendRequest']);
+        Route::post('/visitor/request/cancel/{id}', [ProfileController::class, 'cancelRequest']);
         Route::post('/visitor/delete/{id}', [ProfileController::class, 'deleteFriend']);
         Route::post('/visitor/block/{id}', [ProfileController::class, 'block']);
         Route::post('/friend/request', [ProfileController::class, 'friendRequest']);
@@ -92,5 +94,11 @@ Route::middleware('auth:api')->group(function () {
         Route::post('/review/upsert', [CoursesController::class, 'reviewUpsert']);
         Route::post('/detail/{id}', [CoursesController::class, 'teacherDetail']);
         Route::post('/detail/reviews/{id}', [CoursesController::class, 'teacherReviews']);
+    });
+
+    Route::prefix('message')->group(function () {
+        Route::post('/list', [MessageController::class, 'list']);
+        Route::post('/send', [MessageController::class, 'send']);
+        Route::post('/get', [MessageController::class, 'get']);
     });
 });

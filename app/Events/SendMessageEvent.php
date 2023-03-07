@@ -15,15 +15,19 @@ class SendMessageEvent
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public string $data;
+    public int $sender_id;
+    public int $receiver_id;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(string $data)
+    public function __construct(string $data, int $sender_id, int $receiver_id)
     {
         $this->data = $data;
+        $this->sender_id = $sender_id;
+        $this->receiver_id = $receiver_id;
     }
 
     /**
@@ -38,6 +42,6 @@ class SendMessageEvent
 
     public function broadcastAs()
     {
-        return 'send-message';
+        return 'message-' . $this->receiver_id . '-' . $this->sender_id;
     }
 }

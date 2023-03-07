@@ -136,6 +136,22 @@ class ProfileController extends Controller
         return response(['friend_requests' => $friendRequests]);
     }
 
+    public function cancelRequest(Request $request, $id)
+    {
+        $user = $request->user();
+        $visitor = User::findOrFail($id);
+
+        $friendRequests = $user->getFriendRequests();
+        foreach ($friendRequests as $friendRequest) {
+            if ($friendRequest->sender->id === $visitor->id) {
+                $friendRequest->delete();
+                return response(['status' => 'success', 'message' => 'Arkadaşlık isteği başarıyla silindi.']);
+            }
+        }
+
+        return response(['status' => 'error', 'message' => 'Arkadaşlık isteği bulunamadı.'], 404);
+    }
+
     public function friendAccept(Request $request, $id)
     {
         $user = $request->user();

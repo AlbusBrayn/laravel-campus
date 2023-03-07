@@ -14,5 +14,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    event(new \App\Events\SendMessageEvent(json_encode(['message' => 'Hello World!', 'sender' => 'Server'])));
+    return 'Hello World!';
 });
