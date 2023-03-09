@@ -142,7 +142,7 @@ class ProfileController extends Controller
         $visitor = User::findOrFail($id);
 
         $friendRequests = $user->getFriendRequests();
-        dd($friendRequests);
+        dd($user->hasSentFriendRequestTo($visitor));
         foreach ($friendRequests as $friendRequest) {
             if ($friendRequest->id === $visitor->id) {
                 $friendRequest->delete();
