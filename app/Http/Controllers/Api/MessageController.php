@@ -69,6 +69,8 @@ class MessageController extends Controller
         $user = $request->user();
         $receiver = User::findOrFail($request->receiver_id);
 
-        $messages = Message::where(['receiver_id' => $receiver->id, 'sender_id' => $user->id])->orWhere(['receiver_id' => $user->id, 'sender_id' => $receiver->id])->get();
+        $messages = Message::where(['receiver_id' => $receiver->id, 'sender_id' => $user->id])->orWhere(['receiver_id' => $user->id, 'sender_id' => $receiver->id])->orderBy('created_at')->paginate(10);
+
+        return response(['status' => 'success', 'message' => 'Mesajlar başarıyla getirildi!', 'data' => $messages], 200);
     }
 }
