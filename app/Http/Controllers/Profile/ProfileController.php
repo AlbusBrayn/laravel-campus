@@ -142,8 +142,8 @@ class ProfileController extends Controller
         $visitor = User::findOrFail($id);
 
         $friendRequests = $user->getFriendRequests();
+        dd($friendRequests);
         foreach ($friendRequests as $friendRequest) {
-            dd($friendRequest);
             if ($friendRequest->id === $visitor->id) {
                 $friendRequest->delete();
                 return response(['status' => 'success', 'message' => 'Arkadaşlık isteği başarıyla silindi.']);
