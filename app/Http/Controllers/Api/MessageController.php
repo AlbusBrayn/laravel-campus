@@ -26,6 +26,8 @@ class MessageController extends Controller
             $users->add($friend->user);
         }
 
+        dd($users);
+
         return response(['unread' => $unread, 'users' => UserResource::make($users)]);
     }
 
