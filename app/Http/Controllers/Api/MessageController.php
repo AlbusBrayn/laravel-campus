@@ -25,7 +25,7 @@ class MessageController extends Controller
         foreach ($friends as $friend) {
             $user2 = User::find($friend->user_id);
             if ($user->isFriendWith($user2)) {
-                $hasRequest = false;
+                $hasRequest = true;
             } else {
                 if ($user->hasSentFriendRequestTo($user2)) {
                     $hasRequest = true;
