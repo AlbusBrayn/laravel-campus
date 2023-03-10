@@ -20,10 +20,10 @@ class MessageController extends Controller
         $getMajor = UserMajor::where(['user_id' => $user->id])->first();
 
         $users = collect();
-        $friends = UserMajor::where(['major_id' => $getMajor->major_id, 'school_id' => $getMajor->school_id])->get();
+        $friends = UserMajor::where(['major_id' => $getMajor->major_id, 'school_id' => $getMajor->school_id])->get()->except($user->id);
         $friends = $friends->random((count($friends) > 10) ? 10 : count($friends));
         foreach ($friends as $friend) {
-            $users->add($friend->user());
+            $users->add(User::find($friend->user_id));
         }
 
         return response(['unread' => $unread, 'users' => UserResource::make($users)]);
