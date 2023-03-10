@@ -10,9 +10,13 @@ use Illuminate\Http\Request;
 
 class MessageController extends Controller
 {
-    public function list()
+    public function list(Request $request)
     {
-        //
+        $user = $request->user();
+        $unread = Message::where(['receiver_id' => $user->id, 'is_read' => false])->get();
+        $friends = $user->getFriends();
+
+        return response(['unread' => $unread, 'friends' => $friends]);
     }
 
     public function send(Request $request)
