@@ -100,5 +100,6 @@ Route::middleware('auth:api')->group(function () {
         Route::post('/list', [MessageController::class, 'list']);
         Route::post('/send', [MessageController::class, 'send']);
         Route::post('/get', [MessageController::class, 'get']);
+        Route::post('/start', [MessageController::class, 'startMessage']);
     });
 });

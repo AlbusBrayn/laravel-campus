@@ -59,6 +59,24 @@ class MessageController extends Controller
         return response(['messages' => $messageUsers, 'unread' => $unread, 'users' => $users]);
     }
 
+    public function startMessage(Request $request)
+    {
+        $user = $request->user();
+        $users = [];
+        $friends = $user->getFriends();
+
+        foreach ($friends as $friend) {
+            $users[] = [
+                'id' => $friend->id,
+                'name' => $friend->name,
+                'avatar' => $friend->avatar,
+                'email' => $friend->email,
+            ];
+        }
+
+        return response(['friends' => $users]);
+    }
+
     public function send(Request $request)
     {
         $validator = \Validator::make($request->all(), [
