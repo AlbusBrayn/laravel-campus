@@ -27,7 +27,8 @@ class MessageController extends Controller
             $users[] = [
                 'id' => $user->id,
                 'name' => $user->name,
-                'avatar' => $user->avatar
+                'avatar' => $user->avatar,
+                'email' => $user->email
             ];
         }
 
