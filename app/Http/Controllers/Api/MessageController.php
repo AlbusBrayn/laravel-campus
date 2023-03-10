@@ -16,7 +16,18 @@ class MessageController extends Controller
     public function list(Request $request)
     {
         $user = $request->user();
+        $unreads = [];
         $unread = Message::where(['receiver_id' => $user->id, 'is_read' => false])->get();
+        foreach ($unread as $item) {
+            $s = User::find($item->sender_id);
+            $unreads[] = [
+                'sender_id' => $item->sender_id,
+                'message' => $item->message,
+                'created_at' => $item->created_at,
+                'name' => $s->name,
+                'avatar' => $s->avatar
+            ];
+        }
         $messageUsers = [];
         $messages = Message::where(['receiver_id' => $user->id])->orWhere(['sender_id' => $user->id])->get();
         foreach ($messages as $message) {
@@ -65,7 +76,7 @@ class MessageController extends Controller
             ];
         }
 
-        return response(['messages' => $messageUsers, 'unread' => $unread, 'users' => $users, 'friends' => $realFriends]);
+        return response(['messages' => $messageUsers, 'unread' => $unreads, 'users' => $users, 'friends' => $realFriends]);
     }
 
     public function startMessage(Request $request)
