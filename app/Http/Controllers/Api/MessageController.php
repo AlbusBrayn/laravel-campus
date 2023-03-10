@@ -55,8 +55,17 @@ class MessageController extends Controller
                 'has_request' => $hasRequest,
             ];
         }
+        $realFriends = [];
+        foreach ($user->getFriends() as $rfriend) {
+            $realFriends[] = [
+                'id' => $rfriend->id,
+                'name' => $rfriend->name,
+                'avatar' => $rfriend->avatar,
+                'email' => $rfriend->email,
+            ];
+        }
 
-        return response(['messages' => $messageUsers, 'unread' => $unread, 'users' => $users]);
+        return response(['messages' => $messageUsers, 'unread' => $unread, 'users' => $users, 'friends' => $realFriends]);
     }
 
     public function startMessage(Request $request)
