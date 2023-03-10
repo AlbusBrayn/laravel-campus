@@ -23,7 +23,7 @@ class MessageController extends Controller
         $friends = UserMajor::where(['major_id' => $getMajor->major_id, 'school_id' => $getMajor->school_id])->get();
         $friends = $friends->random((count($friends) > 10) ? 10 : count($friends));
         foreach ($friends as $friend) {
-            $users->add($friend->user);
+            $users->add($friend->user());
         }
 
         return response(['unread' => $unread, 'users' => UserResource::make($users)]);
