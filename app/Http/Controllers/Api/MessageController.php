@@ -15,7 +15,6 @@ class MessageController extends Controller
 {
     public function list(Request $request)
     {
-        dd('test');
         $user = $request->user();
         $unread = Message::where(['receiver_id' => $user->id, 'is_read' => false])->get();
         $getMajor = UserMajor::where(['user_id' => $user->id])->first();
@@ -26,8 +25,6 @@ class MessageController extends Controller
         foreach ($friends as $friend) {
             $users->add($friend->user);
         }
-
-        dd($users);
 
         return response(['unread' => $unread, 'users' => UserResource::make($users)]);
     }
