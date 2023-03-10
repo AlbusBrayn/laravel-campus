@@ -19,7 +19,8 @@ class MessageController extends Controller
         $getMajor = UserMajor::where(['user_id' => $user->id])->first();
 
         $users = [];
-        $friends = UserMajor::where(['major_id' => $getMajor->major_id, 'school_id' => $getMajor->school_id])->get()->random(10);
+        $friends = UserMajor::where(['major_id' => $getMajor->major_id, 'school_id' => $getMajor->school_id])->get();
+        $friends = $friends->random((count($friends) > 10) ? 10 : count($friends));
         foreach ($friends as $friend) {
             $users[] = $friend->user;
         }
