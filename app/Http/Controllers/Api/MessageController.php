@@ -24,7 +24,15 @@ class MessageController extends Controller
         $friends = $friends->random((count($friends) > 10) ? 10 : count($friends));
         foreach ($friends as $friend) {
             $user2 = User::find($friend->user_id);
-            $hasRequest = $user->hasSentFriendRequestTo($user2);
+            if ($user->isFriendWith($user2)) {
+                $hasRequest = false;
+            } else {
+                if ($user->hasSentFriendRequestTo($user2)) {
+                    $hasRequest = true;
+                } else {
+                    $hasRequest = false;
+                }
+            }
             $users[] = [
                 'id' => $user2->id,
                 'name' => $user2->name,
