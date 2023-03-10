@@ -17,6 +17,20 @@ class MessageController extends Controller
     {
         $user = $request->user();
         $unread = Message::where(['receiver_id' => $user->id, 'is_read' => false])->get();
+        $messageUsers = [];
+        $messages = Message::where(['receiver_id' => $user->id])->orWhere(['sender_id' => $user->id])->get();
+        foreach ($messages as $message) {
+            if ($message->sender_id == $user->id) {
+                $m = User::find($message->receiver_id);
+            } else {
+                $m = User::find($message->sender_id);
+            }
+            $messageUsers[] = [
+                'id' => $m->id,
+                'name' => $m->name,
+                'avatar' => $m->avatar,
+            ];
+        }
         $getMajor = UserMajor::where(['user_id' => $user->id])->first();
 
         $users = [];
@@ -42,7 +56,7 @@ class MessageController extends Controller
             ];
         }
 
-        return response(['unread' => $unread, 'users' => $users]);
+        return response(['messages' => $messageUsers, 'unread' => $unread, 'users' => $users]);
     }
 
     public function send(Request $request)
