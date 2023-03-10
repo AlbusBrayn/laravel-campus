@@ -24,7 +24,7 @@ class MessageController extends Controller
             $users[] = $friend->user;
         }
 
-        return response(['unread' => $unread, 'friends' => $users]);
+        return response(['unread' => $unread, 'users' => $users]);
     }
 
     public function send(Request $request)
