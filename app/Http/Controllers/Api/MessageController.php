@@ -19,14 +19,19 @@ class MessageController extends Controller
         $unread = Message::where(['receiver_id' => $user->id, 'is_read' => false])->get();
         $getMajor = UserMajor::where(['user_id' => $user->id])->first();
 
-        $users = collect();
+        $users = [];
         $friends = UserMajor::where(['major_id' => $getMajor->major_id, 'school_id' => $getMajor->school_id])->get()->except($user->id);
         $friends = $friends->random((count($friends) > 10) ? 10 : count($friends));
         foreach ($friends as $friend) {
-            $users->add(User::find($friend->user_id));
+            $user = User::find($friend->user_id);
+            $users[] = [
+                'id' => $user->id,
+                'name' => $user->name,
+                'avatar' => $user->avatar
+            ];
         }
 
-        return response(['unread' => $unread, 'users' => UserResource::make($users)]);
+        return response(['unread' => $unread, 'users' => $users]);
     }
 
     public function send(Request $request)
