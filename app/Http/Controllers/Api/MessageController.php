@@ -23,12 +23,14 @@ class MessageController extends Controller
         $friends = UserMajor::where(['major_id' => $getMajor->major_id, 'school_id' => $getMajor->school_id])->get()->except($user->id);
         $friends = $friends->random((count($friends) > 10) ? 10 : count($friends));
         foreach ($friends as $friend) {
-            $user = User::find($friend->user_id);
+            $user2 = User::find($friend->user_id);
+            $hasRequest = $user->hasSentFriendRequestTo($user2);
             $users[] = [
-                'id' => $user->id,
-                'name' => $user->name,
-                'avatar' => $user->avatar,
-                'email' => $user->email
+                'id' => $user2->id,
+                'name' => $user2->name,
+                'avatar' => $user2->avatar,
+                'email' => $user2->email,
+                'has_request' => $hasRequest,
             ];
         }
 
