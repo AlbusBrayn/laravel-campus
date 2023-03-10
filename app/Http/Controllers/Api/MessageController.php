@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Events\SendMessageEvent;
 use App\Http\Controllers\Controller;
+use App\Models\Major;
 use App\Models\Message;
 use App\Models\User;
+use App\Models\UserMajor;
 use Illuminate\Http\Request;
 
 class MessageController extends Controller
@@ -14,9 +16,15 @@ class MessageController extends Controller
     {
         $user = $request->user();
         $unread = Message::where(['receiver_id' => $user->id, 'is_read' => false])->get();
-        $friends = $user->getFriends();
+        $getMajor = UserMajor::where(['user_id' => $user->id])->first();
 
-        return response(['unread' => $unread, 'friends' => $friends]);
+        $users = [];
+        $friends = UserMajor::where(['major_id' => $getMajor->major_id, 'school_id' => $getMajor->school_id])->get()->random(10);
+        foreach ($friends as $friend) {
+            $users[] = $friend->user;
+        }
+
+        return response(['unread' => $unread, 'friends' => $users]);
     }
 
     public function send(Request $request)
