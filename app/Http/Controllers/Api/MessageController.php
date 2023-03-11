@@ -171,7 +171,7 @@ class MessageController extends Controller
     public function searchMessage(Request $request)
     {
         $validator = \Validator::make($request->all(), [
-            'search' => 'required|string',
+            'search' => 'required|string|min:3',
         ]);
 
         $validator->setAttributeNames([
