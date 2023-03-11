@@ -7,6 +7,7 @@ use App\Http\Resources\CommentResource;
 use App\Http\Resources\PostResource;
 use App\Models\Comment;
 use App\Models\Like;
+use App\Models\LikeComment;
 use App\Models\Post;
 use App\Models\PostReport;
 use App\Models\User;
@@ -155,6 +156,56 @@ class PostController extends Controller
             $post->dislike = $post->dislike + 1;
             $post->save();
             return response(['status' => 'success', 'message' => 'Post beğenilmedi!', 'like' => $post->like, 'dislike' => $post->dislike]);
+        }
+    }
+
+    public function likeComment(Request $request, $id)
+    {
+        $comment = Comment::findOrFail($id);
+        $like = LikeComment::where(['user_id' => $request->user()->id, 'comment_id' => $comment->id, 'is_liked' => true])->first();
+        $unlike = LikeComment::where(['user_id' => $request->user()->id, 'comment_id' => $comment->id, 'is_liked' => false])->first();
+
+        if ($unlike) {
+            $unlike->delete();
+            $comment->dislike_count = $comment->dislike_count - 1;
+            $comment->save();
+        }
+
+        if ($like) {
+            $like->delete();
+            $comment->like_count = $comment->like_count - 1;
+            $comment->save();
+            return response(['status' => 'success', 'message' => 'Yorum beğenisi kaldırıldı!', 'like' => $comment->like_count, 'dislike' => $comment->dislike_count]);
+        } else {
+            LikeComment::create(['user_id' => $request->user()->id, 'comment_id' => $comment->id]);
+            $comment->like_count = $comment->like_count + 1;
+            $comment->save();
+            return response(['status' => 'success', 'message' => 'Yorum beğenildi!', 'like' => $comment->like_count, 'dislike' => $comment->dislike_count]);
+        }
+    }
+
+    public function unlikeComment(Request $request, $id)
+    {
+        $comment = Comment::findOrFail($id);
+        $like = LikeComment::where(['user_id' => $request->user()->id, 'comment_id' => $comment->id, 'is_liked' => true])->first();
+        $unlike = LikeComment::where(['user_id' => $request->user()->id, 'comment_id' => $comment->id, 'is_liked' => false])->first();
+
+        if ($like) {
+            $like->delete();
+            $comment->like_count = $comment->like_count - 1;
+            $comment->save();
+        }
+
+        if ($unlike) {
+            $unlike->delete();
+            $comment->dislike_count = $comment->dislike_count - 1;
+            $comment->save();
+            return response(['status' => 'success', 'message' => 'Yorum beğenmeme kaldırıldı!', 'like' => $comment->like_count, 'dislike' => $comment->dislike_count]);
+        } else {
+            LikeComment::create(['user_id' => $request->user()->id, 'comment_id' => $comment->id, 'is_liked' => false]);
+            $comment->dislike_count = $comment->dislike_count + 1;
+            $comment->save();
+            return response(['status' => 'success', 'message' => 'Yorum beğenilmedi!', 'like' => $comment->like_count, 'dislike' => $comment->dislike_count]);
         }
     }
 
