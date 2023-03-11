@@ -54,9 +54,9 @@ class CoursesController extends Controller
             'teacher_ids.*' => 'Öğretmen',
         ]);
 
-        if ($validator->fails()) {
+        /*if ($validator->fails()) {
             return response(['status' => 'error', 'message' => 'Bir seçim işlemi yapmadınız!', 'data' => $validator->errors()], 400);
-        }
+        }*/
 
         $course_ids = $request->course_ids;
         $teacher_ids = $request->teacher_ids;
