@@ -128,7 +128,12 @@ class MessageController extends Controller
         ]);
 
         if ($message) {
-            $event = new SendMessageEvent(json_encode(['message' => $message->message, 'sender' => $user->name]), $user->id, $receiver->id);
+            $pusher = new \Pusher\Pusher(config('broadcasting.connections.pusher.key'),
+                config('broadcasting.connections.pusher.secret'),
+                config('broadcasting.connections.pusher.app_id'),
+                config('broadcasting.connections.pusher.options'));
+
+            $pusher->trigger('campus-message', 'message-' . $receiver->id . '-' . $user->id, ['status' => 'success']);
 
             return response(['status' => 'success', 'message' => 'Mesajınız başarıyla gönderildi!'], 200);
         } else {
