@@ -167,4 +167,24 @@ class MessageController extends Controller
 
         return response(['status' => 'success', 'message' => 'Mesajlar başarıyla getirildi!', 'data' => $messages], 200);
     }
+
+    public function searchMessage(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'search' => 'required|string',
+        ]);
+
+        $validator->setAttributeNames([
+            'search' => 'Arama',
+        ]);
+
+        if ($validator->fails()) {
+            return response(['status' => 'error', 'message' => 'Eksik bilgi gönderemezsiniz!', 'data' => $validator->errors()], 400);
+        }
+
+        $user = $request->user();
+        $messages = Message::where([['receiver_id', '=', $user->id], ['message', 'like', "%{$request->search}%"]])->orWhere([['sender_id', '=', $user->id], ['message', 'like', "%{$request->search}%"]])->orderBy('id', 'DESC')->get();
+
+        return response(['status' => 'success', 'message' => 'Mesajlar başarıyla getirildi!', 'data' => $messages], 200);
+    }
 }

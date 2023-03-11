@@ -101,5 +101,6 @@ Route::middleware('auth:api')->group(function () {
         Route::post('/send', [MessageController::class, 'send']);
         Route::post('/get', [MessageController::class, 'get']);
         Route::post('/start', [MessageController::class, 'startMessage']);
+        Route::post('/search', [MessageController::class, 'searchMessage']);
     });
 });
