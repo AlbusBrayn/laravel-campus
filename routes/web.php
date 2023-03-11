@@ -14,5 +14,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return 'Hello World!';
+    event(new \App\Events\SendMessageEvent('Hello World', 10, 2));
 });
