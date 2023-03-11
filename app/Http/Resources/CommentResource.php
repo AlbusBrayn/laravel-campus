@@ -24,8 +24,8 @@ class CommentResource extends JsonResource
             'avatar' => Avatar::where(['user_id' => $this->user->id])->first(),
             'parent_id' => $this->parent_id,
             'replies' => CommentResource::collection($this->replies),
-            'likes' => $this->like_count,
-            'dislikes' => $this->dislike_count,
+            'like' => $this->like_count,
+            'dislike' => $this->dislike_count,
             'created_at' => $this->created_at,
         ];
     }
