@@ -61,7 +61,7 @@ class CoursesController extends Controller
         $course_ids = $request->course_ids;
         $teacher_ids = $request->teacher_ids;
 
-        if (count($course_ids) !== count($teacher_ids)) {
+        if (array_has_dupes($course_ids)) {
             return response(['status' => 'error', 'message' => 'Aynı ders üzerinde sadece bir öğretmen seçebilirsin!'], 400);
         }
 
