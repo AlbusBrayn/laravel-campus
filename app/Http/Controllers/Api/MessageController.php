@@ -183,8 +183,20 @@ class MessageController extends Controller
         }
 
         $user = $request->user();
+        $datas = [];
         $messages = Message::where([['receiver_id', '=', $user->id], ['message', 'like', "%{$request->search}%"]])->orWhere([['sender_id', '=', $user->id], ['message', 'like', "%{$request->search}%"]])->orderBy('id', 'DESC')->get();
+        foreach ($messages as $message) {
+            $datas[] = [
+                $sender = User::find($message->sender_id),
+                $receiver = User::find($message->receiver_id),
+                'id' => ($sender->id === $user->id) ? $receiver->id : $sender->id,
+                'name' => $sender->name,
+                'email' => $sender->email,
+                'avatar' => $sender->avatar,
+                'message' => $message->message,
+            ];
+        }
 
-        return response(['status' => 'success', 'message' => 'Mesajlar başarıyla getirildi!', 'data' => $messages], 200);
+        return response(['status' => 'success', 'message' => 'Mesajlar başarıyla getirildi!', 'data' => $datas], 200);
     }
 }
