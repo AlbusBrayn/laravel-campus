@@ -153,6 +153,11 @@ class MessageController extends Controller
         $receiver = User::findOrFail($request->receiver_id);
 
         $messages = Message::where(['receiver_id' => $receiver->id, 'sender_id' => $user->id])->orWhere(['receiver_id' => $user->id, 'sender_id' => $receiver->id])->orderBy('id', 'DESC')->paginate(15);
+        $unreadMessages = Message::where(['receiver_id' => $user->id, 'sender_id' => $receiver->id, 'is_read' => false])->get();
+        foreach ($unreadMessages as $message) {
+            $message->is_read = true;
+            $message->save();
+        }
 
         return response(['status' => 'success', 'message' => 'Mesajlar başarıyla getirildi!', 'data' => $messages], 200);
     }
