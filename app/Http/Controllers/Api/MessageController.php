@@ -25,6 +25,7 @@ class MessageController extends Controller
                 'message' => $item->message,
                 'created_at' => $item->created_at,
                 'name' => $s->name,
+                'email' => $s->email,
                 'avatar' => $s->avatar
             ];
         }
