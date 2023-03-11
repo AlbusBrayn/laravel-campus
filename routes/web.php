@@ -14,5 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    event(new \App\Events\SendMessageEvent('Hello World', 10, 2));
+    $pusher = new \Pusher\Pusher(config('broadcasting.connections.pusher.key'),
+        config('broadcasting.connections.pusher.secret'),
+        config('broadcasting.connections.pusher.app_id'),
+        config('broadcasting.connections.pusher.options'));
+
+    $pusher->trigger('campus-message', 'test-event', ['message' => 'hello world']);
+    //event(new \App\Events\SendMessageEvent('Hello World', 10, 2));
 });
