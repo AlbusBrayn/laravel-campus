@@ -20,6 +20,9 @@ return new class extends Migration
 
             $table->bigInteger('parent_id')->unsigned()->nullable();
             $table->text('body');
+
+            $table->integer('like_count')->default(0);
+            $table->integer('dislike_count')->default(0);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
