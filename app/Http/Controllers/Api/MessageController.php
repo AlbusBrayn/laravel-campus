@@ -194,6 +194,7 @@ class MessageController extends Controller
                 'email' => $sender->email,
                 'avatar' => $sender->avatar,
                 'message' => $message->message,
+                'created_at' => $message->created_at,
             ];
         }
 
