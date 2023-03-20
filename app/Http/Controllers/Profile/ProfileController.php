@@ -18,10 +18,11 @@ class ProfileController extends Controller
         $school = $user->school;
 
         if ($user->major) {
+            $blockedIds = $request->user()->getBlockedFriendships()->pluck('recipient_id')->toArray();
             $major = [
                 'id' => $user->major->major->id,
                 'title' => $user->major->major->title,
-                'major_user_count' => UserMajor::where(['school_id' => $user->school_id, 'major_id' => $user->major->major_id])->count()
+                'major_user_count' => UserMajor::where(['school_id' => $user->school_id, 'major_id' => $user->major->major_id])->whereNotIn('user_id', $blockedIds)->count()
             ];
         } else {
             $major = [];
