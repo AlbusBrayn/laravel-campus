@@ -256,7 +256,7 @@ class CoursesController extends Controller
             return response(['status' => 'error', 'message' => 'Bu öğretmene ait dersi almadığınız için yorum yapamazsınız!'], 400);
         }
 
-        $teacherVote = TeacherVote::where(['teacher_id' => $teacher->id])->first();
+        $teacherVote = TeacherVote::where(['teacher_id' => $teacher->id, 'user_id' => $user->id])->first();
         if (!$teacherVote) {
             $teacherVote = TeacherVote::create([
                 'user_id' => $user->id,
