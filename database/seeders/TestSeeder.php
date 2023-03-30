@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\PostTitle;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -234,22 +235,21 @@ class TestSeeder extends Seeder
             ]
         ]);
 
-        \DB::table('post_titles')->insert([
-            [
-                'tr' => [
-                    'title' => 'Test Konusu'
-                ],
-                'en' => [
-                    'title' => 'Test Subject'
-                ]
+        PostTitle::create([
+           'tr' => [
+               'title' => 'Kampüs Hayatı'
+           ],
+          'en' => [
+            'title' => 'Campus Life'
+          ]
+        ]);
+
+        PostTitle::create([
+            'tr' => [
+                'title' => 'Bölüm Dersleri'
             ],
-            [
-                'tr' => [
-                    'title' => 'Test Konusu 2'
-                ],
-                'en' => [
-                    'title' => 'Test Subject 2'
-                ]
+            'en' => [
+                'title' => 'Department Courses'
             ]
         ]);
     }
