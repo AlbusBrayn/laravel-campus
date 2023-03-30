@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Profile;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PostResource;
 use App\Http\Resources\UserResource;
+use App\Models\Courses;
 use App\Models\User;
 use App\Models\UserMajor;
 use App\Models\UserReport;
+use App\Models\UserTeacher;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
@@ -215,5 +217,21 @@ class ProfileController extends Controller
         }
 
         return response(['status' => 'success', 'message' => 'Başarılı', 'data' => $d]);
+    }
+
+    public function courses(Request $request)
+    {
+        $user = $request->user();
+        $userTeachers = UserTeacher::where(['user_id' => $user->id])->get();
+        $courses = [];
+
+        $i = 0;
+        foreach ($userTeachers as $teacher) {
+            $courses[$i]['course'] = $teacher->teacherCourse->course->name;
+            $courses[$i]['teacher'] = $teacher->teacherCourse->teacher->name;
+            $i++;
+        }
+
+        return response(['status' => 'success', 'courses' => $courses]);
     }
 }

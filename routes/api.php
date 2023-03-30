@@ -53,6 +53,7 @@ Route::middleware('auth:api')->group(function () {
         Route::post('/avatar/set', [AvatarController::class, 'store']);
         Route::post('/avatar/update', [AvatarController::class, 'update']);
         Route::post('/report/{id}', [ProfileController::class, 'report']);
+        Route::post('/courses', [ProfileController::class, 'courses']);
 
         Route::post('/majors', [MajorController::class, 'index']);
         Route::post('/major/students', [MajorController::class, 'students']);
