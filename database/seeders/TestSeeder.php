@@ -235,15 +235,6 @@ class TestSeeder extends Seeder
             ]
         ]);
 
-        PostTitle::create([
-           'tr' => [
-               'title' => 'Kampüs Hayatı'
-           ],
-          'en' => [
-            'title' => 'Campus Life'
-          ]
-        ]);
-
         $data = [
             'is_active' => true,
             'tr' => ['title' => 'Kampüs Hayatı'],
