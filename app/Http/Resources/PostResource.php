@@ -19,7 +19,7 @@ class PostResource extends JsonResource
         $user = User::find($this->user_id);
         return [
             'id' => $this->id,
-            'title' => $this->title,
+            'title' => $this->postTitle->translate('tr')->title,
             'content' => $this->content,
             'like' => $this->like,
             'dislike' => $this->dislike,

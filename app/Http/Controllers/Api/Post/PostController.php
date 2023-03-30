@@ -10,6 +10,7 @@ use App\Models\Like;
 use App\Models\LikeComment;
 use App\Models\Post;
 use App\Models\PostReport;
+use App\Models\PostTitle;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -58,7 +59,7 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $validator = \Validator::make($request->all(), [
-            'title' => 'required|string',
+            'title' => 'required|int',
             'content' => 'required|string',
         ]);
 
@@ -71,11 +72,22 @@ class PostController extends Controller
             return response(['status' => 'error', 'message' => 'validate error!', 'data' => $validator->errors()], 400);
         }
 
+        if (!PostTitle::where(['id' => $request->title])->exists()) {
+            return response(['status' => 'error', 'message' => 'error!', 'data' => ['title' => ['Başlık bulunamadı.']]], 400);
+        }
+
         $data = $validator->validated();
         $data['user_id'] = $request->user()->id;
         $post = Post::create($data);
 
         return response(['status' => 'success', 'message' => 'Post başarıyla oluşturuldu!', 'data' => new PostResource($post)]);
+    }
+
+    public function titleList(Request $request)
+    {
+        $titles = PostTitle::where(['is_active' => false])->get();
+
+        return response(['status' => 'success', 'data' => $titles]);
     }
 
     public function show(Request $request, $id)
