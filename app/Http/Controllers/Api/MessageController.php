@@ -20,14 +20,7 @@ class MessageController extends Controller
         $unread = Message::where(['receiver_id' => $user->id, 'is_read' => false])->get();
         foreach ($unread as $item) {
             $s = User::find($item->sender_id);
-            $unreads[] = [
-                'sender_id' => $item->sender_id,
-                'message' => $item->message,
-                'created_at' => $item->created_at,
-                'name' => $s->name,
-                'email' => $s->email,
-                'avatar' => $s->avatar
-            ];
+            $unread[] = $s->id;
         }
         $messageUsers = [];
         $messages = Message::where(['receiver_id' => $user->id])->orWhere(['sender_id' => $user->id])->get();
@@ -39,6 +32,7 @@ class MessageController extends Controller
             }
             $messageUsers[] = [
                 'id' => $m->id,
+                'is_unread' => in_array($m->id, $unreads),
                 'name' => $m->name,
                 'avatar' => $m->avatar,
             ];
