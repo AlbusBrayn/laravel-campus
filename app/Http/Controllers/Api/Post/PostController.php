@@ -68,6 +68,13 @@ class PostController extends Controller
             'content' => 'İçerik'
         ]);
 
+        $user = $request->user();
+
+        $commentCount = Comment::where(['user_id' => $user->id])->count();
+        if ($commentCount >= 10) {
+            return response(['status' => 'error', 'message' => 'Konu açmak için 10 adet yorum yapmalısınız!'], 400);
+        }
+
         if ($validator->fails()) {
             return response(['status' => 'error', 'message' => 'validate error!', 'data' => $validator->errors()], 400);
         }
@@ -77,7 +84,7 @@ class PostController extends Controller
         }
 
         $data = $validator->validated();
-        $data['user_id'] = $request->user()->id;
+        $data['user_id'] = $user->id;
         $post = Post::create($data);
 
         return response(['status' => 'success', 'message' => 'Post başarıyla oluşturuldu!', 'data' => new PostResource($post)]);
