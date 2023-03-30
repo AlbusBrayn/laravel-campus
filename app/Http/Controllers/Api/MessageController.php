@@ -16,12 +16,6 @@ class MessageController extends Controller
     public function list(Request $request)
     {
         $user = $request->user();
-        $unreads = [];
-        $unread = Message::where(['receiver_id' => $user->id, 'is_read' => false])->get();
-        foreach ($unread as $item) {
-            $s = User::find($item->sender_id);
-            $unreads[] = $s->id;
-        }
 
         $messages = Message::where(['receiver_id' => $user->id])->orWhere(['sender_id' => $user->id])->get();
         $chatList = [];
@@ -36,11 +30,12 @@ class MessageController extends Controller
         $array = [];
         foreach ($chatList as $userId => $arr) {
             $user2 = User::find($userId);
+            $unread = Message::where(['receiver_id' => $user->id, 'sender_id' => $user2->id, 'is_read' => false])->count();
             $array[] = [
                 'name' => $user2->name,
                 'id' => $user2->id,
                 'message' => \Str::limit($arr['message'], 50, '...'),
-                'is_unread' => in_array($user2->id, $unreads),
+                'is_unread' => $unread > 0,
                 'avatar' => $user2->avatar,
                 'time' => timeParse(strtotime($arr['time'])),
             ];
