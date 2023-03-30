@@ -3,6 +3,29 @@
 use App\Models\Like;
 use App\Models\User;
 
+function timeParse($zaman): string
+{
+    $zamanismi= array("Saniye", "Dakika", "Saat", "Gün", "Ay", "Yıl");
+    $sure= array("60","60","24","30","12","10");
+
+    $simdikizaman = time();
+
+    if($simdikizaman >= $zaman)
+    {
+        $fark     = time()- $zaman;
+        for($i = 0; $fark >= $sure[$i] && $i < count($sure)-1; $i++)
+        {
+            $fark = $fark / $sure[$i];
+        }
+
+        $fark = round($fark);
+
+        return $fark . " " . $zamanismi[$i] . " Önce";
+    }
+
+    return "";
+}
+
 function isLiked(int $user_id, int $post_id): string
 {
     $like = Like::where(['user_id' => $user_id, 'post_id' => $post_id])->first();

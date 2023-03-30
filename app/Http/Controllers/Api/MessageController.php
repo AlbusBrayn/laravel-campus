@@ -42,7 +42,7 @@ class MessageController extends Controller
                 'message' => $arr['message'],
                 'is_unread' => in_array($user2->id, $unreads),
                 'avatar' => $user2->avatar,
-                'time' => $arr['time'],
+                'time' => timeParse(strtotime($arr['time'])),
             ];
         }
 
