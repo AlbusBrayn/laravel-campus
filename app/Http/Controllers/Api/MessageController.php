@@ -39,7 +39,7 @@ class MessageController extends Controller
             $array[] = [
                 'name' => $user2->name,
                 'id' => $user2->id,
-                'message' => \Str::substr($arr['message'], 0, 50) . strlen($arr['message']) > 50 ? '...' : '',
+                'message' => \Str::substr($arr['message'], 0, 50) . '' . strlen($arr['message']) > 50 ? '...' : '',
                 'is_unread' => in_array($user2->id, $unreads),
                 'avatar' => $user2->avatar,
                 'time' => timeParse(strtotime($arr['time'])),
