@@ -31,6 +31,6 @@ class Post extends Model
 
     public function postTitle(): HasOne
     {
-        return $this->hasOne(PostTitle::class, 'title', 'id');
+        return $this->hasOne(PostTitle::class, 'id', 'title');
     }
 }
