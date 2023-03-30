@@ -85,7 +85,7 @@ class PostController extends Controller
 
     public function titleList(Request $request)
     {
-        $titles = PostTitle::where(['is_active' => false])->get();
+        $titles = PostTitle::where(['is_active' => true])->get();
 
         return response(['status' => 'success', 'data' => $titles]);
     }
