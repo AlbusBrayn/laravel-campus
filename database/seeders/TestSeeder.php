@@ -233,5 +233,24 @@ class TestSeeder extends Seeder
                 'course_id' => 8
             ]
         ]);
+
+        \DB::table('post_titles')->insert([
+            [
+                'tr' => [
+                    'title' => 'Test Konusu'
+                ],
+                'en' => [
+                    'title' => 'Test Subject'
+                ]
+            ],
+            [
+                'tr' => [
+                    'title' => 'Test Konusu 2'
+                ],
+                'en' => [
+                    'title' => 'Test Subject 2'
+                ]
+            ]
+        ]);
     }
 }
