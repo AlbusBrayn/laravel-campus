@@ -37,6 +37,7 @@ class MessageController extends Controller
         foreach ($chatList as $userId => $arr) {
             $user2 = User::find($userId);
             $array[] = [
+                'name' => $user2->name,
                 'id' => $user2->id,
                 'message' => $arr['message'],
                 'is_unread' => in_array($user2->id, $unreads),
