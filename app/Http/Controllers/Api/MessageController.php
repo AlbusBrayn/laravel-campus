@@ -20,58 +20,32 @@ class MessageController extends Controller
         $unread = Message::where(['receiver_id' => $user->id, 'is_read' => false])->get();
         foreach ($unread as $item) {
             $s = User::find($item->sender_id);
-            $unread[] = $s->id;
+            $unreads[] = $s->id;
         }
-        $messageUsers = [];
+
         $messages = Message::where(['receiver_id' => $user->id])->orWhere(['sender_id' => $user->id])->get();
+        $chatList = [];
         foreach ($messages as $message) {
-            if ($message->sender_id == $user->id) {
-                $m = User::find($message->receiver_id);
+            if ($message->receiver_id === $user->id) {
+                $chatList[$message->sender_id] = ['message' => $message->message, 'time' => $message->created_at];
             } else {
-                $m = User::find($message->sender_id);
+                $chatList[$message->receiver_id] = ['message' => $message->message, 'time' => $message->created_at];
             }
-            $messageUsers[] = [
-                'id' => $m->id,
-                'is_unread' => in_array($m->id, $unreads),
-                'name' => $m->name,
-                'avatar' => $m->avatar,
-            ];
         }
-        $getMajor = UserMajor::where(['user_id' => $user->id])->first();
 
-        $users = [];
-        $friends = UserMajor::where(['major_id' => $getMajor->major_id, 'school_id' => $getMajor->school_id])->get()->except($user->id);
-        $friends = $friends->random((count($friends) > 10) ? 10 : count($friends));
-        foreach ($friends as $friend) {
-            $user2 = User::find($friend->user_id);
-            if ($user->isFriendWith($user2)) {
-                $hasRequest = true;
-            } else {
-                if ($user->hasSentFriendRequestTo($user2)) {
-                    $hasRequest = true;
-                } else {
-                    $hasRequest = false;
-                }
-            }
-            $users[] = [
+        $array = [];
+        foreach ($chatList as $userId => $arr) {
+            $user2 = User::find($userId);
+            $array[] = [
                 'id' => $user2->id,
-                'name' => $user2->name,
+                'message' => $arr['message'],
+                'is_unread' => in_array($user2->id, $unreads),
                 'avatar' => $user2->avatar,
-                'email' => $user2->email,
-                'has_request' => $hasRequest,
-            ];
-        }
-        $realFriends = [];
-        foreach ($user->getFriends() as $rfriend) {
-            $realFriends[] = [
-                'id' => $rfriend->id,
-                'name' => $rfriend->name,
-                'avatar' => $rfriend->avatar,
-                'email' => $rfriend->email,
+                'time' => $arr['time'],
             ];
         }
 
-        return response(['messages' => $messageUsers, 'unread' => $unreads, 'users' => $users, 'friends' => $realFriends]);
+        return response(['messages' => $array]);
     }
 
     public function startMessage(Request $request)
