@@ -244,13 +244,19 @@ class TestSeeder extends Seeder
           ]
         ]);
 
-        PostTitle::create([
-            'tr' => [
-                'title' => 'Bölüm Dersleri'
-            ],
-            'en' => [
-                'title' => 'Department Courses'
-            ]
-        ]);
+        $data = [
+            'is_active' => true,
+            'tr' => ['title' => 'Kampüs Hayatı'],
+            'en' => ['title' => 'Campus Life'],
+        ];
+
+        $data2 = [
+            'is_active' => true,
+            'tr' => ['title' => 'Kampüs Dersleri'],
+            'en' => ['title' => 'Campus Lessons'],
+        ];
+
+        PostTitle::create($data);
+        PostTitle::create($data2);
     }
 }
