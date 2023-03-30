@@ -71,7 +71,7 @@ class PostController extends Controller
         $user = $request->user();
 
         $commentCount = Comment::where(['user_id' => $user->id])->count();
-        if ($commentCount >= 10) {
+        if ($commentCount < 10) {
             return response(['status' => 'error', 'message' => 'Konu açmak için 10 adet yorum yapmalısınız!'], 400);
         }
 

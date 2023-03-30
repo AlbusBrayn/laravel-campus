@@ -58,6 +58,7 @@ class ProfileController extends Controller
     {
         $user = $request->user();
         $visitor = User::findOrFail($id);
+        $school = $user->school;
 
         if ($user->major) {
             $major = [
@@ -83,6 +84,7 @@ class ProfileController extends Controller
             'id' => $visitor->id,
             'name' => $visitor->name,
             'avatar' => $visitor->avatar,
+            'school' => $school,
             'followers' => $visitor->getFriendsCount(),
             'posts' => $visitor->posts->count(),
             'is_follow' => isFriend($user->id, $visitor->id),
