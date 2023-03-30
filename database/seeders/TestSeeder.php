@@ -235,19 +235,36 @@ class TestSeeder extends Seeder
             ]
         ]);
 
-        $data = [
-            'is_active' => true,
-            'tr' => ['title' => 'Kampüs Hayatı'],
-            'en' => ['title' => 'Campus Life'],
-        ];
+        \DB::table('post_titles')->insert([
+            [
+                'is_active' => true
+            ],
+            [
+                'is_active' => true
+            ]
+        ]);
 
-        $data2 = [
-            'is_active' => true,
-            'tr' => ['title' => 'Kampüs Dersleri'],
-            'en' => ['title' => 'Campus Lessons'],
-        ];
-
-        PostTitle::create($data);
-        PostTitle::create($data2);
+        \DB::table('post_title_translations')->insert([
+            [
+                'post_title_id' => 1,
+                'locale' => 'tr',
+                'title' => 'Kampüs Hayatı'
+            ],
+            [
+                'post_title_id' => 1,
+                'locale' => 'en',
+                'title' => 'Campus Life'
+            ],
+            [
+                'post_title_id' => 2,
+                'locale' => 'tr',
+                'title' => 'Öğrenci Hayatı'
+            ],
+            [
+                'post_title_id' => 2,
+                'locale' => 'en',
+                'title' => 'Student Life'
+            ]
+        ]);
     }
 }
