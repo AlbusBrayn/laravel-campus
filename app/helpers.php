@@ -77,7 +77,7 @@ function getColor(float|int $point)
     if ($point >= 8) {
         return 'green';
     } elseif ($point >= 5) {
-        return 'yellow';
+        return '#DAA520';
     } else {
         return 'red';
     }
