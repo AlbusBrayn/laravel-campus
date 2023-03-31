@@ -295,7 +295,7 @@ class PostController extends Controller
         }
 
         $data = $validator->validated();
-        $posts = Post::where(['published' => true])->where('title', 'like', '%' . $data['q'] . '%')->with('comments.replies')->orderBy('created_at', 'desc')->paginate(10);
+        $posts = Post::where(['published' => true])->where('content', 'like', '%' . $data['q'] . '%')->with('comments.replies')->orderBy('created_at', 'desc')->paginate(10);
         return PostResource::collection($posts);
     }
 
