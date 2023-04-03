@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\CommentResource;
 use App\Http\Resources\PostResource;
 use App\Models\Comment;
+use App\Models\CommentReport;
 use App\Models\Like;
 use App\Models\LikeComment;
 use App\Models\Post;
@@ -263,8 +264,49 @@ class PostController extends Controller
         }
     }
 
+    public function reportComment(Request $request, $id)
+    {
+        $validator = \Validator::make($request->all(), [
+            'reason_id' => 'required|integer|in:1,2,3,4,5,6,7,8,9',
+        ]);
+
+        $validator->setAttributeNames([
+            'reason_id' => 'Sebep',
+        ]);
+
+        if ($validator->fails()) {
+            return response(['status' => 'error', 'message' => 'Hata.', 'data' => $validator->errors()], 400);
+        }
+
+        $user = $request->user();
+        $comment = Comment::findOrFail($id);
+
+        if (CommentReport::where(['user_id' => $user->id, 'comment_id' => $comment->id])->exists()) {
+            return response(['status' => 'error', 'message' => 'Bu yorumu zaten bildirdiniz!'], 400);
+        }
+
+        if ($user->id === $comment->user_id) {
+            return response(['status' => 'error', 'message' => 'Kendinize ait yorumu bildiremezsiniz!'], 400);
+        }
+
+        CommentReport::create(['user_id' => $user->id, 'comment_id' => $comment->id, 'reason_id' => $request->reason_id]);
+        return response(['status' => 'success', 'message' => 'Yorum başarıyla bildirildi!']);
+    }
+
     public function report(Request $request, $id)
     {
+        $validator = \Validator::make($request->all(), [
+            'reason_id' => 'required|integer|in:1,2,3,4,5,6,7,8,9',
+        ]);
+
+        $validator->setAttributeNames([
+            'reason_id' => 'Sebep',
+        ]);
+
+        if ($validator->fails()) {
+            return response(['status' => 'error', 'message' => 'Hata.', 'data' => $validator->errors()], 400);
+        }
+
         $user = $request->user();
         $post = Post::findOrFail($id);
 
@@ -276,7 +318,7 @@ class PostController extends Controller
             return response(['status' => 'error', 'message' => 'Kendi gönderini bildiremezsin!'], 400);
         }
 
-        PostReport::create(['user_id' => $user->id, 'post_id' => $post->id]);
+        PostReport::create(['user_id' => $user->id, 'post_id' => $post->id, 'reason_id' => $request->reason_id]);
         return response(['status' => 'success', 'message' => 'Rapor başarıyla oluşturuldu!']);
     }
 

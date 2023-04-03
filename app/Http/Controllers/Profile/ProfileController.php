@@ -101,6 +101,18 @@ class ProfileController extends Controller
 
     public function report(Request $request, $id)
     {
+        $validator = \Validator::make($request->all(), [
+            'reason_id' => 'required|integer|in:1,2,3,4,5,6,7,8,9',
+        ]);
+
+        $validator->setAttributeNames([
+            'reason_id' => 'Sebep',
+        ]);
+
+        if ($validator->fails()) {
+            return response(['status' => 'error', 'message' => 'Hata.', 'data' => $validator->errors()], 400);
+        }
+
         $user = $request->user();
         $visitor = User::findOrFail($id);
 
@@ -115,6 +127,7 @@ class ProfileController extends Controller
         UserReport::create([
             'sender_id' => $user->id,
             'receiver_id' => $visitor->id,
+            'reason_id' => $request->reason_id
         ]);
 
         return response(['status' => 'success', 'message' => 'Şikayet başarıyla gönderildi.']);

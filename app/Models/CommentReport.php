@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class UserReport extends Model
+class CommentReport extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'sender_id',
-        'receiver_id',
-        'reason_id'
+        'comment_id',
+        'reason_id',
+        'user_id'
     ];
 }

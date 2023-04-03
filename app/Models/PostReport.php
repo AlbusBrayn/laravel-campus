@@ -11,6 +11,7 @@ class PostReport extends Model
 
     protected $fillable = [
         'user_id',
-        'post_id'
+        'post_id',
+        'reason_id'
     ];
 }

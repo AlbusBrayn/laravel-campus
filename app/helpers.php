@@ -86,15 +86,15 @@ function getColor(float|int $point)
 function getReportReasons()
 {
     return [
-        'Spam',
-        'Çıplaklık veya cinsellik',
-        'Nefret söylemi',
-        'Şiddet veya tehlikeli örgütler',
-        'Yasal düzenlemeye aykırı içerik',
-        'Zorbalık veya taciz',
-        'Fikri mülkiyet ihlali',
-        'Yanlış bilgiler',
-        'Sadece bundan hoşlanmadım'
+        1 => 'Spam',
+        2 => 'Çıplaklık veya cinsellik',
+        3 => 'Nefret söylemi',
+        4 => 'Şiddet veya tehlikeli örgütler',
+        5 => 'Yasal düzenlemeye aykırı içerik',
+        6 => 'Zorbalık veya taciz',
+        7 => 'Fikri mülkiyet ihlali',
+        8 => 'Yanlış bilgiler',
+        9 => 'Sadece bundan hoşlanmadım'
     ];
 }
 
