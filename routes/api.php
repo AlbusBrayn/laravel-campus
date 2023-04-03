@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\Service\MapController;
 use App\Http\Controllers\Api\Post\PostController;
 use App\Http\Controllers\Api\Courses\CoursesController;
 use App\Http\Controllers\Api\MessageController;
+use App\Http\Controllers\Api\ClientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -106,5 +107,9 @@ Route::middleware('auth:api')->group(function () {
         Route::post('/get', [MessageController::class, 'get']);
         Route::post('/start', [MessageController::class, 'startMessage']);
         Route::post('/search', [MessageController::class, 'searchMessage']);
+    });
+
+    Route::prefix('client')->group(function () {
+        Route::post('/report/list', [ClientController::class, 'reportList']);
     });
 });

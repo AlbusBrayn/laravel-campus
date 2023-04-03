@@ -83,6 +83,21 @@ function getColor(float|int $point)
     }
 }
 
+function getReportReasons()
+{
+    return [
+        'Spam',
+        'Çıplaklık veya cinsellik',
+        'Nefret söylemi',
+        'Şiddet veya tehlikeli örgütler',
+        'Yasal düzenlemeye aykırı içerik',
+        'Zorbalık veya taciz',
+        'Fikri mülkiyet ihlali',
+        'Yanlış bilgiler',
+        'Sadece bundan hoşlanmadım'
+    ];
+}
+
 function paginator($items, $total, $perPage, $currentPage, $options)
 {
     return \Illuminate\Container\Container::getInstance()->makeWith(\Illuminate\Pagination\LengthAwarePaginator::class, compact(
