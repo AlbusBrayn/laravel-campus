@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\TeacherCourses;
 use App\Models\TeacherVote;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -15,6 +16,13 @@ class UserTeacherResource extends JsonResource
      */
     public function toArray($request)
     {
+        $courses = '';
+        $teacherCourses = TeacherCourses::where(['teacher_id' => $this->id])->get();
+        foreach ($teacherCourses as $teacherCours) {
+            $courses .= $teacherCours->course->name . ', ';
+        }
+        $courses = rtrim($courses, ', ');
+
         if (TeacherVote::where(['teacher_id' => $this->id])->exists()) {
             $votes = TeacherVote::where(['teacher_id' => $this->id])->get();
             $quality = 0;
@@ -35,6 +43,7 @@ class UserTeacherResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'title' => $courses,
             'is_admin' => (bool)$this->is_admin,
             'points' => $point,
             'qualityRate' => $qualityRate ?? 10,

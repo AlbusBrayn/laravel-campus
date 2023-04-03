@@ -75,11 +75,11 @@ function paginate(\Illuminate\Support\Collection $results, $pageSize)
 function getColor(float|int $point)
 {
     if ($point >= 8) {
-        return 'green';
+        return '#228B22';
     } elseif ($point >= 5) {
-        return '#DAA520';
+        return '#FFD700';
     } else {
-        return 'red';
+        return '#FF4500';
     }
 }
 

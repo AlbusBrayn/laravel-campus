@@ -285,6 +285,13 @@ class CoursesController extends Controller
             return response(['status' => 'error', 'message' => 'Öğretmen bulunamadı!'], 400);
         }
 
+        $courses = '';
+        $teacherCourses = TeacherCourses::where(['teacher_id' => $teacher->id])->get();
+        foreach ($teacherCourses as $teacherCours) {
+            $courses .= $teacherCours->course->name . ', ';
+        }
+        $courses = rtrim($courses, ', ');
+
         if (TeacherVote::where(['teacher_id' => $id])->exists()) {
             $votes = TeacherVote::where(['teacher_id' => $id])->get();
             $quality = 0;
@@ -312,6 +319,7 @@ class CoursesController extends Controller
         return response(['status' => 'success', 'data' => [
             'id' => $teacher->id,
             'name' => $teacher->name,
+            'title' => $courses,
             'is_admin' => (bool)$teacher->is_admin,
             'points' => $point,
             'color' => getColor($point),
