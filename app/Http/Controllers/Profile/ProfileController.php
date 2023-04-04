@@ -244,6 +244,7 @@ class ProfileController extends Controller
         foreach ($userTeachers as $teacher) {
             $courses[$i]['course'] = $teacher->teacherCourse->course->name;
             $courses[$i]['teacher'] = $teacher->teacherCourse->teacher->name;
+            $courses[$i]['teacher_id'] = $teacher->teacherCourse->teacher->id;
             $i++;
         }
 
