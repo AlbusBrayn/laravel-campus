@@ -16,10 +16,13 @@ class CommentResource extends JsonResource
      */
     public function toArray($request)
     {
+        $user = $request->user();
+
         return [
             'id' => $this->id,
             'body' => $this->body,
             'user_id' => $this->user->id,
+            'is_admin' => $user->id === $this->user->id,
             'name' => $this->user->name,
             'avatar' => Avatar::where(['user_id' => $this->user->id])->first(),
             'parent_id' => $this->parent_id,
