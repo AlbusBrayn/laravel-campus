@@ -95,7 +95,7 @@ class CoursesController extends Controller
     public function teachers(Request $request)
     {
         $sort = $request->sort;
-        if (!in_array($sort, ['highest_points', 'lowest_points', 'name', 'my_teachers', 'department'])) {
+        if (!in_array($sort, ['highest_points', 'lowest_points', 'name', 'my_teachers', 'department', 'evaluated'])) {
             $sort = 'all';
         }
 
@@ -200,7 +200,6 @@ class CoursesController extends Controller
                 $teachers = paginate($teachers, 10);
                 break;
             case 'evaluated':
-                return 'yarrak';
                 $teachers = collect();
                 $teacherVotes = TeacherVote::where(['user_id' => $request->user()->id])->get();
                 foreach ($teacherVotes as $teacherVote) {
