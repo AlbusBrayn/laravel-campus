@@ -200,6 +200,7 @@ class CoursesController extends Controller
                 $teachers = paginate($teachers, 10);
                 break;
             case 'evaluated':
+                return 'yarrak';
                 $teachers = collect();
                 $teacherVotes = TeacherVote::where(['user_id' => $request->user()->id])->get();
                 foreach ($teacherVotes as $teacherVote) {
