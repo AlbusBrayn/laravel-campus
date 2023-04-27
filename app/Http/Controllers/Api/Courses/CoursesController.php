@@ -61,6 +61,8 @@ class CoursesController extends Controller
         $course_ids = $request->course_ids;
         $teacher_ids = $request->teacher_ids;
 
+        $k = false;
+
         if (array_has_dupes($course_ids)) {
             return response(['status' => 'error', 'message' => 'Aynı ders üzerinde sadece bir öğretmen seçebilirsin!'], 400);
         }
@@ -68,6 +70,7 @@ class CoursesController extends Controller
         $user = $request->user();
         $userTeachers = UserTeacher::where(['user_id' => $user->id])->get();
         foreach ($userTeachers as $userTeacher) {
+            $k = true;
             $userTeacher->delete();
         }
 
@@ -82,7 +85,11 @@ class CoursesController extends Controller
             }
         }
 
-        return response(['status' => 'success', 'message' => 'Dersler kaydedildi!']);
+        if ($k) {
+            return response(['status' => 'success', 'message' => 'Seçtiğiniz dersler başarıyla güncellendi!']);
+        } else {
+            return response(['status' => 'success', 'message' => 'Dersler kaydedildi!']);
+        }
     }
 
     public function teachers(Request $request)
@@ -192,6 +199,13 @@ class CoursesController extends Controller
 
                 $teachers = paginate($teachers, 10);
                 break;
+            case 'evaluated':
+                $teachers = collect();
+                $teacherVotes = TeacherVote::where(['user_id' => $request->user()->id])->get();
+                foreach ($teacherVotes as $teacherVote) {
+                    $teacher = Teachers::find($teacherVote->teacher_id);
+                    $teachers->add($teacher);
+                }
             default:
                 $teachers = Teachers::paginate(10);
                 break;

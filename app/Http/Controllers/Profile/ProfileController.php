@@ -210,6 +210,10 @@ class ProfileController extends Controller
             return response(['status' => 'error', 'message' => 'Zaten arkadaşlık isteği göndermişsiniz!'], 400);
         }
 
+        if ($visitor->hasSentFriendRequestTo($user)) {
+            return response(['status' => 'error', 'message' => 'Bu kullanıcı size arkadaşlık isteği göndermiş!'], 400);
+        }
+
         $user->befriend($visitor);
 
         return response(['status' => 'success', 'message' => 'Arkadaşlık isteği gönderildi!']);
