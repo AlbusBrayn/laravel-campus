@@ -206,6 +206,7 @@ class CoursesController extends Controller
                     $teacher = Teachers::find($teacherVote->teacher_id);
                     $teachers->add($teacher);
                 }
+                break;
             default:
                 $teachers = Teachers::paginate(10);
                 break;
