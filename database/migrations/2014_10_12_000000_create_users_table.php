@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('school_id')->unsigned();
+            $table->string('one_signal')->nullable();
             $table->string('name')->nullable();
             $table->string('email')->unique();
             $table->integer('otp_code')->nullable();

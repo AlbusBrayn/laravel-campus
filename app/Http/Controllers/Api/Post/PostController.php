@@ -61,11 +61,13 @@ class PostController extends Controller
     {
         $validator = \Validator::make($request->all(), [
             'title' => 'required|int',
+            'short_content' => 'required|string',
             'content' => 'required|string',
         ]);
 
         $validator->setAttributeNames([
-            'title' => 'Başlık',
+            'title' => 'Konu',
+            'short_content' => 'Başlık',
             'content' => 'İçerik'
         ]);
 
@@ -110,11 +112,13 @@ class PostController extends Controller
     {
         $validator = \Validator::make($request->all(), [
             'title' => 'required|string',
+            'short_content' => 'required|string',
             'content' => 'required|string',
         ]);
 
         $validator->setAttributeNames([
-            'title' => 'Başlık',
+            'title' => 'Konu',
+            'short_content' => 'Başlık',
             'content' => 'İçerik'
         ]);
 

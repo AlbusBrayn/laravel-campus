@@ -18,6 +18,7 @@ return new class extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('title')->unsigned();
 
+            $table->string('short_content');
             $table->longText('content');
 
             $table->integer('like')->default(0);

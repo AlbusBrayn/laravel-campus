@@ -8,6 +8,7 @@
         "php": "^8.0.2",
         "astrotomic/laravel-translatable": "^11.12",
         "guzzlehttp/guzzle": "^7.2",
+        "ladumor/one-signal": "0.4.4",
         "laravel/framework": "^9.19",
         "laravel/passport": "^11.3",
         "laravel/sanctum": "^3.0",
