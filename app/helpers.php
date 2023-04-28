@@ -98,6 +98,16 @@ function getReportReasons()
     ];
 }
 
+function getTicketSubjects()
+{
+    return [
+        1 => 'Şikayet',
+        2 => 'Öneri',
+        3 => 'İstek',
+        4 => 'Diğer'
+    ];
+}
+
 function paginator($items, $total, $perPage, $currentPage, $options)
 {
     return \Illuminate\Container\Container::getInstance()->makeWith(\Illuminate\Pagination\LengthAwarePaginator::class, compact(
