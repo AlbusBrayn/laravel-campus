@@ -40,6 +40,10 @@ Route::middleware('auth:api')->group(function () {
         Route::post('info', [AuthController::class, 'info']);
     });
 
+    Route::prefix('user')->group(function () {
+        Route::post('/onesignal', [ProfileController::class, 'oneSignal']);
+    });
+
     Route::prefix('profile')->group(function () {
         Route::post('/visitor/{id}', [ProfileController::class, 'visitor']);
         Route::post('/visitor/request/send/{id}', [ProfileController::class, 'sendRequest']);

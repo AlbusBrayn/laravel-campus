@@ -254,4 +254,25 @@ class ProfileController extends Controller
 
         return response(['status' => 'success', 'courses' => $courses]);
     }
+
+    public function oneSignal(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'one_signal' => 'required|string',
+        ]);
+
+        $validator->setAttributeNames([
+            'one_signal' => 'One Signal ID',
+        ]);
+
+        if ($validator->fails()) {
+            return response(['status' => 'error', 'message' => 'Hata.', 'data' => $validator->errors()], 400);
+        }
+
+        $user = $request->user();
+        $user->one_signal = $request->one_signal;
+        $user->save();
+
+        return response(['status' => 'success', 'message' => 'Başarılı.']);
+    }
 }
