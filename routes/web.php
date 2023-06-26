@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\Dashboard;
+use App\Http\Controllers\Admin\Crud\AdminCrudController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,5 +30,14 @@ Route::prefix("admin")->group(function () {
         Route::get("changePassword", [AuthController::class, "changePassword"])->name("admin.changePassword");
         Route::post("changePassword", [AuthController::class, "changePasswordStore"])->name("admin.changePasswordStore");
         Route::get("/", [Dashboard::class, "index"])->name('admin.dashboard');
+
+        Route::prefix("admins")->group(function () {
+            Route::get("/", [AdminCrudController::class, "index"])->name("admin.admins");
+            Route::get("/create", [AdminCrudController::class, "create"])->name("admin.admins.create");
+            Route::post("/createStore", [AdminCrudController::class, "createStore"])->name("admin.admins.createStore");
+            Route::get("/update/{admin}", [AdminCrudController::class, "update"])->name("admin.admins.update");
+            Route::put("/updateStore/{admin}", [AdminCrudController::class, "updateStore"])->name("admin.admins.updateStore");
+            Route::delete("/delete/{admin}", [AdminCrudController::class, "delete"])->name("admin.admins.delete");
+        });
     });
 });
