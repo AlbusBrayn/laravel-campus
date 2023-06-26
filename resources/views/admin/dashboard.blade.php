@@ -35,6 +35,32 @@
                     </div>
                 </div>
             </div>
+            <div class="grid sm:grid-cols-3 gap-5">
+                <div
+                    class="card px-4 py-8 flex justify-center items-center text-center lg:transform hover:scale-110 hover:shadow-lg transition-transform duration-200">
+                    <div>
+                        <span class="text-primary text-5xl leading-none la la-user"></span>
+                        <p class="mt-2">Ders Sayısı</p>
+                        <div class="text-primary mt-5 text-3xl leading-none">8</div>
+                    </div>
+                </div>
+                <div
+                    class="card px-4 py-8 flex justify-center items-center text-center lg:transform hover:scale-110 hover:shadow-lg transition-transform duration-200">
+                    <div>
+                        <span class="text-primary text-5xl leading-none la la-cloud"></span>
+                        <p class="mt-2">Öğretmen Sayısı</p>
+                        <div class="text-primary mt-5 text-3xl leading-none">16</div>
+                    </div>
+                </div>
+                <div
+                    class="card px-4 py-8 flex justify-center items-center text-center lg:transform hover:scale-110 hover:shadow-lg transition-transform duration-200">
+                    <div>
+                        <span class="text-primary text-5xl leading-none la la-users"></span>
+                        <p class="mt-2">Tracker Injected</p>
+                        <div class="text-primary mt-5 text-3xl leading-none">18</div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <footer class="mt-auto">
