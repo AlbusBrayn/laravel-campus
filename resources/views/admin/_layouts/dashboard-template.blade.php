@@ -2,21 +2,13 @@
     $user = auth()->guard('admin')->user();
 @endphp
 
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}" dir="ltr">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    <title>Minerose - Dashboard</title>
-
-    <link rel="icon" href="{{ asset('assets/images/favicon/favicon-32.png') }}" sizes="32x32">
-    <link rel="icon" href="{{ asset('assets/images/favicon/favicon-128.png') }}" sizes="128x128">
-    <link rel="icon" href="{{ asset('assets/images/favicon/favicon-192.png') }}" sizes="192x192">
-    <link rel="shortcut icon" href="{{ asset('assets/images/favicon/favicon-196.png') }}" sizes="196x196">
-    <link rel="apple-touch-icon" href="{{ asset('assets/images/favicon/favicon-152.png') }}" sizes="152x152">
-    <link rel="apple-touch-icon" href="{{ asset('assets/images/favicon/favicon-167.png') }}" sizes="167x167">
-    <link rel="apple-touch-icon" href="{{ asset('assets/images/favicon/favicon-180.png') }}" sizes="180x180">
+    <title>Campus A+ - Dashboard</title>
 
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" />
 </head>
@@ -24,7 +16,7 @@
 <body>
 <header class="top-bar">
     <button class="menu-toggler la la-bars" data-toggle="menu"></button>
-    <span class="brand">Minerose</span>
+    <span class="brand">Campus A+</span>
     <div class="flex items-center ltr:ml-auto rtl:mr-auto">
         <label class="switch switch_outlined" data-toggle="tooltip" data-tippy-content="Toggle Dark Mode">
             <input id="darkModeToggler" type="checkbox">
@@ -42,16 +34,16 @@
             </button>
             <div class="custom-dropdown-menu">
                 <div class="flex items-center px-5 py-2">
-                    <h5 class="mb-0 uppercase">Notifications</h5>
-                    <button class="btn btn_outlined btn_warning uppercase ltr:ml-auto rtl:mr-auto">Clear All</button>
+                    <h5 class="mb-0 uppercase">Bildirimler</h5>
+                    <button class="btn btn_outlined btn_warning uppercase ltr:ml-auto rtl:mr-auto">Hepsini Temizle</button>
                 </div>
                 <hr>
                 <div class="p-5 hover:bg-primary hover:bg-opacity-5">
                     <a href="#no-link">
-                        <h6 class="uppercase">Heading One</h6>
+                        <h6 class="uppercase">Test Bildirimi</h6>
                     </a>
                     <p>Lorem ipsum dolor, sit amet consectetur.</p>
-                    <small>Today</small>
+                    <small>26.06.2023</small>
                 </div>
                 <hr>
             </div>
@@ -60,29 +52,29 @@
         <div class="dropdown">
             <button class="flex items-center ltr:ml-4 rtl:mr-4" data-toggle="custom-dropdown-menu"
                     data-tippy-arrow="true" data-tippy-placement="bottom-end">
-                <span class="avatar">{{ initials($user->name) }}</span>
+                <span class="avatar">TA</span>
             </button>
             <div class="custom-dropdown-menu w-64">
                 <div class="p-5">
                     <h5 class="uppercase">{{ $user->name }}</h5>
-                    <p>{{ $user->username }}</p>
+                    <p>{{ $user->email }}</p>
                 </div>
                 <hr>
                 <div class="p-5">
                     <a href="#no-link" class="flex items-center text-normal hover:text-primary">
                         <span class="la la-user-circle text-2xl leading-none ltr:mr-2 rtl:ml-2"></span>
-                        View Profile
+                        Profili Görüntüle
                     </a>
                     <a href="{{ route('admin.changePassword') }}" class="flex items-center text-normal hover:text-primary mt-5">
                         <span class="la la-key text-2xl leading-none ltr:mr-2 rtl:ml-2"></span>
-                        Change Password
+                        Şifreyi Değiştir
                     </a>
                 </div>
                 <hr>
                 <div class="p-5">
                     <a href="{{ route('admin.logout') }}" class="flex items-center text-normal hover:text-primary">
                         <span class="la la-power-off text-2xl leading-none ltr:mr-2 rtl:ml-2"></span>
-                        Logout
+                        Çıkış Yap
                     </a>
                 </div>
             </div>
