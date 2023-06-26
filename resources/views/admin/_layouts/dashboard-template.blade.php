@@ -110,12 +110,12 @@
     </div>
     <div class="menu-detail" data-menu="staffs">
         <div class="menu-detail-wrapper">
-            <h6 class="uppercase">Admin Management</h6>
-            <a href="#">
+            <h6 class="uppercase">Yetkili Yönetimi</h6>
+            <a href="{{ route('admin.admins') }}">
                 <span class="la la-list"></span>
                 Admin Listesi
             </a>
-            <a href="#">
+            <a href="{{ route('admin.admins.create') }}">
                 <span class="la la-plus-circle"></span>
                 Admin Oluştur
             </a>
