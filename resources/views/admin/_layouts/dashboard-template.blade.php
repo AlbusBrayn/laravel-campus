@@ -85,104 +85,119 @@
     <div class="menu-items">
         <a href="{{ route('admin.dashboard') }}" class="link active" data-toggle="tooltip-menu" data-tippy-content="Dashboard">
             <span class="icon la la-laptop"></span>
-            <span class="title">Dashboard</span>
+            <span class="title">Anasayfa</span>
         </a>
         <button class="link" data-target="[data-menu=staffs]" data-toggle="tooltip-menu" data-tippy-content="Staffs">
             <span class="icon la la-users"></span>
-            <span class="title">Staff Management</span>
+            <span class="title">Yetkili Yönetimi</span>
         </button>
-        <button class="link" data-target="[data-menu=players]" data-toggle="tooltip-menu" data-tippy-content="Players">
-            <span class="icon la la-users"></span>
-            <span class="title">Player Management</span>
+        <button class="link" data-target="[data-menu=system]" data-toggle="tooltip-menu" data-tippy-content="System">
+            <span class="icon la la-cogs"></span>
+            <span class="title">Sistem Yönetimi</span>
         </button>
-        <button class="link" data-target="[data-menu=roles]" data-toggle="tooltip-menu" data-tippy-content="Roles">
+        <button class="link" data-target="[data-menu=tracker]" data-toggle="tooltip-menu" data-tippy-content="Tracker">
             <span class="icon la la-user-tag"></span>
-            <span class="title">Role Manager</span>
+            <span class="title">Tracker Management</span>
         </button>
-        <button class="link" data-target="[data-menu=servers]" data-toggle="tooltip-menu" data-tippy-content="Servers">
-            <span class="icon la la-server"></span>
-            <span class="title">Server Manager</span>
+        <button class="link" data-target="[data-menu=schools]" data-toggle="tooltip-menu" data-tippy-content="Schools">
+            <span class="icon la la-school"></span>
+            <span class="title">Okul Yönetimi</span>
+        </button>
+        <button class="link" data-target="[data-menu=forums]" data-toggle="tooltip-menu" data-tippy-content="Forums">
+            <span class="icon la la-blog"></span>
+            <span class="title">Forum Yönetimi</span>
         </button>
     </div>
     <div class="menu-detail" data-menu="staffs">
         <div class="menu-detail-wrapper">
             <h6 class="uppercase">Admin Management</h6>
-            <a href="{{ route('admin.admins') }}">
+            <a href="#">
                 <span class="la la-list"></span>
-                Admin List
+                Admin Listesi
             </a>
-            <a href="{{ route('admin.admins.create') }}">
+            <a href="#">
                 <span class="la la-plus-circle"></span>
-                Admin Create
+                Admin Oluştur
             </a>
         </div>
     </div>
-    <div class="menu-detail" data-menu="players">
+    <div class="menu-detail" data-menu="system">
         <div class="menu-detail-wrapper">
-            <h6 class="uppercase">Player Management</h6>
-            <a href="{{ route('admin.players') }}">
+            <h6 class="uppercase">Sistem Yönetimi</h6>
+            <a href="">
                 <span class="la la-list"></span>
-                Player List
+                Kullanıcılar
             </a>
             <a href="">
-                <span class="la la-plus-circle"></span>
-                Player Create
-            </a>
-        </div>
-        <hr>
-        <h6 class="uppercase">Ban Management</h6>
-        <a href="{{ route('admin.bans') }}">
-            <span class="la la-list"></span>
-            Ban List
-        </a>
-        <a href="{{ route('admin.bans.ban') }}">
-            <span class="la la-hammer"></span>
-            Ban Player
-        </a>
-    </div>
-    <div class="menu-detail" data-menu="roles">
-        <div class="menu-detail-wrapper">
-            <h6 class="uppercase">Role Management</h6>
-            <a href="{{ route('admin.roles') }}">
                 <span class="la la-list"></span>
-                Role List
+                Kullanıcı Değerlendirmeleri
             </a>
-            <a href="{{ route('admin.roles.create') }}">
-                <span class="la la-plus-circle"></span>
-                Role Create
-            </a>
-            <hr>
-            <h6 class="uppercase">Permission Management</h6>
-            <a href="{{ route('admin.permissions') }}">
+            <a href="">
                 <span class="la la-list"></span>
-                Permission List
+                Kullanıcı Yasakları
             </a>
-            <a href="{{ route('admin.permissions.create') }}">
-                <span class="la la-plus-circle"></span>
-                Permission Create
+            <a href="">
+                <span class="la la-list"></span>
+                Kullanıcı Yorumları
+            </a>
+            <a href="">
+                <span class="la la-list"></span>
+                Kullanıcı Mesajları
+            </a>
+            <a href="#">
+                <span class="la la-list"></span>
+                Şikayet Edilen Kullanıcılar
             </a>
         </div>
     </div>
-    <div class="menu-detail" data-menu="servers">
+    <div class="menu-detail" data-menu="tracker">
         <div class="menu-detail-wrapper">
-            <h6 class="uppercase">Server Management</h6>
-            <a href="{{ route('admin.servers') }}">
+            <h6 class="uppercase">Tracker</h6>
+            <a href="">
                 <span class="la la-list"></span>
-                Server List
+                Kullanıcı Verileri
             </a>
-            <a href="{{ route('admin.servers.create') }}">
-                <span class="la la-plus-circle"></span>
-                Server Create
+            <a href="">
+                <span class="la la-list"></span>
+                Kullanıcı Çerezleri
             </a>
-            <hr>
-            <h6 class="uppercase">Server Data Management</h6>
+        </div>
+    </div>
+    <div class="menu-detail" data-menu="schools">
+        <div class="menu-detail-wrapper">
+            <h6 class="uppercase">Okul Yönetimi</h6>
             <a href="#">
                 <span class="la la-list"></span>
-                Server Data List
+                Okul Listesi
             </a>
             <a href="#">
                 <span class="la la-plus-circle"></span>
-                Server Data Create
+                Okul Oluştur
+            </a>
+            <a href="#">
+                <span class="la la-list"></span>
+                Ders Ekle
+            </a>
+            <a href="#">
+                <span class="la la-list"></span>
+                Öğretmen Ekle
+            </a>
+        </div>
+    </div>
+    <div class="menu-detail" data-menu="forums">
+        <div class="menu-detail-wrapper">
+            <h6 class="uppercase">Forum Yönetimi</h6>
+            <a href="#">
+                <span class="la la-list"></span>
+                Forum Konuları
+            </a>
+            <a href="#">
+                <span class="la la-list"></span>
+                Forum Listesi
+            </a>
+            <a href="#">
+                <span class="la la-list"></span>
+                Şikayet Edilen Forumlar
             </a>
         </div>
     </div>
