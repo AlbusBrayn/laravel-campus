@@ -21,7 +21,7 @@
                 <div
                     class="card px-4 py-8 flex justify-center items-center text-center lg:transform hover:scale-110 hover:shadow-lg transition-transform duration-200">
                     <div>
-                        <span class="text-primary text-5xl leading-none la la-cloud"></span>
+                        <span class="text-primary text-5xl leading-none la la-school"></span>
                         <p class="mt-2">Okul Sayısı</p>
                         <div class="text-primary mt-5 text-3xl leading-none">1</div>
                     </div>
@@ -29,7 +29,7 @@
                 <div
                     class="card px-4 py-8 flex justify-center items-center text-center lg:transform hover:scale-110 hover:shadow-lg transition-transform duration-200">
                     <div>
-                        <span class="text-primary text-5xl leading-none la la-users"></span>
+                        <span class="text-primary text-5xl leading-none la la-book"></span>
                         <p class="mt-2">Bölüm Sayısı</p>
                         <div class="text-primary mt-5 text-3xl leading-none">4</div>
                     </div>
@@ -39,7 +39,7 @@
                 <div
                     class="card px-4 py-8 flex justify-center items-center text-center lg:transform hover:scale-110 hover:shadow-lg transition-transform duration-200">
                     <div>
-                        <span class="text-primary text-5xl leading-none la la-user"></span>
+                        <span class="text-primary text-5xl leading-none la la-pencil"></span>
                         <p class="mt-2">Ders Sayısı</p>
                         <div class="text-primary mt-5 text-3xl leading-none">8</div>
                     </div>
@@ -47,7 +47,7 @@
                 <div
                     class="card px-4 py-8 flex justify-center items-center text-center lg:transform hover:scale-110 hover:shadow-lg transition-transform duration-200">
                     <div>
-                        <span class="text-primary text-5xl leading-none la la-cloud"></span>
+                        <span class="text-primary text-5xl leading-none la la-chalkboard-teacher"></span>
                         <p class="mt-2">Öğretmen Sayısı</p>
                         <div class="text-primary mt-5 text-3xl leading-none">16</div>
                     </div>
@@ -55,7 +55,7 @@
                 <div
                     class="card px-4 py-8 flex justify-center items-center text-center lg:transform hover:scale-110 hover:shadow-lg transition-transform duration-200">
                     <div>
-                        <span class="text-primary text-5xl leading-none la la-users"></span>
+                        <span class="text-primary text-5xl leading-none la la-cog"></span>
                         <p class="mt-2">Tracker Injected</p>
                         <div class="text-primary mt-5 text-3xl leading-none">18</div>
                     </div>
