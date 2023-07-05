@@ -124,7 +124,7 @@
     <div class="menu-detail" data-menu="system">
         <div class="menu-detail-wrapper">
             <h6 class="uppercase">Sistem Yönetimi</h6>
-            <a href="">
+            <a href="{{ route('admin.users') }}">
                 <span class="la la-list"></span>
                 Kullanıcılar
             </a>

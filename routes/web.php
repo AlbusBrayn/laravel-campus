@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\Dashboard;
 use App\Http\Controllers\Admin\Crud\AdminCrudController;
+use App\Http\Controllers\Admin\Crud\UserCrudController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +39,11 @@ Route::prefix("admin")->group(function () {
             Route::get("/update/{admin}", [AdminCrudController::class, "update"])->name("admin.admins.update");
             Route::put("/updateStore/{admin}", [AdminCrudController::class, "updateStore"])->name("admin.admins.updateStore");
             Route::delete("/delete/{admin}", [AdminCrudController::class, "delete"])->name("admin.admins.delete");
+        });
+
+        Route::prefix("users")->group(function () {
+            Route::get("/", [UserCrudController::class, "index"])->name("admin.users");
+            Route::get("/create", [UserCrudController::class, "create"])->name("admin.users.create");
         });
     });
 });
