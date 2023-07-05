@@ -44,6 +44,10 @@ Route::prefix("admin")->group(function () {
         Route::prefix("users")->group(function () {
             Route::get("/", [UserCrudController::class, "index"])->name("admin.users");
             Route::get("/create", [UserCrudController::class, "create"])->name("admin.users.create");
+            Route::post("/createStore", [UserCrudController::class, "createStore"])->name("admin.users.createStore");
+            Route::get("/update/{user}", [UserCrudController::class, "update"])->name("admin.users.update");
+            Route::put("/updateStore/{user}", [UserCrudController::class, "updateStore"])->name("admin.users.updateStore");
+            Route::delete("/delete/{user}", [UserCrudController::class, "delete"])->name("admin.users.delete");
         });
     });
 });
