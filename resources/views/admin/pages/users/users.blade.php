@@ -51,10 +51,10 @@
                                 @endif
                             </td>
                             <td class="text-center">
-                                @if($user->hide_location)
-                                    <div class="badge badge_success uppercase">Hayır</div>
+                                @if(!$user->hide_location)
+                                    <div class="badge badge_success uppercase">Evet</div>
                                 @else
-                                    <div class="badge badge_danger uppercase">Evet</div>
+                                    <div class="badge badge_danger uppercase">Hayır</div>
                                 @endif
                             </td>
                             <td class="text-center">
