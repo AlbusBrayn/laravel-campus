@@ -13,4 +13,14 @@ class Teachers extends Model
         'name',
         'is_admin'
     ];
+
+    public function votes(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(TeacherVote::class);
+    }
+
+    public function courses(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(TeacherCourses::class);
+    }
 }

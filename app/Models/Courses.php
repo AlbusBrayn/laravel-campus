@@ -14,4 +14,14 @@ class Courses extends Model
         'major_id',
         'name'
     ];
+
+    public function school(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(School::class);
+    }
+
+    public function major(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Major::class);
+    }
 }

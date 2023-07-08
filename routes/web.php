@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\Dashboard;
 use App\Http\Controllers\Admin\Crud\AdminCrudController;
 use App\Http\Controllers\Admin\Crud\UserCrudController;
+use App\Http\Controllers\Admin\Crud\UserReviewCrudController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +43,11 @@ Route::prefix("admin")->group(function () {
         });
 
         Route::prefix("users")->group(function () {
+            Route::prefix("reviews")->group(function () {
+                Route::get("/", [UserReviewCrudController::class, "index"])->name("admin.users.reviews");
+                Route::delete("/delete/{review}", [UserReviewCrudController::class, "delete"])->name("admin.users.reviews.delete");
+            });
+
             Route::get("/", [UserCrudController::class, "index"])->name("admin.users");
             Route::get("/create", [UserCrudController::class, "create"])->name("admin.users.create");
             Route::post("/createStore", [UserCrudController::class, "createStore"])->name("admin.users.createStore");

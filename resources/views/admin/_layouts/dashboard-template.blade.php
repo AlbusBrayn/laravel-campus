@@ -128,7 +128,7 @@
                 <span class="la la-list"></span>
                 Kullanıcılar
             </a>
-            <a href="">
+            <a href="{{ route('admin.users.reviews') }}">
                 <span class="la la-list"></span>
                 Kullanıcı Değerlendirmeleri
             </a>
