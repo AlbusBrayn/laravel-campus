@@ -17,9 +17,9 @@ class UserReviewCrudController extends Controller
         return view("admin.pages.users.user-reviews", compact("teacherVotes"));
     }
 
-    public function delete(TeacherVote $vote)
+    public function delete(TeacherVote $review)
     {
-        $vote->delete();
+        $review->delete();
         return redirect()->route('admin.users.reviews')->with('success', 'Kullanıcı değerlendirmesi başarıyla silindi!');
     }
 }
