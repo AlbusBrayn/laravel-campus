@@ -136,7 +136,7 @@
                 <span class="la la-list"></span>
                 Kullanıcı Yasakları
             </a>
-            <a href="">
+            <a href="{{ route('admin.users.comments') }}">
                 <span class="la la-list"></span>
                 Kullanıcı Yorumları
             </a>

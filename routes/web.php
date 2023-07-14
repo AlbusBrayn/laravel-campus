@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\Dashboard;
 use App\Http\Controllers\Admin\Crud\AdminCrudController;
 use App\Http\Controllers\Admin\Crud\UserCrudController;
 use App\Http\Controllers\Admin\Crud\UserReviewCrudController;
+use App\Http\Controllers\Admin\Crud\UserCommentCrudController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +47,11 @@ Route::prefix("admin")->group(function () {
             Route::prefix("reviews")->group(function () {
                 Route::get("/", [UserReviewCrudController::class, "index"])->name("admin.users.reviews");
                 Route::delete("/delete/{review}", [UserReviewCrudController::class, "delete"])->name("admin.users.reviews.delete");
+            });
+
+            Route::prefix("comments")->group(function () {
+                Route::get("/", [UserCommentCrudController::class, "index"])->name("admin.users.comments");
+                Route::delete("/delete/{comment}", [UserCommentCrudController::class, "delete"])->name("admin.users.comments.delete");
             });
 
             Route::get("/", [UserCrudController::class, "index"])->name("admin.users");
