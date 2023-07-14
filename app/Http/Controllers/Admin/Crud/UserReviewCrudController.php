@@ -13,6 +13,7 @@ class UserReviewCrudController extends Controller
     public function index()
     {
         $teacherVotes = TeacherVote::paginate(10);
+        dd($teacherVotes);
 
         return view("admin.pages.users.user-reviews", compact("teacherVotes"));
     }

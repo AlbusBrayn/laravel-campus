@@ -36,7 +36,7 @@
                     <tbody>
                     @foreach($teacherVotes as $vote)
                         <tr>
-                            <td class="text-center uppercase">{{ $vote->user->name }}</td>
+                            <td class="text-center uppercase"><a href="{{ route('admin.users.update', ['user' => $vote->user]) }}">{{ $vote->user->name }}</a></td>
                             <td class="text-center uppercase">{{ $vote->teacher->name }}</td>
                             <td class="text-center uppercase">{{ $vote->quality }}</td>
                             <td class="text-center uppercase">{{ $vote->attitude }}</td>
