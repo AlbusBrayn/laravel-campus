@@ -28,6 +28,7 @@
                 <table class="table table-auto table_hoverable w-full">
                     <thead>
                     <tr>
+                        <th class="text-center uppercase">#</th>
                         <th class="text-center uppercase">Ad Soyad</th>
                         <th class="text-center uppercase">Email</th>
                         <th class="text-center uppercase">Okul</th>
@@ -40,6 +41,7 @@
                     <tbody>
                     @foreach($users as $user)
                         <tr>
+                            <td class="text-center uppercase">{{ $user->id }}</td>
                             <td class="text-center uppercase">{{ $user->name }}</td>
                             <td class="text-center uppercase">{{ $user->email }}</td>
                             <td class="text-center uppercase">{{ $user->school->name }}</td>
