@@ -14,7 +14,7 @@ class UserReviewCrudController extends Controller
     {
         $teacherVotes = TeacherVote::paginate(10);
         foreach ($teacherVotes as $teacherVote) {
-            if (!User::where(['id' => $teacherVote->id])->exists()) {
+            if ($teacherVote->user_id == 4) {
                 $teacherVote->delete();
             }
         }
