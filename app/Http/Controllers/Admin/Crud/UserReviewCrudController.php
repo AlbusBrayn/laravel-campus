@@ -18,6 +18,7 @@ class UserReviewCrudController extends Controller
                 $teacherVote->delete();
             }
         }
+        dd($teacherVotes);
 
         return view("admin.pages.users.user-reviews", compact("teacherVotes"));
     }
