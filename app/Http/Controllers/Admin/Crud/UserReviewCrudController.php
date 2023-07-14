@@ -13,12 +13,6 @@ class UserReviewCrudController extends Controller
     public function index()
     {
         $teacherVotes = TeacherVote::paginate(10);
-        foreach ($teacherVotes as $teacherVote) {
-            if (!User::where(['id' => $teacherVote->id])->exists()) {
-                $teacherVote->delete();
-            }
-        }
-        dd($teacherVotes);
 
         return view("admin.pages.users.user-reviews", compact("teacherVotes"));
     }
