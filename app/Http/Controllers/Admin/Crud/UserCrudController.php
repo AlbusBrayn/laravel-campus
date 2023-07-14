@@ -38,7 +38,8 @@ class UserCrudController extends Controller
 
     public function delete(User $user)
     {
-        $user->delete();
+        $user->status = false;
+        $user->save();
         return redirect()->route('admin.users')->with('success', 'Kullanıcı başarıyla silindi!');
     }
 }
