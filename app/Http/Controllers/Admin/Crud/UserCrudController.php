@@ -47,7 +47,9 @@ class UserCrudController extends Controller
 
     public function update(User $user)
     {
-        //
+        $schools = School::all();
+
+        return view('admin.pages.users.user-update', compact('user', 'schools'));
     }
 
     public function updateStore(Request $request, User $user)
@@ -57,7 +59,7 @@ class UserCrudController extends Controller
 
     public function delete(User $user)
     {
-        $user->status = false;
+        $user->is_active = false;
         $user->save();
         return redirect()->route('admin.users')->with('success', 'Kullanıcı başarıyla silindi!');
     }

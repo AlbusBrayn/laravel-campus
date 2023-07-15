@@ -29,6 +29,7 @@ return new class extends Migration
             $table->boolean('hide_location')->default(true);
             $table->boolean('is_muted')->default(false);
             $table->boolean('is_admin')->default(false);
+            $table->boolean('is_active')->default(true);
             $table->integer('status')->default(1);
             $table->string('lat')->nullable();
             $table->string('lng')->nullable();

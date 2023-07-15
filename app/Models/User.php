@@ -34,6 +34,7 @@ class User extends Authenticatable
         'is_muted',
         'otp_code',
         'is_admin',
+        'is_active',
         'otp_reset_time',
         'forget_code',
         'forget_expire',

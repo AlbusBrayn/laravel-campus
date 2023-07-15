@@ -49,7 +49,7 @@
                                 @if($user->is_banned)
                                     <div class="badge badge_success uppercase">Evet</div>
                                 @else
-                                    <div class="badge badge_danger uppercase">Yasaklı</div>
+                                    <div class="badge badge_danger uppercase">Hayır</div>
                                 @endif
                             </td>
                             <td class="text-center">
@@ -60,7 +60,7 @@
                                 @endif
                             </td>
                             <td class="text-center">
-                                @if($user->status)
+                                @if($user->is_active)
                                     <div class="badge badge_success uppercase">Aktif</div>
                                 @else
                                     <div class="badge badge_danger uppercase">Deaktif</div>
