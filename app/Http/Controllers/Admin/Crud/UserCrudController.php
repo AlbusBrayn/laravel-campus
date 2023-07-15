@@ -54,7 +54,27 @@ class UserCrudController extends Controller
 
     public function updateStore(Request $request, User $user)
     {
-        //
+        $request->validate([
+            'school_id' => 'required|int',
+            'email' => 'required|email|unique:admins|max:255',
+            'name' => 'required|string|max:255'
+        ]);
+
+        $user->school_id = $request->school_id;
+        $user->email = $request->email;
+        $user->name = $request->name;
+        $user->is_banned = isset($request->is_banned);
+        $user->is_active = isset($request->is_active);
+        $user->is_muted = isset($request->is_muted);
+        $user->hide_location = isset($request->hide_location);
+
+        if ($request->password) {
+            $user->password = bcrypt($request->password);
+        }
+
+        $user->save();
+
+        return redirect()->route('admin.users')->with('success', 'Kullanıcı başarıyla güncellendi!');
     }
 
     public function delete(User $user)
