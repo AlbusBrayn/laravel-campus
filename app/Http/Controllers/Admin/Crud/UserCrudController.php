@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Crud;
 
 use App\Http\Controllers\Controller;
+use App\Models\School;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -17,13 +18,31 @@ class UserCrudController extends Controller
 
     public function create()
     {
-        dd('sss');
-        //return view('admin.pages.admins.admin-create');
+        $schools = School::all();
+
+        return view('admin.pages.users.user-create', compact('schools'));
     }
 
     public function createStore(Request $request)
     {
-        //
+        $request->validate([
+            'school_id' => 'required|int',
+            'email' => 'required|email|unique:admins|max:255',
+            'password' => 'required|string|max:255',
+            're_password' => 'required|string|max:255|same:password',
+        ]);
+
+        $user = User::create([
+            'school_id' => $request->school_id,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+        ]);
+
+        if ($user) {
+            return redirect()->route('admin.users')->with('success', 'Kullanıcı başarıyla oluşturuldu!');
+        } else {
+            return redirect()->route('admin.users')->with('error', 'Kullanıcı oluşturulurken bir hata oluştu!');
+        }
     }
 
     public function update(User $user)

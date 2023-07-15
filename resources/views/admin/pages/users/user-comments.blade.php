@@ -42,7 +42,7 @@
                                 @if($comment->parent_id !== null)
                                     <a href="">{{ $comment->parent->body }}</a>
                                 @else
-                                    <div class="badge badge_danger uppercase">Hayır</div>
+                                    <div class="badge badge_danger uppercase">Yok</div>
                                 @endif
                             </td>
                             <td class="text-center uppercase">{{ $comment->like_count }}</td>
