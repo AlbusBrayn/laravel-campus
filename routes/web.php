@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\Crud\UserCommentCrudController;
 use App\Http\Controllers\Admin\Crud\ForumCrudController;
 use App\Http\Controllers\Admin\Crud\ForumTitleCrudController;
 use App\Http\Controllers\Admin\Crud\ForumReportCrudController;
+use App\Http\Controllers\Admin\Crud\SchoolCrudController;
 
 /*
 |--------------------------------------------------------------------------
@@ -87,5 +88,14 @@ Route::prefix("admin")->group(function () {
             Route::put("/updateStore/{user}", [UserCrudController::class, "updateStore"])->name("admin.users.updateStore");
             Route::delete("/delete/{user}", [UserCrudController::class, "delete"])->name("admin.users.delete");
         });
+    });
+
+    Route::prefix("schools")->group(function () {
+        Route::get("/", [SchoolCrudController::class, "index"])->name("admin.schools");
+        Route::get("/create", [SchoolCrudController::class, "create"])->name("admin.schools.create");
+        Route::post("/createStore", [SchoolCrudController::class, "createStore"])->name("admin.schools.createStore");
+        Route::get("/update/{school}", [SchoolCrudController::class, "update"])->name("admin.schools.update");
+        Route::put("/updateStore/{school}", [SchoolCrudController::class, "updateStore"])->name("admin.schools.updateStore");
+        Route::delete("/delete/{school}", [SchoolCrudController::class, "delete"])->name("admin.schools.delete");
     });
 });

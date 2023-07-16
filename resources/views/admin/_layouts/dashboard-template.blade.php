@@ -166,7 +166,7 @@
     <div class="menu-detail" data-menu="schools">
         <div class="menu-detail-wrapper">
             <h6 class="uppercase">Okul Yönetimi</h6>
-            <a href="#">
+            <a href="{{ route('admin.schools') }}">
                 <span class="la la-list"></span>
                 Okul Listesi
             </a>
