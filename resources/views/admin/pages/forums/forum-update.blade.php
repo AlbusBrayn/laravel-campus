@@ -57,7 +57,7 @@
                         </div>
                         <div class="mb-5">
                             <label class="label block mb-2" for="content">İçerik</label>
-                            <textarea id="content" name="content" class="form-control">{{ old('content', $admin->email) }}</textarea>
+                            <textarea id="content" name="content" class="form-control">{{ old('content', $post->content) }}</textarea>
                         </div>
                         <div class="mb-5">
                             <label class="label block mb-2" for="like">Beğenme</label>
