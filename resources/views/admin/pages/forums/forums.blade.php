@@ -40,7 +40,7 @@
                     <tbody>
                     @foreach($forums as $forum)
                         <tr>
-                            <td class="text-center uppercase"><a href="{{ route('admin.forums.update', ['user' => $forum->user]) }}">{{ $forum->user->name }}</a></td>
+                            <td class="text-center uppercase"><a href="{{ route('admin.users.update', ['user' => $forum->user]) }}">{{ $forum->user->name }}</a></td>
                             <td class="text-center uppercase"><a href="">{{ $forum->postTitle->title }}</a></td>
                             <td class="text-center uppercase">{{ $forum->short_content }}</td>
                             <td class="text-center uppercase">{{ $forum->like }}</td>
