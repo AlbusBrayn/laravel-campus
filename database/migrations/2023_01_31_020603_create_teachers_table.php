@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->boolean('is_admin')->default(false);
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }

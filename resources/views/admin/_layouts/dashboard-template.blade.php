@@ -178,7 +178,7 @@
                 <span class="la la-list"></span>
                 Ders Listesi
             </a>
-            <a href="#">
+            <a href="{{ route('admin.teachers') }}">
                 <span class="la la-list"></span>
                 Öğretmen Listesi
             </a>

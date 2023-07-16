@@ -11,7 +11,8 @@ class Teachers extends Model
 
     protected $fillable = [
         'name',
-        'is_admin'
+        'is_admin',
+        'is_active'
     ];
 
     public function votes(): \Illuminate\Database\Eloquent\Relations\HasMany
