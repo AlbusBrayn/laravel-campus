@@ -170,7 +170,7 @@
                 <span class="la la-list"></span>
                 Okul Listesi
             </a>
-            <a href="#">
+            <a href="{{ route('admin.majors') }}">
                 <span class="la la-list"></span>
                 Ders Listesi
             </a>
