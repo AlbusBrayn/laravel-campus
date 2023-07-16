@@ -38,6 +38,7 @@ class CourseCrudController extends Controller
             'school_id' => $request->school_id,
             'major_id' => $request->major_id,
             'name' => $request->name,
+            'is_active' => isset($request->is_active),
         ]);
 
         if ($course) {
@@ -66,6 +67,7 @@ class CourseCrudController extends Controller
         $course->school_id = $request->school_id;
         $course->major_id = $request->major_id;
         $course->name = $request->name;
+        $course->is_active = isset($request->is_active);
 
         if ($course->save()) {
             return redirect()->back()->with('success', 'Ders başarıyla güncellendi!');
