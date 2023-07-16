@@ -171,16 +171,12 @@
                 Okul Listesi
             </a>
             <a href="#">
-                <span class="la la-plus-circle"></span>
-                Okul Oluştur
+                <span class="la la-list"></span>
+                Ders Listesi
             </a>
             <a href="#">
                 <span class="la la-list"></span>
-                Ders Ekle
-            </a>
-            <a href="#">
-                <span class="la la-list"></span>
-                Öğretmen Ekle
+                Öğretmen Listesi
             </a>
         </div>
     </div>

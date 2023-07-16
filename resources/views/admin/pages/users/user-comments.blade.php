@@ -37,7 +37,7 @@
                     @foreach($comments as $comment)
                         <tr>
                             <td class="text-center uppercase"><a href="{{ route('admin.users.update', ['user' => $comment->user]) }}">{{ $comment->user->name }}</a></td>
-                            <td class="text-center uppercase">{{ $comment->post->title }}</td>
+                            <td class="text-center uppercase"><a href="{{ route('admin.forums.update', ['post' => $comment->post]) }}">{{ $comment->post->title }}</a></td>
                             <td class="text-center uppercase">
                                 @if($comment->parent_id !== null)
                                     <a href="">{{ $comment->parent->body }}</a>
