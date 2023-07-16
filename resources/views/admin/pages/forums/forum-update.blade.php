@@ -56,8 +56,8 @@
                             <input type="text" id="short_content" name="short_content" class="form-control" value="{{ old('short_content', $post->short_content) }}">
                         </div>
                         <div class="mb-5">
-                            <label class="label block mb-2" for="content">İçerik</label>
-                            <textarea id="content" name="content" class="form-control">{{ old('content', $post->content) }}</textarea>
+                            <label class="label block mb-2" for="long_content">İçerik</label>
+                            <textarea id="long_content" name="long_content" class="form-control">{{ old('long_content', $post->content) }}</textarea>
                         </div>
                         <div class="mb-5">
                             <label class="label block mb-2" for="like">Beğenme</label>

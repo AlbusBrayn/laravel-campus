@@ -34,7 +34,18 @@ class ForumCrudController extends Controller
 
     public function updateStore(Request $request, Post $post)
     {
-        //
+        $request->validate([
+            'short_content' => 'required|string',
+            'long_content' => 'required|string',
+        ]);
+
+        $post->short_content = $request->short_content;
+        $post->content = $request->long_content;
+        $post->published = isset($request->published);
+        $post->is_active = isset($request->is_active);
+        $post->save();
+
+        return redirect()->route('admin.forums')->with('success', 'İçerik başarıyla güncellendi!');
     }
 
     public function delete(Post $post)
