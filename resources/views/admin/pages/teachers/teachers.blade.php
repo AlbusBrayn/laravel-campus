@@ -57,8 +57,8 @@
                                         $point = 10;
                                     }
                                 @endphp
+                                {{ $point }}
                             </td>
-                            <td class="text-center uppercase">{{ $point }}</td>
                             <td class="text-center uppercase">{{ $teacher->votes->count() }}</td>
                             <td class="text-center">
                                 @if($teacher->is_active)
