@@ -38,7 +38,7 @@
                     @foreach($forums as $forum)
                         <tr>
                             <td class="text-center uppercase"><a href="{{ route('admin.users.update', ['user' => $forum->user]) }}">{{ $forum->user->name }}</a></td>
-                            <td class="text-center uppercase"><a href="{{ route('admin.forums.update', ['postTitle' => $forum->postTitle]) }}">{{ $forum->postTitle->title }}</a></td>
+                            <td class="text-center uppercase"><a href="{{ route('admin.forums.titles.update', ['postTitle' => $forum->postTitle]) }}">{{ $forum->postTitle->title }}</a></td>
                             <td class="text-center uppercase">{{ Str::limit($forum->short_content, 50, '...') }}</td>
                             <td class="text-center uppercase">{{ $forum->like }}</td>
                             <td class="text-center uppercase">{{ $forum->dislike }}</td>
