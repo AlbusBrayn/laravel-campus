@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\Crud\UserReviewCrudController;
 use App\Http\Controllers\Admin\Crud\UserCommentCrudController;
 use App\Http\Controllers\Admin\Crud\ForumCrudController;
 use App\Http\Controllers\Admin\Crud\ForumTitleCrudController;
+use App\Http\Controllers\Admin\Crud\ForumReportCrudController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,6 +61,11 @@ Route::prefix("admin")->group(function () {
                 Route::get("/update/{postTitle}", [ForumTitleCrudController::class, "update"])->name("admin.forums.titles.update");
                 Route::put("/updateStore/{postTitle}", [ForumTitleCrudController::class, "updateStore"])->name("admin.forums.titles.updateStore");
                 Route::delete("/delete/{postTitle}", [ForumTitleCrudController::class, "delete"])->name("admin.forums.titles.delete");
+            });
+
+            Route::prefix("reports")->group(function () {
+                Route::get("/", [ForumReportCrudController::class, "index"])->name("admin.forums.reports");
+                Route::delete("/delete/{report}", [ForumReportCrudController::class, "delete"])->name("admin.forums.reports.delete");
             });
         });
 
