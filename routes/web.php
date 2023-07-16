@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\Crud\UserCrudController;
 use App\Http\Controllers\Admin\Crud\UserReviewCrudController;
 use App\Http\Controllers\Admin\Crud\UserCommentCrudController;
 use App\Http\Controllers\Admin\Crud\ForumCrudController;
+use App\Http\Controllers\Admin\Crud\ForumTitleCrudController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,6 +52,15 @@ Route::prefix("admin")->group(function () {
             Route::get("/update/{post}", [ForumCrudController::class, "update"])->name("admin.forums.update");
             Route::put("/updateStore/{post}", [ForumCrudController::class, "updateStore"])->name("admin.forums.updateStore");
             Route::delete("/delete/{post}", [ForumCrudController::class, "delete"])->name("admin.forums.delete");
+
+            Route::prefix("titles")->group(function () {
+                Route::get("/", [ForumTitleCrudController::class, "index"])->name("admin.forums.titles");
+                Route::get("/create", [ForumTitleCrudController::class, "create"])->name("admin.forums.titles.create");
+                Route::post("/createStore", [ForumTitleCrudController::class, "createStore"])->name("admin.forums.titles.createStore");
+                Route::get("/update/{postTitle}", [ForumTitleCrudController::class, "update"])->name("admin.forums.titles.update");
+                Route::put("/updateStore/{postTitle}", [ForumTitleCrudController::class, "updateStore"])->name("admin.forums.titles.updateStore");
+                Route::delete("/delete/{postTitle}", [ForumTitleCrudController::class, "delete"])->name("admin.forums.titles.delete");
+            });
         });
 
         Route::prefix("users")->group(function () {
