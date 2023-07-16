@@ -19,20 +19,20 @@ class ForumCrudController extends Controller
 
     public function create()
     {
-        //
+        return back();
     }
 
     public function createStore(Request $request)
     {
-        //
+        return back();
     }
 
-    public function update(Admin $admin)
+    public function update(Post $post)
     {
-        //
+        return view('admin.pages.forums.forum-update', compact('post'));
     }
 
-    public function updateStore(Request $request, Admin $admin)
+    public function updateStore(Request $request, Post $post)
     {
         //
     }
@@ -41,6 +41,6 @@ class ForumCrudController extends Controller
     {
         $post->is_active = false;
         $post->save();
-        return redirect()->route('admin.admins')->with('success', 'İçerik başarıyla silindi!');
+        return redirect()->route('admin.forums')->with('success', 'İçerik başarıyla silindi!');
     }
 }

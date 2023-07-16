@@ -18,9 +18,6 @@
                             class="text-gray-300 dark:text-gray-700 text-xl leading-none la la-search ltr:mr-4 rtl:ml-4"></button>
                     </label>
                 </form>
-                <div class="flex gap-x-2">
-                    <a href="{{ route('admin.forums.create') }}" class="btn btn_primary uppercase">Yeni Ekle</a>
-                </div>
             </div>
         </section>
         <div class="card p-5">
