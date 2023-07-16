@@ -17,7 +17,8 @@ class Post extends Model
         'content',
         'like',
         'dislike',
-        'published'
+        'published',
+        'is_active'
     ];
 
     protected $hidden = [
@@ -33,5 +34,10 @@ class Post extends Model
     public function postTitle(): HasOne
     {
         return $this->hasOne(PostTitle::class, 'id', 'title');
+    }
+
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }

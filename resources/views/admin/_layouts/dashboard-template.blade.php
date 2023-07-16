@@ -191,7 +191,7 @@
                 <span class="la la-list"></span>
                 Forum Konuları
             </a>
-            <a href="#">
+            <a href="{{ route('admin.forums') }}">
                 <span class="la la-list"></span>
                 Forum Listesi
             </a>

@@ -39,16 +39,16 @@ class PostController extends Controller
 
         switch ($sort) {
             case "highest_like":
-                $posts = Post::where('published', true)->whereNotIn('user_id', $blockedIds)->with('comments.replies')->orderBy('like', 'desc')->paginate(10);
+                $posts = Post::where(['published' => true, 'is_active' => true])->whereNotIn('user_id', $blockedIds)->with('comments.replies')->orderBy('like', 'desc')->paginate(10);
                 break;
             case "lowest_like":
-                $posts = Post::where('published', true)->whereNotIn('user_id', $blockedIds)->with('comments.replies')->orderBy('like', 'asc')->paginate(10);
+                $posts = Post::where(['published' => true, 'is_active' => true])->whereNotIn('user_id', $blockedIds)->with('comments.replies')->orderBy('like', 'asc')->paginate(10);
                 break;
             case "newest":
-                $posts = Post::where('published', true)->whereNotIn('user_id', $blockedIds)->with('comments.replies')->orderBy('created_at', 'desc')->paginate(10);
+                $posts = Post::where(['published' => true, 'is_active' => true])->whereNotIn('user_id', $blockedIds)->with('comments.replies')->orderBy('created_at', 'desc')->paginate(10);
                 break;
             case "oldest":
-                $posts = Post::where('published', true)->whereNotIn('user_id', $blockedIds)->with('comments.replies')->orderBy('created_at', 'asc')->paginate(10);
+                $posts = Post::where(['published' => true, 'is_active' => true])->whereNotIn('user_id', $blockedIds)->with('comments.replies')->orderBy('created_at', 'asc')->paginate(10);
                 break;
             default:
                 return false;
@@ -104,7 +104,7 @@ class PostController extends Controller
 
     public function show(Request $request, $id)
     {
-        $post = Post::where(['id' => $id, 'published' => true])->with('comments.replies')->firstOrFail();
+        $post = Post::where(['id' => $id, 'published' => true, 'is_active' => true])->with('comments.replies')->firstOrFail();
         return response(['status' => 'success', 'data' => new PostResource($post)]);
     }
 
@@ -343,7 +343,7 @@ class PostController extends Controller
         }
 
         $data = $validator->validated();
-        $posts = Post::where(['published' => true])->where('content', 'like', '%' . $data['q'] . '%')->with('comments.replies')->orderBy('created_at', 'desc')->paginate(10);
+        $posts = Post::where(['published' => true, 'is_active' => true])->where('content', 'like', '%' . $data['q'] . '%')->with('comments.replies')->orderBy('created_at', 'desc')->paginate(10);
         return PostResource::collection($posts);
     }
 

@@ -25,6 +25,7 @@ return new class extends Migration
             $table->integer('dislike')->default(0);
 
             $table->boolean('published')->default(true);
+            $table->boolean('is_active')->default(true);
 
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
