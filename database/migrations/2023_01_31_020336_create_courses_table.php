@@ -18,6 +18,7 @@ return new class extends Migration
             $table->bigInteger('school_id')->unsigned();
             $table->bigInteger('major_id')->unsigned();
             $table->string('name');
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
 
             $table->foreign('school_id')->references('id')->on('schools')->onDelete('cascade');

@@ -172,6 +172,10 @@
             </a>
             <a href="{{ route('admin.majors') }}">
                 <span class="la la-list"></span>
+                Bölüm Listesi
+            </a>
+            <a href="{{ route('admin.courses') }}">
+                <span class="la la-list"></span>
                 Ders Listesi
             </a>
             <a href="#">

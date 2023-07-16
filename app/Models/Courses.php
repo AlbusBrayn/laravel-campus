@@ -12,7 +12,8 @@ class Courses extends Model
     protected $fillable = [
         'school_id',
         'major_id',
-        'name'
+        'name',
+        'is_active'
     ];
 
     public function school(): \Illuminate\Database\Eloquent\Relations\BelongsTo

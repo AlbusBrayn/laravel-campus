@@ -3,18 +3,18 @@
     <main class="workspace">
         <section class="breadcrumb lg:flex items-start">
             <div>
-                <h1>Bölüm Oluştur</h1>
+                <h1>Ders Oluştur</h1>
                 <ul>
                     <li><a class="{{ route('admin.dashboard') }}">Anasayfa</a></li>
                     <li class="divider la la-arrow-right"></li>
-                    <li><a href="{{ route('admin.majors') }}">Bölüm Listesi</a></li>
+                    <li><a href="{{ route('admin.courses') }}">Ders Listesi</a></li>
                     <li class="divider la la-arrow-right"></li>
-                    <li><a>Bölüm Oluştur</a></li>
+                    <li><a>Ders Oluştur</a></li>
                 </ul>
             </div>
             <div class="flex flex-wrap gap-2 items-center ltr:ml-auto rtl:mr-auto mt-5 lg:mt-0">
                 <div class="flex gap-x-2">
-                    <button onclick="document.getElementById('majorForm').submit()" class="btn btn_primary uppercase">Kaydet</button>
+                    <button onclick="document.getElementById('courseForm').submit()" class="btn btn_primary uppercase">Kaydet</button>
                 </div>
             </div>
         </section>
@@ -27,20 +27,42 @@
                 </div>
             @endforeach
         @endif
-        <form id="majorForm" action="{{ route('admin.majors.createStore') }}" method="POST">
+        <form id="courseForm" action="{{ route('admin.courses.createStore') }}" method="POST">
             @csrf
             <div class="grid lg:grid-cols-4 gap-5">
                 <div class="lg:col-span-2 xl:col-span-3">
                     <div class="card p-5">
                         <div class="mb-5">
-                            <label class="label block mb-2" for="title">Bölüm Adı</label>
-                            <input type="text" id="title" name="title" class="form-control" value="{{ old('title') }}">
+                            <label class="label block mb-2" for="school">Okul</label>
+                            <div class="custom-select">
+                                <select id="school" name="school_id" class="form-control">
+                                    @foreach($schools as $school)
+                                        <option value="{{ $school->id }}">{{ $school->name }}</option>
+                                    @endforeach
+                                </select>
+                                <div class="custom-select-icon la la-caret-down"></div>
+                            </div>
+                        </div>
+                        <div class="mb-5">
+                            <label class="label block mb-2" for="major">Bölüm</label>
+                            <div class="custom-select">
+                                <select id="major" name="major_id" class="form-control">
+                                    @foreach($majors as $major)
+                                        <option value="{{ $major->id }}">{{ $major->title }}</option>
+                                    @endforeach
+                                </select>
+                                <div class="custom-select-icon la la-caret-down"></div>
+                            </div>
+                        </div>
+                        <div class="mb-5">
+                            <label class="label block mb-2" for="name">Ders Adı</label>
+                            <input type="text" id="name" name="name" class="form-control" value="{{ old('name') }}">
                         </div>
                     </div>
                 </div>
                 <div class="flex flex-col gap-y-5 lg:col-span-2 xl:col-span-1">
                     <div class="card p-5 flex flex-col gap-y-5">
-                        <h3>Okul Ayarları</h3>
+                        <h3>Ders Ayarları</h3>
                         <div class="flex flex-col gap-y-5">
                             <div class="flex items-center">
                                 <div class="w-3/4">

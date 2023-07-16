@@ -34,7 +34,7 @@
                 <div class="lg:col-span-2 xl:col-span-3">
                     <div class="card p-5">
                         <div class="mb-5">
-                            <label class="label block mb-2" for="title">Ders Adı</label>
+                            <label class="label block mb-2" for="title">Bölüm Adı</label>
                             <input type="text" id="title" name="title" class="form-control" value="{{ old('title', $major->title) }}">
                         </div>
                     </div>
