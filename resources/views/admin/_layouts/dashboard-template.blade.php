@@ -187,7 +187,7 @@
     <div class="menu-detail" data-menu="forums">
         <div class="menu-detail-wrapper">
             <h6 class="uppercase">Forum Yönetimi</h6>
-            <a href="#">
+            <a href="{{ route('admin.forums.titles') }}">
                 <span class="la la-list"></span>
                 Forum Konuları
             </a>
