@@ -191,7 +191,7 @@
                 <span class="la la-list"></span>
                 Forum Listesi
             </a>
-            <a href="#">
+            <a href="{{ route('admin.forums.reports') }}">
                 <span class="la la-list"></span>
                 Şikayet Edilen Forumlar
             </a>
