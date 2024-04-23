@@ -63,6 +63,13 @@
             </div>
         </div>
 
+        <form action="{{ route('admin.import') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <label for="file">Excel Dosyası Yükle:</label>
+            <input type="file" id="file" name="file" required>
+            <button type="submit" class="btn btn-primary">İçeri Aktar</button>
+        </form>
+
         <footer class="mt-auto">
             <div class="footer">
                 <span class='uppercase'>&copy; 2022 Campus A+</span>

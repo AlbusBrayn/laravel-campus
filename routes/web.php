@@ -31,6 +31,7 @@ Route::get('/', function () {
 });
 
 Route::prefix("admin")->group(function () {
+    Route::post('/admin/import', [Dashboard::class, 'importExcel'])->name('admin.import');
     Route::middleware(["guest"])->group(function () {
         Route::get("login", [AuthController::class, "login"])->name("admin.login");
         Route::post("loginStore", [AuthController::class, "loginStore"])->name("admin.loginStore");

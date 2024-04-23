@@ -8,11 +8,13 @@
         "php": "^8.0.2",
         "astrotomic/laravel-translatable": "^11.12",
         "guzzlehttp/guzzle": "^7.2",
+        "kreait/laravel-firebase": "^5.8",
         "ladumor/one-signal": "0.4.4",
         "laravel/framework": "^9.19",
         "laravel/passport": "^11.3",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
+        "maatwebsite/excel": "^3.1",
         "multicaret/laravel-acquaintances": "^3.5",
         "pusher/pusher-php-server": "^7.2",
         "spatie/laravel-collection-macros": "^7.12"

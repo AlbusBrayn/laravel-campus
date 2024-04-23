@@ -9,7 +9,10 @@ use App\Models\Major;
 use App\Models\Message;
 use App\Models\User;
 use App\Models\UserMajor;
+use App\Services\FirebaseService;
 use Illuminate\Http\Request;
+use Kreait\Firebase\Exception\FirebaseException;
+use Kreait\Firebase\Exception\MessagingException;
 
 class MessageController extends Controller
 {
@@ -62,6 +65,10 @@ class MessageController extends Controller
         return response(['friends' => $users]);
     }
 
+    /**
+     * @throws MessagingException
+     * @throws FirebaseException
+     */
     public function send(Request $request)
     {
         $validator = \Validator::make($request->all(), [
@@ -92,12 +99,13 @@ class MessageController extends Controller
         ]);
 
         if ($message) {
-            $pusher = new \Pusher\Pusher(config('broadcasting.connections.pusher.key'),
+            /*$pusher = new \Pusher\Pusher(config('broadcasting.connections.pusher.key'),
                 config('broadcasting.connections.pusher.secret'),
                 config('broadcasting.connections.pusher.app_id'),
                 config('broadcasting.connections.pusher.options'));
 
-            $pusher->trigger('campus-message', 'message-' . $receiver->id . '-' . $user->id, ['status' => 'success']);
+            $pusher->trigger('campus-message', 'message-' . $receiver->id . '-' . $user->id, ['status' => 'success']);*/
+            FirebaseService::sendNotification($receiver->device_id, 'Yeni Mesaj!', $receiver->name . ': ' . $request->message);
 
             return response(['status' => 'success', 'message' => 'Mesajınız başarıyla gönderildi!'], 200);
         } else {

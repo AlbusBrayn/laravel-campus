@@ -18,6 +18,7 @@ class AuthController extends Controller
         $validator = \Validator::make($request->all(), [
             'email' => 'required|email|unique:users',
             'password' => 'required|min:8',
+            'device_id' => 'nullable|string'
         ]);
         $validator->setAttributeNames([
             'email' => 'Email',
@@ -49,6 +50,7 @@ class AuthController extends Controller
         $data['school_id'] = $school->id; //@todo: multiple school support
         $user = User::create($data);
         $user['school'] = $user->school;
+        $user['device_id'] = $request->device_id;
 
         $token = $user->createToken('Personel Access Token')->accessToken;
 

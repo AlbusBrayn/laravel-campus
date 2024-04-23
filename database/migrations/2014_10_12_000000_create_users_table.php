@@ -33,6 +33,7 @@ return new class extends Migration
             $table->integer('status')->default(1);
             $table->string('lat')->nullable();
             $table->string('lng')->nullable();
+            $table->string('device_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
 

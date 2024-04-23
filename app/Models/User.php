@@ -39,7 +39,8 @@ class User extends Authenticatable
         'forget_code',
         'forget_expire',
         'lat',
-        'lng'
+        'lng',
+        'device_id',
     ];
 
     /**
