@@ -99,13 +99,9 @@ class MessageController extends Controller
         ]);
 
         if ($message) {
-            /*$pusher = new \Pusher\Pusher(config('broadcasting.connections.pusher.key'),
-                config('broadcasting.connections.pusher.secret'),
-                config('broadcasting.connections.pusher.app_id'),
-                config('broadcasting.connections.pusher.options'));
-
-            $pusher->trigger('campus-message', 'message-' . $receiver->id . '-' . $user->id, ['status' => 'success']);*/
-            FirebaseService::sendNotification($receiver->device_id, 'Yeni Mesaj!', $receiver->name . ': ' . $request->message);
+            if ($receiver->device_id) {
+                FirebaseService::sendNotification($receiver->device_id, 'Yeni Mesaj!', $receiver->name . ': ' . $request->message);
+            }
 
             return response(['status' => 'success', 'message' => 'Mesajınız başarıyla gönderildi!'], 200);
         } else {

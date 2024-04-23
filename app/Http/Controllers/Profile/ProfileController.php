@@ -10,7 +10,10 @@ use App\Models\User;
 use App\Models\UserMajor;
 use App\Models\UserReport;
 use App\Models\UserTeacher;
+use App\Services\FirebaseService;
 use Illuminate\Http\Request;
+use Kreait\Firebase\Exception\FirebaseException;
+use Kreait\Firebase\Exception\MessagingException;
 
 class ProfileController extends Controller
 {
@@ -193,6 +196,10 @@ class ProfileController extends Controller
         }
     }
 
+    /**
+     * @throws MessagingException
+     * @throws FirebaseException
+     */
     public function sendRequest(Request $request, $id)
     {
         $user = $request->user();
@@ -215,6 +222,10 @@ class ProfileController extends Controller
         }
 
         $user->befriend($visitor);
+
+        if ($visitor->device_id) {
+            FirebaseService::sendNotification($visitor->device_id, 'Yeni Arkadaşlık İsteği!', $user->name . ' size arkadaşlık isteği gönderdi.');
+        }
 
         return response(['status' => 'success', 'message' => 'Arkadaşlık isteği gönderildi!']);
     }

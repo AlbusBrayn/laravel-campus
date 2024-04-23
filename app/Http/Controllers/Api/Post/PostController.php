@@ -13,7 +13,10 @@ use App\Models\Post;
 use App\Models\PostReport;
 use App\Models\PostTitle;
 use App\Models\User;
+use App\Services\FirebaseService;
 use Illuminate\Http\Request;
+use Kreait\Firebase\Exception\FirebaseException;
+use Kreait\Firebase\Exception\MessagingException;
 
 class PostController extends Controller
 {
@@ -135,6 +138,10 @@ class PostController extends Controller
         return response(['status' => 'success', 'message' => 'Post başarıyla güncellendi!', 'data' => new PostResource($post)]);
     }
 
+    /**
+     * @throws MessagingException
+     * @throws FirebaseException
+     */
     public function like(Request $request, $id)
     {
         $post = Post::findOrFail($id);
@@ -156,6 +163,11 @@ class PostController extends Controller
             Like::create(['user_id' => $request->user()->id, 'post_id' => $post->id]);
             $post->like = $post->like + 1;
             $post->save();
+
+            if ($post->user->device_id) {
+                FirebaseService::sendNotification($post->user->device_id, 'Konun beğenildi!', $request->user()->name . ' adlı kullanıcı ' . $post->title . ' başlıklı konunuzu beğendi!');
+            }
+
             return response(['status' => 'success', 'message' => 'Post beğenildi!', 'like' => $post->like, 'dislike' => $post->dislike]);
         }
     }
