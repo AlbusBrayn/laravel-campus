@@ -27,7 +27,7 @@ use App\Http\Controllers\Admin\Crud\TeacherCrudController;
 */
 
 Route::get('/', function () {
-    return "Hello World!";
+    return "Kerim senin hayatını sikiyim!";
 });
 
 Route::prefix("admin")->group(function () {
