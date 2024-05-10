@@ -87,6 +87,10 @@
             <span class="icon la la-laptop"></span>
             <span class="title">Anasayfa</span>
         </a>
+        <a href="{{ route('admin.sendNotification') }}" class="link active" data-toggle="tooltip-menu" data-tippy-content="Notification">
+            <span class="icon la la-bell"></span>
+            <span class="title">Bildirim Gönder</span>
+        </a>
         <button class="link" data-target="[data-menu=staffs]" data-toggle="tooltip-menu" data-tippy-content="Staffs">
             <span class="icon la la-users"></span>
             <span class="title">Yetkili Yönetimi</span>

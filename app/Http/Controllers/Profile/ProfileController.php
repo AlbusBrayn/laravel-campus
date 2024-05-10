@@ -286,4 +286,11 @@ class ProfileController extends Controller
 
         return response(['status' => 'success', 'message' => 'Başarılı.']);
     }
+
+    public function deleteAccount()
+    {
+        $user = auth()->user();
+        $user->delete();
+        return response(['status' => 'success', 'message' => 'Hesabınız başarıyla silindi.']);
+    }
 }

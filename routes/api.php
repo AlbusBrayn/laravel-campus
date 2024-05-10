@@ -42,6 +42,7 @@ Route::middleware('auth:api')->group(function () {
 
     Route::prefix('user')->group(function () {
         Route::post('/onesignal', [ProfileController::class, 'oneSignal']);
+        Route::delete('/delete-account', [ProfileController::class, 'deleteAccount']);
     });
 
     Route::prefix('profile')->group(function () {
