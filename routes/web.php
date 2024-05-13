@@ -31,14 +31,14 @@ Route::get('/', function () {
     return "Kerim senin hayatını sikiyim!";
 });
 
-Route::prefix("admin")->middleware(["auth:admin"])->group(function () {
+Route::prefix("admin")->group(function () {
     Route::post('/admin/import', [Dashboard::class, 'importExcel'])->name('admin.import');
     Route::middleware(["guest"])->group(function () {
         Route::get("login", [AuthController::class, "login"])->name("admin.login");
         Route::post("loginStore", [AuthController::class, "loginStore"])->name("admin.loginStore");
     });
 
-    Route::middleware(['auth:api'])->group(function () {
+    Route::middleware(['auth:admin'])->group(function () {
         Route::get("logout", [AuthController::class, "adminLogout"])->name("admin.logout");
         Route::get("changePassword", [AuthController::class, "changePassword"])->name("admin.changePassword");
         Route::post("changePassword", [AuthController::class, "changePasswordStore"])->name("admin.changePasswordStore");
