@@ -14,7 +14,7 @@ class NotificationController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('admin.pages.send-notification', $users);
+        return view('admin.pages.send-notification', compact('users'));
     }
 
     /**
