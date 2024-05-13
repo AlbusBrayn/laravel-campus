@@ -61,15 +61,19 @@
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div class="gap-5">
-            <form action="{{ route('admin.import') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                <label for="file">Excel Dosyası Yükle:</label>
-                <input type="file" id="file" name="file" required>
-                <button type="submit" class="btn btn-primary">İçeri Aktar</button>
-            </form>
+            <div class="grid sm:grid-cols-3 gap-5">
+                <div
+                    class="card px-4 py-8 flex justify-center items-center text-center lg:transform hover:scale-110 hover:shadow-lg transition-transform duration-200">
+                    <div>
+                        <form action="{{ route('admin.import') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <label for="file">Excel Dosyası Yükle:</label>
+                            <input type="file" id="file" name="file" required>
+                            <button type="submit" class="btn btn-primary">İçeri Aktar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <footer class="mt-auto">
