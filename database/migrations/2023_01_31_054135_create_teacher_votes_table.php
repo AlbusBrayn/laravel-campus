@@ -20,8 +20,7 @@ return new class extends Migration
             $table->integer('quality');
             $table->integer('attitude');
             $table->integer('performance');
-          //  $table->text('comment');
-            $table->text('comment')->nullable(); 
+            $table->text('comment');
             $table->timestamps();
         });
     }
