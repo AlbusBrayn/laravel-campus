@@ -15,7 +15,7 @@ class AvatarController extends Controller
         $user = $request->user();
 
         if (!$user->avatar) {
-            return response(['status' => 'error', 'message' => 'Kullanıcının avatar datası oluşturulmamış!'], 400);
+            return response(['status' => 'error', 'message ' => 'Kullanıcının avatar datası oluşturulmamış!'], 400);
         }
 
         return response(['avatar' => $user->avatar]);

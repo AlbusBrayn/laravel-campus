@@ -13,6 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
+       
         Schema::create('hide_maps', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('from_id')->unsigned();

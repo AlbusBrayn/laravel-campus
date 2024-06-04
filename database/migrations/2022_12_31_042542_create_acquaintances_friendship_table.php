@@ -9,6 +9,7 @@ class CreateAcquaintancesFriendshipTable extends Migration
     public function up()
     {
 
+     
         Schema::create(config('acquaintances.tables.friendships'), function (Blueprint $table) {
             $table->id();
             $table->morphs('sender');

@@ -13,6 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
+        
         Schema::create('post_title_translations', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('post_title_id')->unsigned();

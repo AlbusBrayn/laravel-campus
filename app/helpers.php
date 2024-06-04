@@ -20,12 +20,13 @@ function timeParse($zaman): string
 
         $fark = round($fark);
 
-        return $fark . " " . $zamanismi[$i] . " Önce";
+        
+        return $fark . " " . $zamanismi[$i] . "Önce";
     }
 
     return "";
 }
-
+//  
 function isLiked(int $user_id, int $post_id): string
 {
     $like = Like::where(['user_id' => $user_id, 'post_id' => $post_id])->first();

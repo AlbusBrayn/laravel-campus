@@ -18,11 +18,12 @@ class User extends Authenticatable
     use CanFollow, CanBeFollowed;
 
     /**
-     * The attributes that are mass assignable.
+     * The attributes that are mass assignable....
      *
      * @var array<int, string>
      */
-    protected $fillable = [
+   
+     protected $fillable = [
         'one_signal',
         'name',
         'email',

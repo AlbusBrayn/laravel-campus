@@ -12,6 +12,7 @@ class CreateAcquaintancesFriendshipsGroupsTable extends Migration
     public function up()
     {
 
+       
         Schema::create(config('acquaintances.tables.friendship_groups'), function (Blueprint $table) {
             $table->id();
 

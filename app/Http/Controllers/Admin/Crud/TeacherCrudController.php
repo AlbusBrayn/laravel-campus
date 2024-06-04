@@ -32,7 +32,7 @@ class TeacherCrudController extends Controller
         ]);
 
         if ($teacher) {
-            return redirect()->back()->with('success', 'Öğretmen başarıyla oluşturuldu!');
+            return redirect()->back()->with('success', 'Öğretmen başarıyla oluşturuldu!!');
         } else {
             return redirect()->back()->with('error', 'Öğretmen oluşturulurken bir hata oluştu!');
         }

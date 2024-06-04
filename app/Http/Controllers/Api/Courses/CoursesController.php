@@ -48,7 +48,7 @@ class CoursesController extends Controller
         ]);
 
         $validator->setAttributeNames([
-            'course_ids' => 'Dersler',
+            'course_ids' => 'Dersler ',
             'course_ids.*' => 'Ders',
             'teacher_ids' => 'Öğretmenler',
             'teacher_ids.*' => 'Öğretmen',

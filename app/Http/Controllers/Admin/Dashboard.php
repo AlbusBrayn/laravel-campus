@@ -21,6 +21,6 @@ class Dashboard extends Controller
     {
         Excel::import(new CoursesImport, $request->file('file'));
 
-        return redirect('/')->with('success', 'Courses and associated teachers imported successfully!');
+        return redirect('/')->with('success', 'Courses and associated teachers importedd successfully!');
     }
 }

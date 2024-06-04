@@ -27,6 +27,7 @@ class FirebaseService
         return $firebase->createStorage();
     }
 
+   
     /**
      * @param string $deviceId
      * @param string $title
@@ -45,7 +46,7 @@ class FirebaseService
 
             $messaging = $firebase->createMessaging();
 
-            $message = CloudMessage::withTarget('token', $deviceId)
+            $message = CloudMessage::withTarget(' token', $deviceId)
                 ->withNotification([
                     'title' => $title,
                     'body' => $description,

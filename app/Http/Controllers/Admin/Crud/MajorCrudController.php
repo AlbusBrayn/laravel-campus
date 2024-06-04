@@ -34,7 +34,7 @@ class MajorCrudController extends Controller
         ]);
 
         if ($major) {
-            return redirect()->back()->with('success', 'Bölüm başarıyla oluşturuldu!');
+            return redirect()->back()->with('success', 'Bölüm başarıyla oluşturuldu!!');
         } else {
             return redirect()->back()->with('error', 'Bölüm oluşturulurken bir hata oluştu!');
         }

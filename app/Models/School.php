@@ -9,7 +9,9 @@ class School extends Model
 {
     use HasFactory;
 
+    
     protected $fillable = [
+       
         'name',
         'email_pattern',
         'latitude',

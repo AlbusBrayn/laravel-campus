@@ -11,6 +11,7 @@ class PostTitle extends Model implements TranslatableContract
 {
     use HasFactory, Translatable;
 
+   
     protected $fillable = [
         'is_active'
     ];

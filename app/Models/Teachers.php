@@ -17,7 +17,7 @@ class Teachers extends Model
 
     public function votes(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(TeacherVote::class, 'teacher_id', 'id');
+        return $this->hasMany(TeacherVote::class, 'teacher_id' , 'id');
     }
 
     public function courses(): \Illuminate\Database\Eloquent\Relations\HasMany

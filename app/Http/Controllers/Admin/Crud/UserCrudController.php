@@ -49,7 +49,7 @@ class UserCrudController extends Controller
     {
         $schools = School::all();
 
-        return view('admin.pages.users.user-update', compact('user', 'schools'));
+        return view('admin.pages.users.user-update ', compact('user', 'schools'));
     }
 
     public function updateStore(Request $request, User $user)

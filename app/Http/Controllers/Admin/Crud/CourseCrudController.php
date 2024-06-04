@@ -13,7 +13,7 @@ class CourseCrudController extends Controller
 
     public function index()
     {
-        $courses = Courses::paginate(10);
+        $courses = Courses::paginate(15);
 
         return view('admin.pages.courses.courses', compact('courses'));
     }

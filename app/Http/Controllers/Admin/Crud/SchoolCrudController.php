@@ -46,7 +46,7 @@ class SchoolCrudController extends Controller
         if ($school) {
             return redirect()->back()->with('success', 'Okul başarıyla oluşturuldu!');
         } else {
-            return redirect()->back()->with('error', 'Okul oluşturulurken bir hata oluştu!');
+            return redirect()->back()->with('error', 'Okul oluşturulurken bir sorun oluştu!');
         }
     }
 

@@ -9,7 +9,10 @@ class UserReport extends Model
 {
     use HasFactory;
 
+  
+  
     protected $fillable = [
+       
         'sender_id',
         'receiver_id',
         'reason_id'

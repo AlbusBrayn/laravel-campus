@@ -14,7 +14,7 @@ class UserReviewCrudController extends Controller
     {
         $teacherVotes = TeacherVote::paginate(10);
 
-        return view("admin.pages.users.user-reviews", compact("teacherVotes"));
+        return view("admin.pages.users.user-reviews ", compact("teacherVotes"));
     }
 
     public function delete(TeacherVote $review)

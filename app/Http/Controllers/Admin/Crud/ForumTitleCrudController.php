@@ -34,7 +34,7 @@ class ForumTitleCrudController extends Controller
             $postTitle->translateOrNew('tr')->title = $request->title;
             $postTitle->save();
 
-            return redirect()->route('admin.forums.titles')->with('success', 'Forum başlığı başarıyla oluşturuldu!');
+            return redirect()->route('admin.forums.titles')->with('success', 'Forum başlığı başarıyla oluşturuldu!!');
         } else {
             return redirect()->route('admin.forums.titles')->with('error', 'Forum başlığı oluşturulurken bir hata oluştu!');
         }

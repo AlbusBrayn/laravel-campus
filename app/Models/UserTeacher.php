@@ -10,6 +10,7 @@ class UserTeacher extends Model
     use HasFactory;
 
     protected $fillable = [
+      
         'user_id',
         'teacher_course_id'
     ];

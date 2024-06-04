@@ -28,7 +28,7 @@ use App\Http\Controllers\Admin\NotificationController;
 */
 
 Route::get('/', function () {
-    return "Kerim senin hayatını sikiyim!";
+    return "Hello world";
 });
 
 Route::prefix("admin")->group(function () {

@@ -45,7 +45,7 @@ class ForumCrudController extends Controller
         $post->is_active = isset($request->is_active);
         $post->save();
 
-        return redirect()->route('admin.forums')->with('success', 'İçerik başarıyla güncellendi!');
+        return redirect()->route('admin.forums')->with('success', 'İçerik başarıyla güncellendi!!');
     }
 
     public function delete(Post $post)

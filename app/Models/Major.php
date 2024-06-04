@@ -17,6 +17,5 @@ class Major extends Model
     protected $hidden = [
         'is_active',
         'created_at',
-        'updated_at'
     ];
 }

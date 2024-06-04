@@ -69,7 +69,7 @@ class PostController extends Controller
         ]);
 
         $validator->setAttributeNames([
-            'title' => 'Konu',
+            'title' => 'Konu ',
             'short_content' => 'Başlık',
             'content' => 'İçerik'
         ]);

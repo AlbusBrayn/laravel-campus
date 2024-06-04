@@ -24,7 +24,7 @@ class AdminCrudController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:admins|max:255',
+            'email' => 'required|email|unique:admins|max:245',
             'password' => 'required|string|max:255',
             're_password' => 'required|string|max:255|same:password',
         ]);

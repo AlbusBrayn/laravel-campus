@@ -19,6 +19,6 @@ class UserCommentCrudController extends Controller
     public function delete(Comment $comment)
     {
         $comment->delete();
-        return redirect()->route('admin.users.comments')->with('success', 'Kullanıcı yorumu başarıyla silindi!');
+        return redirect()->route('admin.users.comments')->with('success', 'Kullanıcı yorumu başarıyla silinmiştir!');
     }
 }

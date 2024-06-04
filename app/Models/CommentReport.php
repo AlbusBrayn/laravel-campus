@@ -10,6 +10,7 @@ class CommentReport extends Model
     use HasFactory;
 
     protected $fillable = [
+       
         'comment_id',
         'reason_id',
         'user_id'

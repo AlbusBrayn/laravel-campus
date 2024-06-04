@@ -45,6 +45,7 @@ class CoursesImport implements ToModel, WithHeadingRow, WithBatchInserts
             }
         });
 
+       
         return null;
     }
 

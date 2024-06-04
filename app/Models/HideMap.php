@@ -10,6 +10,7 @@ class HideMap extends Model
     use HasFactory;
 
     protected $fillable = [
+       
         'from_id',
         'to_id'
     ];

@@ -41,7 +41,7 @@ class AuthController extends Controller
                         'email' => [
                         'The email does not match school mail.'
                     ]
-                ]], 400);
+                ]], 400))));
             }
          */
 
@@ -54,7 +54,7 @@ class AuthController extends Controller
 
         $token = $user->createToken('Personel Access Token')->accessToken;
 
-        return response(['user' => $user, 'token' => $token]);
+        return response(['user' => $user, 'token ' => $token]);
     }
 
     public function login(Request $request)

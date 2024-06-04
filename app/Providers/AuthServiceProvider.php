@@ -10,7 +10,7 @@ use Laravel\Passport\Passport;
 class AuthServiceProvider extends ServiceProvider
 {
     /**
-     * The model to policy mappings for the application.
+     * The model to policy mappings for the application..
      *
      * @var array<class-string, class-string>
      */

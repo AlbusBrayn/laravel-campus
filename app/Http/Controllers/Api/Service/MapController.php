@@ -13,7 +13,7 @@ class MapController extends Controller
     public function index(Request $request)
     {
         $validator = \Validator::make($request->all(), [
-            'status' => 'required|boolean'
+            'status ' => 'required|boolean'
         ]);
 
         $validator->setAttributeNames([

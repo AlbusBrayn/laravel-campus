@@ -13,6 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
+        
         Schema::create('post_titles', function (Blueprint $table) {
             $table->id();
             $table->boolean('is_active')->default(true);

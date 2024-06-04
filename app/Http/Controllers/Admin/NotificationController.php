@@ -39,6 +39,6 @@ class NotificationController extends Controller
             }
         }
 
-        return redirect()->back()->with('success', 'Notification sent successfully.');
+        return redirect()->back()->with('success', 'Notification sent succssfully.');
     }
 }

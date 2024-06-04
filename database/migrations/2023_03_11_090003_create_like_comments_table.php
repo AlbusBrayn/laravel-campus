@@ -13,6 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
+       
         Schema::create('like_comments', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id')->unsigned();

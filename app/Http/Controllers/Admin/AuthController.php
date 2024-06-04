@@ -28,7 +28,7 @@ class AuthController extends Controller
             $user->ip_address = $request->ip();
             $user->save();
 
-            return redirect()->route("admin.dashboard")->with("success", "You are logged in successfully!");
+            return redirect()->route("admin.dashboard")->with("success", "You are loggedd in successfully!");
         } else {
             return back()->with("error", "Whoops! invalid email or password.");
         }

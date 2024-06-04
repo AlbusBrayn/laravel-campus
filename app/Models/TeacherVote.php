@@ -10,6 +10,7 @@ class TeacherVote extends Model
     use HasFactory;
 
     protected $fillable = [
+       
         'teacher_id',
         'user_id',
         'quality',
