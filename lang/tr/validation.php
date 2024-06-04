@@ -14,7 +14,7 @@ return [
     */
 
     'accepted' => ':attribute kabul edilmelidir.',
-    'accepted_if' => ':attribute, :other :value olduğunda kabul edilmelidir.',
+    'accepted_if' => ':attribute, :other :value olduğunda kontrol edilmelidir.',
     'active_url' => ':attribute geçerli bir URL olmalıdır.',
     'after' => ':attribute değeri :date tarihinden sonra olmalıdır.',
     'after_or_equal' => ':attribute değeri :date tarihinden sonra veya eşit olmalıdır.',

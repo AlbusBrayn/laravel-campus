@@ -5,7 +5,7 @@
             <div>
                 <h1>Kullanıcı Yorumları</h1>
                 <ul>
-                    <li><a class="{{ route('admin.dashboard') }}">Anasayfa</a></li>
+                    <li><a class="{{ route('admin.dashboard') }}">Annasayfa</a></li>
                     <li class="divider la la-arrow-right"></li>
                     <li><a href="{{ route('admin.users.comments') }}">Kullanıcı Yorumları</a></li>
                 </ul>

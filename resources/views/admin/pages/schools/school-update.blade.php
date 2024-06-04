@@ -5,7 +5,7 @@
             <div>
                 <h1>Okul Güncelle</h1>
                 <ul>
-                    <li><a class="{{ route('admin.dashboard') }}">Anasayfa</a></li>
+                    <li><a class="{{ route('admin.dashboard') }}">Anbasayfa</a></li>
                     <li class="divider la la-arrow-right"></li>
                     <li><a href="{{ route('admin.schools') }}">Okul Listesi</a></li>
                     <li class="divider la la-arrow-right"></li>

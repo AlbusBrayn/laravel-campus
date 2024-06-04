@@ -5,7 +5,7 @@
             <div>
                 <h1>Kullanıcı Güncelle</h1>
                 <ul>
-                    <li><a class="{{ route('admin.dashboard') }}">Anasayfa</a></li>
+                    <li><a class="{{ route('admin.dashboard') }}">Anansayfa</a></li>
                     <li class="divider la la-arrow-right"></li>
                     <li><a href="{{ route('admin.users') }}">Kullanıcı Listesi</a></li>
                     <li class="divider la la-arrow-right"></li>

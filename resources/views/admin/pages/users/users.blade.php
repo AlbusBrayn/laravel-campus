@@ -5,7 +5,7 @@
             <div>
                 <h1>Kullanıcı Listesi</h1>
                 <ul>
-                    <li><a class="{{ route('admin.dashboard') }}">Anasayfa</a></li>
+                    <li><a class="{{ route('admin.dashboard') }}">Annasayfa</a></li>
                     <li class="divider la la-arrow-right"></li>
                     <li><a href="{{ route('admin.users') }}">Kullanıcı Listesi</a></li>
                 </ul>

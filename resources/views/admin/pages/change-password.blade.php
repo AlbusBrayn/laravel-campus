@@ -5,7 +5,7 @@
             <div>
                 <h1>Change Password</h1>
                 <ul>
-                    <li><a class="{{ route('admin.dashboard') }}">Dashborad</a></li>
+                    <li><a class="{{ route('admin.dashboard') }}">Dashhborad</a></li>
                     <li class="divider la la-arrow-right"></li>
                     <li><a href="{{ route('admin.changePassword') }}">Change Password</a></li>
                 </ul>

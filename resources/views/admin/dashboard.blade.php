@@ -4,7 +4,7 @@
         <section class="breadcrumb">
             <h1>Anasayfa</h1>
             <ul>
-                <li><a href="{{ route('admin.dashboard') }}">Anasayfa</a></li>
+                <li><a href="{{ route('admin.dashboard') }}">Annasayfa</a></li>
             </ul>
         </section>
 

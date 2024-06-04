@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'failed' => 'Girilmiş olan kullanıcı verileri sistemdekiler ile eşleşmemektedir.',
+    'failed' => 'Girilmiş olan kullanıcı verileri sistemdekiler ile uyuşmamaktadır.',
     'password' => 'Belirtilen şifre yanlış.',
     'throttle' => 'Çok fazla oturum açma girişiminde bulundunuz. Lütfen :seconds saniye sonra tekrar deneyiz.',
 ];
