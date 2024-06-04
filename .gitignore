@@ -17,5 +17,6 @@ yarn-error.log
 /.idea
 /.vscode
 cloud.pem
+steve.pem
 /storage/key
 storage/key.pub
